@@ -154,6 +154,25 @@ a=${a:-123}
 等同
 ```
 
+```bash
+$ a="b"
+$ b=2
+$ echo ${!a}
+2
+# 将引入a的变量值再展开
+
+$ foo1="foo1"
+$ foo2="foo2"
+$ echo ${!foo*}
+foo1 foo2
+# 显示存在的变量名
+
+$ echo ${!foo1[@]}
+0
+# 如果变量存在就返回零
+# 不存在无返回值
+``` 
+
 > [字符串处理(一)](http://www.zsythink.net/archives/2276)
 >
 > [字符串处理(二)](http://www.zsythink.net/archives/2296)
