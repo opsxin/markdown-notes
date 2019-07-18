@@ -1,6 +1,7 @@
 ```yaml
-#handler只有在任务‘changed’后执行
-#这段只有handler1会执行，因为“mkdir /root/test 2”不会有‘changed’，因为ansible的幂等性
+# handler只有在任务'changed'后执行
+# 关联同一个handler的tasks都已被执行，才会执行此handler
+# 这段只有handler1会执行，因为“mkdir /root/test 2”不会有‘changed’，因为ansible的幂等性
 ---
 - hosts: A
   remote_user: root
@@ -11,7 +12,7 @@
         state: directory
       notify: handler1
       
-#**执行以上任务需要调用的‘handler’，而不是等待所有任务完成后才执行‘handler’** 
+# **执行以上任务需要调用的‘handler’，而不是等待所有任务完成后才执行‘handler’** 
     - meta: flush_handlers
       
     - name: mkdir /root/test 2
@@ -20,7 +21,7 @@
         state: directory
       notify: handler2
 
-#handler中也可以使用‘notify’，调用指定的handler
+# handler中也可以使用‘notify’，调用指定的handler
   handlers: 
     - name: handler1
       file: 
@@ -43,7 +44,7 @@
       file:
         path: /root/test
         state: directory
-#调用handler组
+# 调用handler组
       notify: handler group
     - name: mkdir /root/test 2
       file: 
@@ -51,7 +52,7 @@
         state: directory
       notify: handler3
 
-#利用‘listen’，设置handler组
+# 利用‘listen’，设置handler组
   handlers: 
     - name: handler1
       listen: handler group
