@@ -22,6 +22,18 @@
 ├── Interview
 │   ├── 1561704109439.png
 │   └── interview_190627.md
+├── K8S
+│   ├── Kubernetes简介.md
+│   ├── architecture.png
+│   └── kubernetes-in-action
+│       ├── 1563849879626.png
+│       ├── 1563862437314.png
+│       ├── 1564038652037.png
+│       ├── k8s-01-介绍.md
+│       ├── k8s-02-开始使用.md
+│       ├── k8s-03-Pod.md
+│       ├── k8s-04-部署托管的Pod.md
+│       └── k8s-05-服务.md
 ├── KVM
 │   ├── KVM的使用.md
 │   ├── Kernel-based_Virtual_Machine_zh-CN.svg.png
@@ -96,5 +108,5 @@
 ├── typora-setting-3.png
 └── update-readme.sh
 
-15 directories, 80 files
+17 directories, 90 files
 ```
