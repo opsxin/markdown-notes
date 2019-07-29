@@ -26,14 +26,22 @@
 │   ├── Kubernetes简介.md
 │   ├── architecture.png
 │   └── kubernetes-in-action
+│       ├── 2019-07-29-143520.png
+│       ├── 2019-07-29-152135.png
+│       ├── 2019-07-29-160851.png
 │       ├── 1563849879626.png
 │       ├── 1563862437314.png
 │       ├── 1564038652037.png
+│       ├── 1564382807943.png
+│       ├── 1564383028195.png
+│       ├── 1564388903832.png
 │       ├── k8s-01-介绍.md
 │       ├── k8s-02-开始使用.md
 │       ├── k8s-03-Pod.md
 │       ├── k8s-04-部署托管的Pod.md
-│       └── k8s-05-服务.md
+│       ├── k8s-05-服务.md
+│       ├── k8s-06-磁盘.md
+│       └── k8s-07-配置应用程序.md
 ├── KVM
 │   ├── KVM的使用.md
 │   ├── Kernel-based_Virtual_Machine_zh-CN.svg.png
@@ -108,5 +116,5 @@
 ├── typora-setting-3.png
 └── update-readme.sh
 
-17 directories, 90 files
+17 directories, 98 files
 ```
