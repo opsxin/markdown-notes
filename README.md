@@ -33,12 +33,10 @@
 │       ├── k8s-07-配置应用程序.md
 │       └── k8s-09-Deployment.md
 ├── KVM
-│   ├── KVM的使用.md
-│   └── kvm.webp
+│   └── KVM的使用.md
 ├── LB
 │   ├── HAproxy.md
 │   ├── LVS.md
-│   ├── hal.webp
 │   ├── 负载均衡总结性说明.md
 │   └── 高并发.md
 ├── Linux
@@ -70,6 +68,8 @@
 │   ├── root和alias的实验.md
 │   └── 限制访问代理的HTTP资源(Limiting_Access_to_Proxied_HTTP_Resources).md
 ├── Other
+│   ├── TCP
+│   │   └── TCP的三次握手与四次挥手.md
 │   └── microService
 │       └── 微服务.md
 ├── Python
@@ -85,5 +85,5 @@
 │   └── RDB和AOF区别.md
 └── update-readme.sh
 
-17 directories, 67 files
+18 directories, 66 files
 ```
