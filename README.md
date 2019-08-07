@@ -19,8 +19,9 @@
 ├── Docker
 │   ├── docker-compose.md
 │   └── docker集群常用命令.md
-├── Interview
-│   └── interview_190627.md
+├── Experience
+│   ├── Interview_01.md
+│   └── Interview_02.md
 ├── K8S
 │   ├── Kubernetes简介.md
 │   └── kubernetes-in-action
@@ -31,7 +32,8 @@
 │       ├── k8s-05-服务.md
 │       ├── k8s-06-磁盘.md
 │       ├── k8s-07-配置应用程序.md
-│       └── k8s-09-Deployment.md
+│       ├── k8s-09-Deployment.md
+│       └── k8s-10-StatefulSet.md
 ├── KVM
 │   └── KVM的使用.md
 ├── LB
@@ -85,5 +87,5 @@
 │   └── RDB和AOF区别.md
 └── update-readme.sh
 
-18 directories, 66 files
+18 directories, 68 files
 ```
