@@ -25,17 +25,19 @@
 ├── K8S
 │   ├── Kubernetes简介.md
 │   ├── Kubernetes集群部署.md
-│   └── kubernetes-in-action
-│       ├── k8s-01-介绍.md
-│       ├── k8s-02-开始使用.md
-│       ├── k8s-03-Pod.md
-│       ├── k8s-04-部署托管的Pod.md
-│       ├── k8s-05-服务.md
-│       ├── k8s-06-磁盘.md
-│       ├── k8s-07-配置应用程序.md
-│       ├── k8s-09-Deployment.md
-│       ├── k8s-10-StatefulSet.md
-│       └── k8s-11-Kubernetes原理.md
+│   ├── kubernetes-in-action
+│   │   ├── k8s-01-介绍.md
+│   │   ├── k8s-02-开始使用.md
+│   │   ├── k8s-03-Pod.md
+│   │   ├── k8s-04-部署托管的Pod.md
+│   │   ├── k8s-05-服务.md
+│   │   ├── k8s-06-磁盘.md
+│   │   ├── k8s-07-配置应用程序.md
+│   │   ├── k8s-09-Deployment.md
+│   │   ├── k8s-10-StatefulSet.md
+│   │   └── k8s-11-Kubernetes原理.md
+│   ├── 知识点摘抄.md
+│   └── 自己理解的一些问题.md
 ├── KVM
 │   └── KVM的使用.md
 ├── LB
@@ -45,6 +47,7 @@
 │   └── 高并发.md
 ├── Linux
 │   ├── FTP安装.md
+│   ├── NFS的安装.md
 │   ├── Shell
 │   │   ├── shell-1-变量.md
 │   │   ├── shell-2-数值计算.md
@@ -89,5 +92,5 @@
 │   └── RDB和AOF区别.md
 └── update-readme.sh
 
-18 directories, 70 files
+18 directories, 73 files
 ```
