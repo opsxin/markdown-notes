@@ -92,18 +92,6 @@ for key, value in dict.items():
    - [Flask Web开发实战：入门、进阶与原理解析](https://read.douban.com/ebook/110053633/)
 3. [Tornado](https://tornado-zh.readthedocs.io/zh/latest/)
 
----
-
-##### 自我介绍
-
----
-
-##### 职业规划
-
----
-
-##### 对运维的理解
-
 
 
 > [Apache worker/prefork模式说明和优化配置](https://www.kancloud.cn/curder/apache/91277)
