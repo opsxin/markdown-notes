@@ -230,3 +230,7 @@ curl -X POST http://NodeIP:Port/-/reload
 ```
 
 浏览器访问 `http://NodeIP:Port`，查看。
+
+
+
+> [kubernetes_sd_config]([https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Ckubernetes_sd_config%3E](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#))
