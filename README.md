@@ -26,8 +26,15 @@
 │   ├── Ingress安装.md
 │   ├── Kubernetes简介.md
 │   ├── Kubernetes集群部署.md
+│   ├── Log
+│   │   └── 日志处理-01-日志收集架构.md
 │   ├── Prometheus
-│   │   └── Prometheus-01-简介.md
+│   │   ├── Prometheus-01-简介.md
+│   │   ├── Prometheus-02-安装.md
+│   │   ├── Prometheus-03-监控.md
+│   │   ├── Prometheus-04-资源对象监控.md
+│   │   ├── Prometheus-05-grafana的安装.md
+│   │   └── Prometheus-06-operator.md
 │   ├── kubernetes-in-action
 │   │   ├── k8s-01-介绍.md
 │   │   ├── k8s-02-开始使用.md
@@ -38,7 +45,8 @@
 │   │   ├── k8s-07-配置应用程序.md
 │   │   ├── k8s-09-Deployment.md
 │   │   ├── k8s-10-StatefulSet.md
-│   │   └── k8s-11-Kubernetes原理.md
+│   │   ├── k8s-11-Kubernetes原理.md
+│   │   └── k8s-12-RBAC.md
 │   ├── 知识点摘抄.md
 │   └── 自己理解的一些问题.md
 ├── KVM
@@ -96,5 +104,5 @@
 │   └── RDB和AOF区别.md
 └── update-readme.sh
 
-19 directories, 76 files
+20 directories, 83 files
 ```
