@@ -189,6 +189,29 @@ kubeadm join <Master 节点的 IP:Port>
 
    使用输出的 token 登录 Dashboard。
 
+   > ```yaml
+   > # 上方 1、2 步的命令对应这一份 YAML
+   > apiVersion: v1
+   > kind: ServiceAccount
+   > metadata: 
+   >   name: dashboard-admin
+   >   namespace: kube-system
+   > 
+   > ---
+   > apiVersion: rbac.authorization.k8s.io/v1
+   > kind: ClusterRoleBinding
+   > metadata: 
+   >   name: dashboard-admin
+   > subjects: 
+   >   - kind: ServiceAccount
+   >     name: dashboard-admin
+   >     namespace: kube-system
+   > roleRef: 
+   >   kind: ClusterRole
+   >   name: cluster-admin
+   >   apiGroup: rbac.authorization.k8s.io
+   > ```
+
 10. #### 集群扩容（增加新 Node）
 
     1. 创建新 TOKEN
