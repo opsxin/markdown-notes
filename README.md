@@ -1,4 +1,3 @@
-```html
 <body>
 	<h1>markdown-note</h1><p>
 	<a href="https://github.com/opsxin/markdown-notes/blob/master">https://github.com/opsxin/markdown-notes/blob/master</a><br>
@@ -110,4 +109,3 @@
 	</p>
 21 directories, 83 files
 </body>
-```
