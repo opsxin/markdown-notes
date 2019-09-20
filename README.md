@@ -1,114 +1,3 @@
-<<<<<<< HEAD
-```bash
-.
-├── Ansible
-│   ├── ansible-1-基本了解.md
-│   ├── ansible-2-文件操作模块.md
-│   ├── ansible-3-命令模块.md
-│   ├── ansible-4-系统模块.md
-│   ├── ansible-5-包管理.md
-│   ├── ansible-6-初识playbook.md
-│   ├── ansible-7-handlers.md
-│   ├── ansible-8-tags.md
-│   ├── ansible-9-变量.md
-│   ├── ansible-10-循环.md
-│   ├── ansible-11-判断.md
-│   ├── ansible-12-过滤.md
-│   ├── ansible-13-include.md
-│   ├── ansible-14-galaxy.md
-│   └── ansible-15-模板.md
-├── Docker
-│   ├── docker-compose.md
-│   └── docker集群常用命令.md
-├── Experience
-│   ├── Interview_01.md
-│   └── Interview_02.md
-├── K8S
-│   ├── Ingress-Nginx
-│   │   └── Ingress安装.md
-│   ├── Kubernetes简介.md
-│   ├── Kubernetes集群部署.md
-│   ├── Log
-│   │   ├── 安装EFK.md
-│   │   └── 日志处理-01-日志收集架构.md
-│   ├── Prometheus
-│   │   ├── Prometheus-01-简介.md
-│   │   ├── Prometheus-02-安装.md
-│   │   ├── Prometheus-03-监控.md
-│   │   ├── Prometheus-04-资源对象监控.md
-│   │   ├── Prometheus-05-grafana的安装.md
-│   │   └── Prometheus-06-operator.md
-│   ├── kubernetes-in-action
-│   │   ├── k8s-01-介绍.md
-│   │   ├── k8s-02-开始使用.md
-│   │   ├── k8s-03-Pod.md
-│   │   ├── k8s-04-部署托管的Pod.md
-│   │   ├── k8s-05-服务.md
-│   │   ├── k8s-06-磁盘.md
-│   │   ├── k8s-07-配置应用程序.md
-│   │   ├── k8s-09-Deployment.md
-│   │   ├── k8s-10-StatefulSet.md
-│   │   ├── k8s-11-Kubernetes原理.md
-│   │   └── k8s-12-RBAC.md
-│   ├── 知识点摘抄.md
-│   └── 自己理解的一些问题.md
-├── KVM
-│   └── KVM的使用.md
-├── LB
-│   ├── HAproxy.md
-│   ├── LVS.md
-│   ├── 负载均衡总结性说明.md
-│   └── 高并发.md
-├── Linux
-│   ├── FTP安装.md
-│   ├── NFS的安装.md
-│   ├── Shell
-│   │   ├── shell-1-变量.md
-│   │   ├── shell-2-数值计算.md
-│   │   ├── shell-3-中括号的区别.md
-│   │   ├── shell-4-字符串.md
-│   │   └── shell-5-尖括号的区别.md
-│   ├── exec解析.md
-│   ├── iptables
-│   │   ├── iptables-1-介绍.md
-│   │   ├── iptables-2-基本操作.md
-│   │   ├── iptables-3-自定义链.md
-│   │   ├── iptables-4-NAT表.md
-│   │   └── iptables-5-ipset.md
-│   ├── oh-my-zsh解决数字键盘无法使用.md
-│   ├── ps列说明.md
-│   ├── vim配置.md
-│   └── xxf.zsh-theme.md
-├── Nginx
-│   ├── HTTP2
-│   │   ├── HTTP2-1-HTTP2完整教程(HTTP2-Complete-Tutorial).md
-│   │   ├── HTTP2-2-HTTP2的多路复用和推送.md
-│   │   └── HTTP2-3-HTTP2的头压缩.md
-│   ├── Nginx编译命令.md
-│   ├── nginx配置URL重写及判断.md
-│   ├── root和alias的实验.md
-│   └── 限制访问代理的HTTP资源(Limiting_Access_to_Proxied_HTTP_Resources).md
-├── Other
-│   ├── TCP
-│   │   ├── TCP拥塞控制.md
-│   │   └── TCP的三次握手与四次挥手.md
-│   └── microService
-│       └── 微服务.md
-├── Python
-│   ├── Python-读取文件.md
-│   ├── Python_Socket-编程详细介绍.md
-│   ├── Python操作Redis.md
-│   └── 零基础入门学习Python
-│       └── python-01-基础.md
-├── README-SETTING.md
-├── README.md
-├── Redis
-│   └── RDB和AOF区别.md
-└── update-readme.sh
-
-21 directories, 83 files
-```
-=======
 <h4>Markdown-Notes</h4>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/">Ansible</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-1-%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3.md">ansible-1-基本了解.md</a><br>
@@ -138,6 +27,7 @@
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Kubernetes%E7%AE%80%E4%BB%8B.md">Kubernetes简介.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md">Kubernetes集群部署.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/">Log</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/Fluentd.md">Fluentd.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/%E5%AE%89%E8%A3%85EFK.md">安装EFK.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86-01-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E6%9E%B6%E6%9E%84.md">日志处理-01-日志收集架构.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Prometheus/">Prometheus</a><br>
@@ -214,5 +104,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>21 directories, 83 files
->>>>>>> dev
+<br/>21 directories, 84 files
