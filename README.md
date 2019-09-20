@@ -80,7 +80,7 @@
 │   └── xxf.zsh-theme.md
 ├── Nginx
 │   ├── HTTP2
-│   │   ├── HTTP2-1-HTTP2完整教程(HTTP2 Complete Tutorial).md
+│   │   ├── HTTP2-1-HTTP2完整教程(HTTP2-Complete-Tutorial).md
 │   │   ├── HTTP2-2-HTTP2的多路复用和推送.md
 │   │   └── HTTP2-3-HTTP2的头压缩.md
 │   ├── Nginx编译命令.md
@@ -94,11 +94,10 @@
 │   └── microService
 │       └── 微服务.md
 ├── Python
-│   ├── Python Socket 编程详细介绍.md
-│   ├── Python 读取文件.md
+│   ├── Python-读取文件.md
+│   ├── Python_Socket-编程详细介绍.md
 │   ├── Python操作Redis.md
 │   └── 零基础入门学习Python
-│       ├── Python课后题.pdf
 │       └── python-01-基础.md
 ├── README-SETTING.md
 ├── README.md
@@ -106,5 +105,5 @@
 │   └── RDB和AOF区别.md
 └── update-readme.sh
 
-21 directories, 84 files
+21 directories, 83 files
 ```
