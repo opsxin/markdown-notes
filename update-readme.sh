@@ -11,4 +11,4 @@
 #find .  -type f -name "*.md" | sed "s|.|https://github.com/opsxin/markdown-notes/blob/master|" | sed "s|.*/\(.*\)|[\1](\0)|" | sed "s/$/\ \ /" > README.md
 
 # URL 正确，但是树形会有一些变形
-tree -I "*.png|*.gif|*.webp|*.pdf" -v -L 3 --ignore-case -H 'https://github.com/opsxin/markdown-notes/blob/master' -T markdown-note | awk 'BEGIN{print "<h4>Markdown-Notes</h4>"} /─/{print} /directories/{print "<br/><br/><br/>" $0}' > README.md
+tree -I "*.png|*.gif|*.webp|*.pdf" -v -L 3 --ignore-case -H 'https://github.com/opsxin/markdown-notes/blob/master' -T markdown-note | awk 'BEGIN{print "<h4>Markdown-Notes</h4>"} /─/{print} /directories/{print "<br/>" $0}' > README.md
