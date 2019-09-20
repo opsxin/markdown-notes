@@ -1,6 +1,4 @@
-<body>
-	<h1>markdown-note</h1><p>
-	<a href="https://github.com/opsxin/markdown-notes/blob/master">https://github.com/opsxin/markdown-notes/blob/master</a><br>
+<h1>markdown-note</h1>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/">Ansible</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-1-%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3.md">ansible-1-基本了解.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-2-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9D%97.md">ansible-2-文件操作模块.md</a><br>
@@ -105,7 +103,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-	<br><br>
-	</p>
 21 directories, 83 files
-</body>
