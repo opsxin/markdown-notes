@@ -1,4 +1,3 @@
-```bash
 .
 ├── Ansible
 │   ├─[ansible-1-基本了解.md](https://github.com/opsxin/markdown-notes/blob/master/ansible-1-基本了解.md)
@@ -106,4 +105,3 @@
 └── update-readme.sh
 
 21 directories, 83 files
-```
