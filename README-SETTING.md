@@ -1,4 +1,4 @@
-Markdown编辑工具：Typora
+Markdown 编辑工具：[Typora](https://typora.io/)
 
 ![设置界面-1](typora-setting-1.png)
 ![设置界面-2](typora-setting-2.png)

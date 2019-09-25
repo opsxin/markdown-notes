@@ -27,6 +27,7 @@
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Kubernetes%E7%AE%80%E4%BB%8B.md">Kubernetes简介.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md">Kubernetes集群部署.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/">Log</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/Fluentd.md">Fluentd.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/%E5%AE%89%E8%A3%85EFK.md">安装EFK.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86-01-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E6%9E%B6%E6%9E%84.md">日志处理-01-日志收集架构.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Prometheus/">Prometheus</a><br>
@@ -48,6 +49,7 @@
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-10-StatefulSet.md">k8s-10-StatefulSet.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-11-Kubernetes%E5%8E%9F%E7%90%86.md">k8s-11-Kubernetes原理.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-12-RBAC.md">k8s-12-RBAC.md</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E7%AD%94.md">一些问题及解答.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%91%98%E6%8A%84.md">知识点摘抄.md</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E8%87%AA%E5%B7%B1%E7%90%86%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98.md">自己理解的一些问题.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/">KVM</a><br>
@@ -58,6 +60,8 @@
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/LB/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%80%BB%E7%BB%93%E6%80%A7%E8%AF%B4%E6%98%8E.md">负载均衡总结性说明.md</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/LB/%E9%AB%98%E5%B9%B6%E5%8F%91.md">高并发.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/">Linux</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/AdGuard-DNS/">AdGuard-DNS</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/AdGuard-DNS/%E6%90%AD%E5%BB%BA%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AADNS%EF%BC%88AdGuard%EF%BC%89.md">搭建广告拦截DNS（AdGuard）.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/FTP%E5%AE%89%E8%A3%85.md">FTP安装.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/NFS%E7%9A%84%E5%AE%89%E8%A3%85.md">NFS的安装.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/">Shell</a><br>
@@ -103,4 +107,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>21 directories, 83 files
+<br/>22 directories, 86 files

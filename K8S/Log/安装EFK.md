@@ -138,6 +138,52 @@ kubectl get pod -o wide -n efk
 curl http://$(上一步得到的 Pod IP)/_cluster/state?pretty
 ```
 
+如果成功，将会显示集群信息
+
+```json
+{
+  "cluster_name" : "es-cluster",
+  "cluster_uuid" : "y2MKTMM1RDKUE1DBLAG0dw",
+  "version" : 68,
+  "state_uuid" : "1VO-hQ8lQQajVXj01ZJviw",
+  # 主节点为 es-cluster-1
+  "master_node" : "m1nf8dcxQZCn9WNXBT2byg",
+  "blocks" : { },
+  "nodes" : {
+    "Ew8tMD0OQXqKI_jWbVOiGQ" : {
+      "name" : "es-cluster-2",
+      "ephemeral_id" : "Iz5LuM-wTDC-1D4YGt7MGA",
+      "transport_address" : "10.244.2.44:9300",
+      "attributes" : {
+        "ml.machine_memory" : "999997440",
+        "ml.max_open_jobs" : "20",
+        "xpack.installed" : "true"
+      }
+    },
+    "_G0-vF33T22HavljY585NA" : {
+      "name" : "es-cluster-0",
+      "ephemeral_id" : "p7_OCSuIS2GZ6f7zGobG2g",
+      "transport_address" : "10.244.2.45:9300",
+      "attributes" : {
+        "ml.machine_memory" : "999997440",
+        "ml.max_open_jobs" : "20",
+        "xpack.installed" : "true"
+      }
+    },
+    "m1nf8dcxQZCn9WNXBT2byg" : {
+      "name" : "es-cluster-1",
+      "ephemeral_id" : "EgOGVaLQQTmaQ1zoXaDI4A",
+      "transport_address" : "10.244.1.232:9300",
+      "attributes" : {
+        "ml.machine_memory" : "999997440",
+        "ml.max_open_jobs" : "20",
+        "xpack.installed" : "true"
+      }
+    }
+  },
+...
+```
+
 ##### 创建 Kibana 服务
 
 ```yaml
@@ -236,48 +282,186 @@ roleRef:
 
 ###### 创建 ConfigMap
 
-（未完全理解，先记录）
+[~~fluentd-es-configmap.yaml~~](https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-configmap.yaml)
 
-[fluentd-es-configmap.yaml](https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-configmap.yaml)
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: fluentd-cm
+  namespace: efk
+data: 
+  system.conf: |-
+    <system>
+      root_dir /tmp/fluentd-buffers
+    </system>
+  
+  containers.input.conf: |-
+    <source>
+     @id fluentd-contain.log
+     @type tail
+     path /var/log/containers/*.log
+     pos_file /var/log/es-containers.log.pos
+     tag raw.k8s
+     read_from_head true
+     <parse>
+      @type multi_format
+        <pattern>
+          format json
+          time_key time
+          time_format %Y-%m-%dT%H:%M:%S.%NZ
+        </pattern>
+        <pattern>
+          format /^(?<time>.+) (?<stream>stdout|stderr) [^ ]* (?<log>.*)$/
+          time_format %Y-%m-%dT%H:%M:%S.%N%:z
+        </pattern>
+     </parse>
+    </source>
+	
+	# 检测日志输出中的异常并将其作为一个日志条目转发。
+    <match raw.k8s.**>
+      @id raw.kubernetes
+      @type detect_exceptions
+      remove_tag_prefix raw
+      message log
+      stream stream
+      multiline_flush_interval 5
+      max_bytes 500000
+      max_lines 1000
+    </match>
+
+    # 合并多行日志
+    <filter **>
+      @id filter_concat
+      @type concat
+      key message
+      multiline_end_regexp /\n$/
+      separator ""
+    </filter>
+    
+    # 用 Kubernetes 元数据丰富记录
+    <filter k8s.**>
+      @id filter_kubernetes_metadata
+      @type kubernetes_metadata
+    </filter>
+    
+    # 修复 Json 字段
+    <filter k8s.**>
+      @id filter_parser
+      @type parser
+      key_name log
+      reserve_data true
+      remove_key_name_field true
+      <parse>
+        @type multi_format
+        <pattern>
+          format json
+        </pattern>
+        <pattern>
+          format none
+        </pattern>
+      </parse>
+    </filter>
+    
+  system.input.conf: |-
+    # I1118 21:26:53.975789       6 proxier.go:1096] Port "nodePort for kube-system/default-http-backend:http" (:31429/tcp) was open before and is still needed
+    <source>
+      @id kube-proxy.log
+      @type tail
+      format multiline
+      multiline_flush_interval 5s
+      format_firstline /^\w\d{4}/
+      format1 /^(?<severity>\w)(?<time>\d{4} [^\s]*)\s+(?<pid>\d+)\s+(?<source>[^ \]]+)\] (?<message>.*)/
+      time_format %m%d %H:%M:%S.%N
+      path /var/log/containers/kube-proxy-*.log
+      pos_file /var/log/es-kube-proxy.log.pos
+      tag kube-proxy
+    </source>
+    
+    # systemd 管理的日志
+    <source>
+      @id journald-docker
+      @type systemd
+      matches [{ "_SYSTEMD_UNIT": "docker.service" }]
+      <storage>
+        @type local
+        persistent true
+        path /var/log/journald-docker.pos
+      </storage>
+      read_from_head true
+      tag docker
+    </source>
+    <source>
+      @id journald-kubelet
+      @type systemd
+      matches [{ "_SYSTEMD_UNIT": "kubelet.service" }]
+      <storage>
+        @type local
+        persistent true
+        path /var/log/journald-kubelet.pos
+      </storage>
+      read_from_head true
+      tag kubelet
+    </source>
+  output.conf: |-
+    # 输出到 ES 集群
+    <match **>
+      @id elasticsearch
+      @type elasticsearch
+      @log_level info
+      type_name _doc
+      include_tag_key true
+      # 集群 Service
+      host efk-svc
+      port 9200
+      logstash_format true
+      <buffer>
+        @type file
+        path /var/log/fluentd-buffers/kubernetes.system.buffer
+        flush_mode interval
+        retry_type exponential_backoff
+        flush_thread_count 2
+        flush_interval 5s
+        retry_forever
+        retry_max_interval 30
+        chunk_limit_size 2M
+        queue_limit_length 8
+        overflow_action block
+      </buffer>
+    </match>
+```
 
 ###### 创建 DaemonSet
 
 ```yaml
 # [fluentd-es-ds.yaml](https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-ds.yaml)
-# 注意按需修改
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: fluentd-es-v2.7.0
+  name: fluentd
   namespace: efk
   labels:
-    k8s-app: fluentd-es
-    version: v2.7.0
-    addonmanager.kubernetes.io/mode: Reconcile
+    app: fluentd
 spec:
   selector:
     matchLabels:
-      k8s-app: fluentd-es
-      version: v2.7.0
+      app: fluentd
   template:
     metadata:
       labels:
-        k8s-app: fluentd-es
-        version: v2.7.0
-      # This annotation ensures that fluentd does not get evicted if the node
-      # supports critical pod annotation based priority scheme.
-      # Note that this does not guarantee admission on the nodes (#40573).
-      annotations:
-        seccomp.security.alpha.kubernetes.io/pod: 'docker/default'
+        app: fluentd
     spec:
-      priorityClassName: system-node-critical
       serviceAccountName: fluentd
       containers:
-      - name: fluentd-es
+      - name: fluentd
         image: quay.io/fluentd_elasticsearch/fluentd:v2.7.0
         env:
-        - name: FLUENTD_ARGS
-          value: --no-supervisor -q
+          - name:  FLUENT_ARGS
+            value: --no-supervisor -q
+          # Fluent 启动用户为 root
+          # 防止有些文件无权限读
+          - name: FLUENT_UID
+            value: "0"
         resources:
           limits:
             memory: 500Mi
@@ -292,18 +476,44 @@ spec:
           readOnly: true
         - name: config-volume
           mountPath: /etc/fluent/config.d
-      terminationGracePeriodSeconds: 30
       volumes:
       - name: varlog
         hostPath:
           path: /var/log
+      # Docker 日志真实的存储路径，必须也挂载
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
       - name: config-volume
         configMap:
-          name: fluentd-es-config-v0.2.0
+          name: fluentd-cm
 ```
+
+#### Kibana 添加展示
+
+###### 创建索引
+
+![create index](1567502148990.png)
+
+###### 创建测试 Pod
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: counter
+  namespace: efk
+spec:
+  containers:
+  - name: count
+    image: busybox
+    args: [/bin/sh, -c,
+            'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
+```
+
+###### 过滤显示测试 Pod 的日志
+
+![counter pod](1567502275707.png)
 
 
 
