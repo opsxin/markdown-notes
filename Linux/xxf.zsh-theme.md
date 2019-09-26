@@ -1,4 +1,7 @@
-  适用于oh~my~zsh的主题，XShell font use Consolas，11，and coloring scheme use Xterm
+适用于 **oh\~my\~zsh** 的主题
+XShell 字体使用 **Consolas，11号**
+颜色模式使用 **Xterm**
+
 ```bash
 # Copy and self modified from ys.zsh-theme, the one of default themes in master repository
 # Clean, simple, compatible and meaningful.
@@ -8,7 +11,7 @@
 # http://xiaofan.at
 # 2 Jul 2015 - Xiaofan
 
-#Change some color configurations
+# Change some color configurations
 # 8 NOV 2017 - Hsin
 
 # Machine name.
