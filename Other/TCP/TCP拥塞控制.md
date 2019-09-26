@@ -9,7 +9,7 @@
 
 [滑动窗口](https://blog.csdn.net/wdscq1234/article/details/52444277)可以让协议同时发送多个报文段，提高网络的通信效率。
 
-慢启动为**发送方**增加一个**拥塞窗口（cwnd）**，初始化后慢慢增加 cwnd 的值。同时也引入了**慢启动阀值（ssthresh）**，如果 cwnd 到达 ssthresh 的值，则会让 cwnd 的增长变得平滑。
+慢启动为**发送方**增加一个**拥塞窗口（cwnd，congestion window）**，初始化后慢慢增加 cwnd 的值。同时也引入了**慢启动阀值（ssthresh）**，如果 cwnd 到达 ssthresh 的值，则会让 cwnd 的增长变得平滑。
 
 1. TCP 连接初始值 cwnd = 1，此时可以传一个最大报文段（MSS）大小的数据。
 
@@ -57,10 +57,37 @@
 2. 收到 3 个相同的 ACK（快速重传）
 
    1. ssthresh = cwnd / 2
-
-   2. cwnd = ssthresh（有些为 cwnd = ssthresh + 3）
-
+2. cwnd = ssthresh（有些为 cwnd = ssthresh + 3）
    3. 重新进入拥塞避免阶段 
+
+   > [TCP 快速重传为什么是三次冗余 ACK](
+   > https://www.zhihu.com/question/21789252/answer/110640581)
+   >
+   > **两次 duplicated ACK 肯定是乱序造成的，丢包肯定会造成三次 duplicated ACK!**
+   >
+   > A 方发送顺序 
+   >
+   > N-1，N，N+1，N+2 
+   >
+   > B 方到达顺序 
+   >
+   > N-1，N，N+1，N+2 | A 收到 1 个 ACK (N) 
+   >
+   > N-1，N，N+2，N+1 | A 收到 1 个 ACK (N) 
+   >
+   > N-1，N+1，N，N+2 | A 收到 2 个 ACK (N) 
+   >
+   > N-1，N+1，N+2，N | A 收到 3 个 ACK (N) 
+   >
+   > N-1，N+2，N，N+1 | A 收到 2 个 ACK (N) 
+   >
+   > N-1，N+2，N+1，N | A 收到 3 个 ACK (N) 
+   >
+   > 如果 N 丢了，没有到达 B 
+   >
+   > N-1，N+1，N+2 | A 收到 3 个 ACK (N) 
+   >
+   > N-1，N+2，N+1 | A 收到 3 个 ACK (N)
 
 #### 快速恢复
 
