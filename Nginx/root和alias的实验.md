@@ -3,7 +3,7 @@
 # /var/www/default.conf
 # 请求路径
 # http://${IP}/t/default.conf
-# 注意末尾的/，特别是alias的
+# 注意末尾的 /，特别是 alias 的
 
 location /t {
     root /var/www        ;
