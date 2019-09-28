@@ -38,7 +38,7 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 
 ### 原理
 
-![LVS/NAT原理]（lvs-nat.png）
+![LVS/NAT原理](lvs-nat.png)
 
 1. 当用户请求到达 DS，此时请求的数据报文会先到内核空间的 PREROUTING 链。 此时报文的源 IP 为 CIP，目标 IP 为 VIP。 
 2. PREROUTING 检查发现数据包的目标 IP 是本机，将数据包送至 INPUT 链。
@@ -59,7 +59,7 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 
 ### 原理
 
-![LVS/DR原理]（lvs-dr.png）
+![LVS/DR原理](lvs-dr.png)
 
 1. 当用户请求到达 Director Server，此时请求的数据报文会先到内核空间的 PREROUTING 链。 此时报文的源 IP 为 CIP，目标 IP 为 VIP。
 
@@ -94,7 +94,7 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 
 ### 原理
 
-![LVS/Tun原理]（lvs-tun.png）
+![LVS/Tun原理](lvs-tun.png)
 
 在原有的 IP 报文外再次封装多一层 IP 首部，内部 IP 首部（源地址为 CIP，目标 IP 为 VIP），外层 IP 首部（源地址为 DIP，目标 IP 为 RIP）。
 
