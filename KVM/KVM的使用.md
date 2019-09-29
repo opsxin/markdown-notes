@@ -131,7 +131,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 
 - 查看 IP 信息
 
-  ![ipaddr](.\ipaddr.PNG)
+  ![ipaddr](ipaddr.PNG)
 
 - virt-install 内使用桥接网络
 
@@ -203,7 +203,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 如果显示为上一条，一定要将新建虚拟机加上。
 
 ```bash
-brctl addif br0 vnet0 #绑定vnet0至bro接口
+brctl addif br0 vnet0 #绑定 vnet0 至 br0 接口
 ```
 
 <br/>
