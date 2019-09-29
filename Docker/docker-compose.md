@@ -247,7 +247,7 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 18. `stop`
 
     ```bash
-docker-compose stop [options] [SERVICE...]
+    docker-compose stop [options] [SERVICE...]
     ```
     
     停止已经处于运行状态的容器，但不删除它。通过 `docker-compose start` 可以再次启动这些容器。
@@ -271,7 +271,7 @@ docker-compose stop [options] [SERVICE...]
  21. `up`
 
      ```bash
-docker-compose up [options] [SERVICE...]
+     docker-compose up [options] [SERVICE...]
      ```
 
      该命令十分强大，它将尝试自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作。链接的服务都将会被自动启动，除非已经处于运行状态。
