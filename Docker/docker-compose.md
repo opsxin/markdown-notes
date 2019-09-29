@@ -52,8 +52,8 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 
 1. ` build`
 
-   ```bash 
-docker-compose build [options] [SERVICE...]
+   ```bash
+   docker-compose build [options] [SERVICE...]
    ```
    
    构建（后者重新构建）项目中的服务容器。
@@ -61,7 +61,7 @@ docker-compose build [options] [SERVICE...]
    选项包括：
 
    - `--force-rm`：删除构建过程中的临时容器
-- `--no-cache`：构建过程中不使用 cache
+   - `--no-cache`：构建过程中不使用 cache
    - `--pull`：尝试使用 pull 来更新镜像
    
 2. `config`
@@ -285,9 +285,9 @@ docker-compose up [options] [SERVICE...]
      选项：
 
      - `-d`：在后台运行服务容器。
--  `--no-color`：不使用颜色来区分不同的服务的控制台输出。
+     - `--no-color`：不使用颜色来区分不同的服务的控制台输出。
      - `--no-deps`：不启动服务所链接的容器。
-- `--force-recreate`：强制重新创建容器，不能与 `--no-recreate` 同时使用。
+     - `--force-recreate`：强制重新创建容器，不能与 `--no-recreate` 同时使用。
      - `--no-recreate`：如果容器已经存在了，则不重新创建，不能与 `--force-recreate` 同时使用。
      - `--no-build`：不自动构建缺失的服务镜像。
      - `-t, --timeout TIMEOUT`：停止容器时候的超时（默认为 10 秒）。
