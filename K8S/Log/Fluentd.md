@@ -1,17 +1,23 @@
-##### 组成
+[TOC]
 
-**Input**(tail, tcp, udp, http, syslog…) –>  **Buffer**(Memory, File) –> **Output**(Kafka, MongoDB, ES…)
+## 组成
 
-##### 插件
+**Input**：tail, tcp, udp, http, syslog…
+
+**Buffer**：Memory, File… 
+
+**Output**：Kafka, MongoDB, ES…
+
+## 插件
 
 - Input 
   输入插件。内置的有 tail、http、tcp、udp 等。
 
 - Parser 
-  解析器。可自定义解析规则，如解析 nginx， json 日志。
+  解析器。自定义解析规则，如解析 nginx， json 日志。
 
 - Filter 
-  Filter 插件，可过滤掉事件，或增加字段，删除字段。
+  Filter 插件，过滤事件，或增加字段，删除字段。
 
   ```bash
   Input -> filter 1 -> ... -> filter N -> Output
@@ -32,14 +38,14 @@
 - Buffer 
   Buffer 缓冲插件。缓冲插件由输出插件使用。在输出之前先缓冲，然后以如 Kafka Producer Client 的方式批量提交。有 file、memory 两种类型。flush_interval 参数决定了提交的间隔，默认 60 秒刷新一次。
 
-##### 匹配模式
+## 匹配模式
 
 - \* 用来匹配 tag 的一部分（比如：a.\* 可以匹配 a.b，但是不能匹配 a 或者 a.b.c）
 - \*\* 可以用来匹配 tag 的 0 个或多个部分（比如：a.\*\* 可以匹配 a、a.b 和 a.b.c）
 - {X,Y,Z} 匹配 X,Y 或者 Z（比如：{a,b} 可以匹配 a 和 b，但是不能匹配 c。他可以和 \* 或者 \*\* 结合起来一起使用）
 - 如果有多个匹配模式写在里面，则可以用空格分开(比如：能够匹配 a 和 b。<match a.\*\* b.\* >能够匹配 a，a.b，a.b.c 和 b.d)
 
-##### 数据类型
+## 数据类型
 
 - `string`：字符串，最常见的格式，详细支持语法见文档
 - `integer`：整数
@@ -57,7 +63,7 @@
 - `array`：按照 JSON array 解析，如 [“key1”, “key2”]
 - `hash`：按照 JSON object 解析，如 {“key1”: “value1”, “key2”: “value2”}
 
-##### 示例
+## 示例
 
 ```html
 # 输入（Input）
@@ -104,8 +110,8 @@
 </match>
 ```
 
-
+<br/>
 
 > 1. [数据收集之Fluentd](https://blog.csdn.net/wangpei1949/article/details/81841431)
 > 2. [Fluentd语法速记](https://blog.csdn.net/luanpeng825485697/article/details/83339985)
-> 3. [Fluentd Doc]([https://docs.fluentd.org](https://docs.fluentd.org/))
+> 3. [Fluentd Doc](https://docs.fluentd.org/)
