@@ -1,87 +1,91 @@
-### docker集群常用命令
+# docker集群常用命令
 
-#### docker swarm^1^
+[TOC]
 
-1. 一个Swarm集群至少需要一个Manager节点，如果有多个，则推选一个为Leader；Worker可以有零个至多个。
+## docker swarm^1^
 
-2. 集群的创建与销毁
+### 要求
 
-   - 创建*Manager*
+一个 Swarm 集群至少需要一个 Manager 节点，如果有多个，则推选一个为 Leader；Worker 可以有零个至多个。
 
-     ```bash
-     docker swarm init --advertise-addr xxx.xxx.xxx.xxx
-     ```
+### 集群的创建与销毁
 
-   - 创建*Worker*
+- 创建 Manager
 
-     ```bash
-     docker swarm join -token ******
-     ```
+  ```bash
+  docker swarm init --advertise-addr xxx.xxx.xxx.xxx
+  ```
 
-   - 查看*token*
+- 创建 Worker
 
-     ```bash
-     docker swarm join-token manager/woker
-     ```
+  ```bash
+  docker swarm join -token ******
+  ```
 
-   - 查看*node*
+- 查看 token
 
-     ```bash
-     doker node ls
-     ```
+  ```bash
+  docker swarm join-token manager/woker
+  ```
 
-   - *worker* 离开集群
+- 查看 node
 
-     ```bash
-     docker swarm leave
-     ```
+  ```bash
+  doker node ls
+  ```
 
-   - *Manager* 离开集群
+- worker 离开集群
 
-     ```bash
-     docker swarm leave --force
-     ```
+  ```bash
+  docker swarm leave
+  ```
 
-3. 节点管理
+- Manager 离开集群
 
-   1. **AVAILABILITY** 的三种状态
+  ```bash
+  docker swarm leave --force
+  ```
 
-      - ==Active==：调度器能够将任务安排到这个节点
-      - ==Pause==：调度器不能将新的任务安排到这个节点，但是已有的任务会继续运行
-      - ==Drain==：调度器不能安排新的任务到这个节点，同时这个节点以运行的任务将被停止，分配到其他的节点上
+### 节点管理
 
-   2. **MANAGER STAUTS** 的状态
+1. **AVAILABILITY** 的三种状态
 
-      - ==Leader==：主要管理者节点
-      - ==Reachable==：如果Leader节点不可用，则这这些节点有资格选举为新的Leader
-      - ==Unavailable==：该节点不能和其他 Manager 节点产生任何联系，这种情况下，应该添加一个新的 Manager 节点到集群，或者将一个 Worker 节点提升为 Manager 节点
+   - ==Active==：调度器能够将任务安排到这个节点
+   - ==Pause==：调度器不能将新的任务安排到这个节点，但是已有的任务会继续运行
+   - ==Drain==：调度器不能安排新的任务到这个节点，同时这个节点以运行的任务将被停止，分配到其他的节点上
 
-   3. 检查节点的详细信息
+2. **MANAGER STAUTS** 的状态
 
-      ```bash
-      docker node inspect <node-id> --pretty
-      ```
+   - ==Leader==：主要管理者节点
+   - ==Reachable==：如果 Leader 节点不可用，则这这些节点有资格选举为新的 Leader
+   - ==Unavailable==：该节点不能和其他 Manager 节点产生任何联系，这种情况下，应该添加一个新的 Manager 节点到集群，或者将一个 Worker 节点提升为 Manager 节点
 
-   4. 变更节点可用性
+3. 检查节点的详细信息
 
-      ```bash
-      docker node update --availability <status> <node>
-      ```
+   ```bash
+   docker node inspect <node-id> --pretty
+   ```
 
-   5. 升级降级节点
+4. 变更节点可用性
 
-      ```bash
-      1. 升级
-      docker node promote <node>
-      2. 降级
-      docker node demote <node> 
-      ```
+   ```bash
+   docker node update --availability <status> <node>
+   ```
 
-4. **Service** 部署
+5. 升级降级节点
+
+   ```bash
+   1. 升级
+   docker node promote <node>
+   2. 降级
+   docker node demote <node> 
+   ```
+   
+6. **Service** 部署
 
    1. 创建服务
 
-      ``` bash
+      ```bash
       docker service create --name <name> <image>
       ```
 
@@ -112,22 +116,22 @@
    6. 移除服务
 
       ```bash
-      docker service removce <name>
+      docker service remove <name>
       ```
 
    7. 列出服务
 
       ```bash
-      1. docker sevice ls
-      2. docker service ps <name>
-      3. docker service inspect <name>
+      docker service ls
+      docker service ps <name>
+      docker service inspect <name>
       ```
 
-5. **Service** 存储
+7. **Service** 存储
 
    1. 数据卷挂载
 
-      ```bsah
+      ```bash
       docker service create \ 
       --mount type=volume,src=<volume-name>, dst=<container-path> \ 
       --name <name> \ 
@@ -158,16 +162,16 @@
       docker volume prune
       ```
 
-6. **Docker Stack**
+8. **Docker Stack**
 
-   1. 部署*stack*
+   1. 部署 stack
 
       ```bash
       docker stack deploy [option] STACK
       ps: docker stack deploy -c compose.yaml <name>
       ```
 
-   2. 列出*Stack*
+   2. 列出 Stack
 
       ```bash
       docker stack ls
@@ -185,22 +189,21 @@
       docekr stack ps <stack-name>
       ```
 
-   5. 更新*stack*
+   5. 更新 stack
 
       ```bash
-      1. 重新部署即可
+      # 重新部署即可
       docker stack deploy [option] STACK
       ```
 
-   6. 删除*stack*
+   6. 删除 stack
 
       ```bash
       docker stack rm <stack-name>
       ```
 
-      
 
-#### kubernetes
+## kubernetes
 
 1. 集群的创建与加入
 
@@ -219,9 +222,9 @@
 
    3. 加入集群
 
-     ```bash
-     kubeadm join xxx.xxx.xxx.xxx:x --token ****** --discovery-token-ca-cert-hash ******
-     ```
+      ```bash
+      kubeadm join xxx.xxx.xxx.xxx:x --token ****** --discovery-token-ca-cert-hash ******  
+      ```
 
    4. 查看节点
 
@@ -230,10 +233,10 @@
       kubectl get nodes -o wide
       ```
 
-2. 获取一些信息(get)
+2. 获取一些信息（get）
 
    ```bash
-   1. replicas-control
+   1. replication-control
    kubectl get rc
    2. replicas-set
    kubectl get rs 
@@ -247,7 +250,7 @@
    kubectl get pod <po-name>
    ```
 
-3. 获取详细信息(describe)
+3. 获取详细信息（describe）
 
    ```bash
    1. pod
@@ -256,16 +259,14 @@
    kubectl describe svc 
    ```
 
-   
-
-4. 创建*POD*
+4. 创建 Pod
 
    ```bash
    kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=replicas] [--dry-run=bool] [--overrides=inline-json] [--command] -- [COMMAND] [args...]
    ps: kubectl run nginx --image=nginx --port=80
    ```
 
-5. 删除*POD*
+5. 删除 Pod
 
    ```bash
    kubectl delete deployment <deploy-name>
@@ -281,11 +282,11 @@
 
    ```bash
    kubectl delete -f <name.yaml>
-   kubectl delete po <po-name>
+   kubectl delete po <pod-name>
    kubectl delete po -lapp=nginx-2 
    ```
 
-8. **kubectl apply**(更新)
+8. **kubectl apply**
 
    ```bash
    kubectl apply -f <name.yaml>
@@ -294,7 +295,7 @@
 9. **kubectl logs**
 
    ```bash
-   kubectl logs <po-name>
+   kubectl logs <pod-name>
    ```
 
 10. **rolling-update**
@@ -319,8 +320,7 @@
     kubectl exec <po-name> [cmd]
     ```
 
-    
 
-
+<br/>
 
 > 1. [Docker Swarm 系列教程](http://www.spring4all.com/article/1254)
