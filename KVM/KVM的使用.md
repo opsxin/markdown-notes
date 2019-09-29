@@ -1,153 +1,159 @@
-​	基于内核的虚拟机（Kernel-based Virtual Machine，缩写为KVM）是一种用于Linux内核中的虚拟化基础设施，可将Linux内核转化为虚拟机监视器。
+# KVM 的使用
 
-1. 内部结构^1^：
+基于内核的虚拟机（Kernel-based Virtual Machine，缩写为 KVM）是一种用于 Linux 内核中的虚拟化基础设施，可将 Linux 内核转化为虚拟机监视器。
 
-   - 设置客户虚拟机的地址空间。宿主机也需要可用于引导进操作系统的固件镜像（通常是模拟PC时的自定义BIOS）。
+[TOC]
 
-   - 为客户机模拟I/O。
+## 内部结构^1^
 
-   - 将客户机的视频显示映射回系统主机上。
+KVM 提供抽象的设备，但不模拟处理器。它开放了 `/dev/kvm` 接口，供使用者模式的主机使用：
 
-     在Linux上，QEMU版本0.10.0及更新版就是一个用户层主机，QEMU使用KVM以近乎原生的速度虚拟化客户机，若无KVM的话则将仅使用软件模拟。
+- 设置客户虚拟机的地址空间。宿主机也需要可用于引导进操作系统的固件镜像（通常是模拟 PC 时的自定义 BIOS）。
+- 为客户机模拟 I/O。
+- 将客户机的视频显示映射回系统主机上。
 
-     KVM内部使用SeaBIOS作为16位x86 BIOS的开源模拟。
+在 Linux 上，QEMU 版本 0.10.0 及更新版就是一个用户层主机，QEMU 使用 KVM 以近乎原生的速度虚拟化客户机，若无 KVM 的话则将仅使用软件模拟。
 
-     ![KVM环境](Kernel-based_Virtual_Machine_zh-CN.svg.png)
+KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 
-2. 实施KVM^4^
+![KVM环境](Kernel-based_Virtual_Machine_zh-CN.svg.png)
 
-   - 查看系统是否可以实现虚拟化
+## 安装 KVM^4^
 
-     ```bash
-     grep -E 'svm|vmx' /proc/cpuinfo
-     ```
+- 查看系统是否可以实现虚拟化
 
-     如果匹配到这两项中的其中一项，则CPU支持虚拟化。
+  ```bash
+  grep -E 'svm|vmx' /proc/cpuinfo
+  ```
 
-     ![vmx](vmx.PNG)
+  如果匹配到这两项中的其中一项，则 CPU 支持虚拟化。
 
-   - 安装KVM软件和相关软件组件（基于CentOS7）
+  ![vmx](vmx.PNG)
 
-     ```bash
-     yum install -y qemu-kvm qemu-img libvirt bridge-utils virt-install libvirt-client libvirt-python
-     ```
+- 安装 KVM 软件和相关软件组件（基于 CentOS 7）
 
-     等待软件安装成功后，输入
+  ```bash
+  yum install -y qemu-kvm qemu-img libvirt bridge-utils virt-install libvirt-client libvirt-python
+  ```
 
-     ```bash
-     lsmod | grep kvm
-     ```
+  等待软件安装成功后，输入
 
-     如果显示下图，则安装成功
+  ```bash
+  lsmod | grep kvm
+  ```
 
-     ![install_succeed](install_succeed.PNG)
+  如果显示下图，则安装成功
 
-    - 网络配置
+  ![install_succeed](install_succeed.PNG)
 
-      默认的，KVM将会开启一个虚拟的网络接口‘virbr0’，它创建一个NAT网络为了虚拟机接入网络，默认的网络为192.168.122.0/24。但这个取决与你的系统环境，也可以创建一个桥接网络使虚拟机接入网络。
+ - 网络配置
 
-   - 配置VNC
+   KVM 默认会开启一个虚拟的网络接口 `virbr0`，它创建一个 NAT 网络提供虚拟机接入网络，默认的网络为 192.168.122.0/24。但这个取决与你的系统环境，也可以创建一个桥接网络使虚拟机接入网络。
 
-     当虚拟机需要使用VNC时，可以通过下列方式
+- 配置 VNC
 
-     1. 默认的VNC将会监听127.0.0.1，这样只有本地的主机可以通过VNC接入。如果需要通过其他主机接入VNC，则需要配置‘/etc/libvirt/qemu.conf’中的‘vnc_listen = ‘0.0.0.0’，将它的注释去掉，并重启‘libvirtd’。
+  当虚拟机需要使用 VNC 时，可以通过下列方式
 
-        ```bash
-        systemctl restart libvirtd 
-        ```
-
-     2. 设置SSH转发（适用于NAT网络）
-
-        ```bash
-        ssh -L 192.168.0.185:5910:127.0.0.1:5910 192.168.0.185
-        192.168.0.185为主机IP地址
-        ```
-
-     3. 防火墙开放端口
-
-        - iptables -I INPUT -p tcp –dport 5910 -s IP -j ACCEPT
-        - firewall-cmd  --permanent --add-port=5910/tcp
-
-   - 创建虚拟机
+  1. 默认的 VNC 将会监听 127.0.0.1，这样只有本地的主机可以通过 VNC 接入。如果需要通过其他主机接入 VNC，则需要配置 ‘/etc/libvirt/qemu.conf’ 中的 `vnc_listen = '0.0.0.0'`，将它的注释去掉，并重启 ‘libvirtd’。
 
      ```bash
-     virt-install \
-     --name win7 \ #虚拟机名称
-     --memory 2048 \ #2G内存
-     --vcpus sockets=1,cores=1,threads=2 \ #1个CPU，1核，2线程
-     --cdrom=/home/windows7/win7-X86.iso \ #系统镜像
-     --os-type windows #系统类型
-     --accelerate #优化选项
-     --os-variant=win7 \ #^7^
-     --disk /home/windows7/win7.qcow2,bus=virtio,size=40 \ #虚拟系统盘40G
-     --disk /home/windows7/virtio-win_x86.vfd,device=floppy \ #挂载virtio为软盘，提供网络及磁盘驱动
-     --graphics vnc,password=Passw0rd,port=5910 \ #开启vnc，端口5910，VNC密码Passw0rd
-     --hvm #完全虚拟化，基于QEMU的系统管理程序，则隐含此参数 
-     --virt-type kvm #安装的系统管理程序。示例是kvm、qemu、xen或kqemu。优先推荐qemu(软件+硬件虚拟)>kvm(硬件虚拟)>kqemu(软件+硬件虚拟)^6^
+     systemctl restart libvirtd 
      ```
 
-3. 添加桥接网络(CentOS7)^8^
-
-   - 新增/etc/sysconfig/network-scripts/ifcfg-br0
+  2. 设置 SSH 转发（适用于 NAT 网络）
 
      ```bash
-     TYPE=Bridge #网络类型
-     DEFROUTE=yes
-     BOOTPROTO=static
-     IPADDR=192.168.0.185
-     GATEWAY=192.168.0.253
-     NETMASK=255.255.255.0
-     DEVICE=br0
-     ONBOOT=yes #开机启动
+     ssh -L 192.168.0.185:5910:127.0.0.1:5910 192.168.0.185
+     192.168.0.185 为主机 IP 地址
      ```
 
-   - 修改/etc/sysconfig/network-scripts/ifcfg-enp1s0(物理网卡)
+  3. 防火墙开放端口
 
      ```bash
-     TYPE=Ethernet
-     BOOTPROTO=none #手动
-     NAME=enp1s0
-     DEVICE=enp1s0
-     ONBOOT=yes
-     BRIDGE=br0 #桥接br0设备
-     NM_CONTROLLED=no #不由NetworkManager管理
+     iptables -I INPUT -p tcp –dport 5910 -s IP -j ACCEPT
+     firewall-cmd  --permanent --add-port=5910/tcp
      ```
 
-   - 重启network.service服务
+- 创建虚拟机
 
-     ```bash
-     systemctl restart network
-     ```
+  ```bash
+  virt-install \
+  --name win7 \ # 虚拟机名称
+  --memory 2048 \ # 2G 内存
+  --vcpus sockets=1,cores=1,threads=2 \ # 1 个 CPU，1 核，2 线程
+  --cdrom=/home/windows7/win7-X86.iso \ # 系统镜像
+  --os-type windows # 系统类型
+  --accelerate # 优化选项
+  --os-variant=win7 \ #^7^
+  --disk /home/windows7/win7.qcow2,bus=virtio,size=40 \ # 虚拟系统盘 40G
+  --disk /home/windows7/virtio-win_x86.vfd,device=floppy \ # 挂载 virtio 为软盘，提供网络及磁盘驱动
+  --graphics vnc,password=Passw0rd,port=5910 \ # 开启 vnc，端口 5910，VNC 密码 Passw0rd
+  --hvm # 完全虚拟化，基于 QEMU 的系统管理程序，则隐含此参数 
+  --virt-type kvm # 安装的系统管理程序。示例是 kvm、qemu、xen 或 kqemu。优先推荐 qemu(软件+硬件虚拟)>kvm(硬件虚拟)>kqemu(软件+硬件虚拟)^6^
+  ```
 
-   - 查看桥接接口
+## 添加桥接网络（CentOS7）^8^
 
-     ![brigeif](brigeif.PNG)
+- 新增 /etc/sysconfig/network-scripts/ifcfg-br0
 
-   - 查看IP信息
+  ```bash
+  TYPE=Bridge #网络类型
+  DEFROUTE=yes
+  BOOTPROTO=static
+  IPADDR=192.168.0.185
+  GATEWAY=192.168.0.253
+  NETMASK=255.255.255.0
+  DEVICE=br0
+  ONBOOT=yes #开机启动
+  ```
 
-     ![ipaddr](.\ipaddr.PNG)
+- 修改 /etc/sysconfig/network-scripts/ifcfg-enp1s0（物理网卡）
 
-   - virt-install内使用桥接网络
+  ```bash
+  TYPE=Ethernet
+  BOOTPROTO=none #手动
+  NAME=enp1s0
+  DEVICE=enp1s0
+  ONBOOT=yes 
+  BRIDGE=br0 #桥接 br0 设备
+  NM_CONTROLLED=no #不由 NetworkManager 管理
+  ```
 
-     ```bash
-     --network bridge=br0,model=virtio 
-     ```
+- 重启 network.service 服务
 
- 4. 常用操作命令^9^
+  ```bash
+  systemctl restart network
+  ```
 
-    | 作用                          | 命令                                   |
-    | ----------------------------- | -------------------------------------- |
-    | 列出所有虚拟机                | virsh list --all                       |
-    | 显示虚拟机信息                | virsh dominfo virtual_name             |
-    | 显示虚拟机内存和cpu的使用情况 | virt-top                               |
-    | 显示虚拟机分区信息            | virt-df virtual_name                   |
-    | 关闭虚拟机（shutodwn）        | virsh shutdown virtual_name            |
-    | 启动虚拟机                    | virsh start virtual_name               |
-    | 设置虚拟机跟随系统自启        | virsh autostart virtual_name           |
-    | 关闭虚拟及自启                | virsh autostart --disable virtual_name |
-    | 删除虚拟机                    | virsh undefine virtual_name            |
-    | 通过控制窗口登录虚拟机        | virsh console virtual_name             |
-    | 编辑虚拟机配置                | virsh edit virtual_name                |
+- 查看桥接接口
+
+  ![brigeif](brigeif.PNG)
+
+- 查看 IP 信息
+
+  ![ipaddr](.\ipaddr.PNG)
+
+- virt-install 内使用桥接网络
+
+  ```bash
+  --network bridge=br0,model=virtio 
+  ```
+
+## 常用操作命令^9^
+
+| 作用                          | 命令                                   |
+| ----------------------------- | -------------------------------------- |
+| 列出所有虚拟机                | virsh list --all                       |
+| 显示虚拟机信息                | virsh dominfo virtual_name             |
+| 显示虚拟机内存和cpu的使用情况 | virt-top                               |
+| 显示虚拟机分区信息            | virt-df virtual_name                   |
+| 关闭虚拟机（shutodwn）        | virsh shutdown virtual_name            |
+| 启动虚拟机                    | virsh start virtual_name               |
+| 设置虚拟机跟随系统自启        | virsh autostart virtual_name           |
+| 关闭虚拟及自启                | virsh autostart --disable virtual_name |
+| 删除虚拟机                    | virsh undefine virtual_name            |
+| 通过控制窗口登录虚拟机        | virsh console virtual_name             |
+| 编辑虚拟机配置                | virsh edit virtual_name                |
 
 5. 删除虚拟机
 
@@ -158,40 +164,39 @@
    rm /home/windows7/win7.qcow2 #删除虚拟磁盘
    ```
    
-6. 桥接网络(bridge)管理
+6. 桥接网络（bridge）管理
 
    ```
-   #添加网桥
+   # 添加网桥
    brctl addbr [name]
-   #显示网桥信息
+   # 显示网桥信息
    brctl show [name]
-   #删除网桥
+   # 删除网桥
    brctl delbr [name]
-   #将物理网口添加到网桥
+   # 将物理网口添加到网桥
    brctl addif [br-name] [ph-name]
    #brctl addif br0 eth0
-   #将物理网口从网桥中删除
+   # 将物理网口从网桥中删除
    brctl delif br0 eth0
    ```
 
 7. **删除网桥步骤**
 
    ```bash
-   #将物理网口从网桥中删除
+   # 将物理网口从网桥中删除
    brctl delif br0 eno1
-   #关闭网桥
+   # 关闭网桥
    ifdown br0 
-   #删除网桥
+   # 删除网桥
    brctl delbr br0
-   #删除配置文件
+   # 删除配置文件
    mv /etc/sysconfig/network-scripts/ifcfg-br0 /tmp
    ```
 
-   
 
 ## 重点
 
-安装虚拟机后请检查br0绑定的虚拟接口，确认虚拟接口是否已经绑定了桥接接口。
+安装虚拟机后请检查 br0 绑定的虚拟接口，确认虚拟接口是否已经绑定了桥接接口。
 
 ![绑定](bang.PNG)
 
@@ -201,9 +206,7 @@
 brctl addif br0 vnet0 #绑定vnet0至bro接口
 ```
 
-
-
-
+<br/>
 
 
 > 1. [基于内核的虚拟机](https://zh.wikipedia.org/zh-hans/基于内核的虚拟机)
