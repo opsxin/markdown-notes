@@ -24,7 +24,6 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/">K8S</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Ingress-Nginx/">Ingress-Nginx</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Ingress-Nginx/Ingress%E5%AE%89%E8%A3%85.md">Ingress安装.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Kubernetes%E7%AE%80%E4%BB%8B.md">Kubernetes简介.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md">Kubernetes集群部署.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/">Log</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Log/Fluentd.md">Fluentd.md</a><br>
@@ -50,8 +49,7 @@
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-11-Kubernetes%E5%8E%9F%E7%90%86.md">k8s-11-Kubernetes原理.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-12-RBAC.md">k8s-12-RBAC.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E7%AD%94.md">一些问题及解答.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%91%98%E6%8A%84.md">知识点摘抄.md</a><br>
-	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E8%87%AA%E5%B7%B1%E7%90%86%E8%A7%A3%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98.md">自己理解的一些问题.md</a><br>
+	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E6%91%98%E6%8A%84%E5%8F%8A%E7%90%86%E8%A7%A3.md">摘抄及理解.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/">KVM</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/KVM%E7%9A%84%E4%BD%BF%E7%94%A8.md">KVM的使用.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/LB/">LB</a><br>
@@ -107,4 +105,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>22 directories, 86 files
+<br/>22 directories, 84 files
