@@ -83,16 +83,14 @@ nslookup redis-cluster-svc
 ```bash
 # 单独获取 Pod 的 IP
 # redis-cluster-0 为 Pod 名
-nslookup redis-cluster-0
+nslookup redis-cluster-0.redis-cluster-svc
 ```
 
 ### 创建集群
 
 本次使用的 Redis 的版本大于 5，因此直接使用 `redis-cli` 即可。版本小于 5 的，使用 `redis-trib`。
 
-因为使用 `Headless svc` 的方式，找不到 Pod IP，所以直接使用上一步操作的 IP。~~暂时不清楚为什么无头服务会有问题。~~
-
-~~[可能 kube-dns 版本过低](https://github.com/kubernetes/kubernetes/issues/45779)~~
+~~使用 `Headless svc` 的方式，但是找不到 Pod IP，所以直接使用上一步操作的 IP。暂时不清楚为什么无头服务会有问题。[可能 kube-dns 版本过低](https://github.com/kubernetes/kubernetes/issues/45779)~~，已解决，看下方引用的文字。
 
 > The **spec.serviceName** field in the statefulSet manifest was wrong. It should match the **metadata.name** field in the headless service definition.
 >
@@ -101,7 +99,13 @@ nslookup redis-cluster-0
 ```bash
 # cluster-replicas 表示集群中的每个主节点创建一个从节点
 # 如果使用 Headless Service
-#redis-cli --cluster create redis-cluster-{0..5}:6379 --cluster-replicas 1
+#redis-cli --cluster create $(dig +short redis-cluster-0.redis-cluster-svc):6379 \
+#    $(dig +short redis-cluster-1.redis-cluster-svc):6379 \
+#    $(dig +short redis-cluster-2.redis-cluster-svc):6379 \
+#    $(dig +short redis-cluster-3.redis-cluster-svc):6379 \ 
+#    $(dig +short redis-cluster-4.redis-cluster-svc):6379 \
+#    $(dig +short redis-cluster-5.redis-cluster-svc):6379 \ 
+#    --cluster-replicas 1
 redis-cli --cluster create 10.244.1.8{0..2}:6379 10.244.2.17{1..3}:6379 --cluster-replicas 1
 ```
 
