@@ -36,6 +36,8 @@
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Prometheus/Prometheus-04-%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E7%9B%91%E6%8E%A7.md">Prometheus-04-资源对象监控.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Prometheus/Prometheus-05-grafana%E7%9A%84%E5%AE%89%E8%A3%85.md">Prometheus-05-grafana的安装.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Prometheus/Prometheus-06-operator.md">Prometheus-06-operator.md</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Redis-Cluster/">Redis-Cluster</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Redis-Cluster/Redis%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.md">Redis集群部署.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/">kubernetes-in-action</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-01-%E4%BB%8B%E7%BB%8D.md">k8s-01-介绍.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-02-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8.md">k8s-02-开始使用.md</a><br>
@@ -105,4 +107,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>22 directories, 84 files
+<br/>23 directories, 85 files
