@@ -22,7 +22,12 @@
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Experience/Interview_01.md">Interview_01.md</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Experience/Interview_02.md">Interview_02.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Git/">Git</a><br>
+<<<<<<< HEAD
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Git/Git%E5%91%BD%E4%BB%A4.md">Git命令.md</a><br>
+=======
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Git/Git%E5%91%BD%E4%BB%A4.md">Git命令.md</a><br>
+	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Git/Git%E5%BF%AB%E9%80%9F%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.md">Git快速参考手册.md</a><br>
+>>>>>>> master
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/">K8S</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Ingress-Nginx/">Ingress-Nginx</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/Ingress-Nginx/Ingress%E5%AE%89%E8%A3%85.md">Ingress安装.md</a><br>
@@ -109,4 +114,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>24 directories, 86 files
+<br/>24 directories, 87 files

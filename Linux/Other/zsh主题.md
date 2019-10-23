@@ -1,8 +1,9 @@
 适用于 **oh\~my\~zsh** 的主题
-XShell 字体使用 **Consolas，11号**
+XShell 字体推荐使用 **Consolas，11号**
 颜色模式使用 **Xterm**
 
 ```bash
+cat > ~/.oh-my-zsh/themes/xxf.zsh-theme << EOF
 # Copy and self modified from ys.zsh-theme, the one of default themes in master repository
 # Clean, simple, compatible and meaningful.
 # Tested on Linux, Unix and Windows under ANSI colors.
@@ -78,5 +79,6 @@ ${git_info}
 %{$fg_bold[red]%}%* \
 %{$terminfo[bold]$fg[blue]%}# %{$reset_color%}"
 fi
+EOF
 ```
 
