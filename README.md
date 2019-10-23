@@ -1,4 +1,4 @@
-<h4>Markdown-Notes</h4>
+Markdown-Notes<br/>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/">Ansible</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-1-%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3.md">ansible-1-基本了解.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-2-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9D%97.md">ansible-2-文件操作模块.md</a><br>
@@ -65,25 +65,25 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/">Linux</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/AdGuard-DNS/">AdGuard-DNS</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/AdGuard-DNS/%E6%90%AD%E5%BB%BA%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AADNS%EF%BC%88AdGuard%EF%BC%89.md">搭建广告拦截DNS（AdGuard）.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/FTP%E5%AE%89%E8%A3%85.md">FTP安装.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/NFS%E7%9A%84%E5%AE%89%E8%A3%85.md">NFS的安装.md</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/">Other</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/FTP%E5%AE%89%E8%A3%85.md">FTP安装.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/NFS%E5%AE%89%E8%A3%85.md">NFS安装.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/exec%E8%AF%B4%E6%98%8E.md">exec说明.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/ps%E5%91%BD%E4%BB%A4.md">ps命令.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/vim%E9%85%8D%E7%BD%AE.md">vim配置.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/zsh%E4%B8%BB%E9%A2%98.md">zsh主题.md</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/zsh%E6%95%B0%E5%AD%97%E5%B0%8F%E9%94%AE%E7%9B%98.md">zsh数字小键盘.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/">Shell</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/shell-1-%E5%8F%98%E9%87%8F.md">shell-1-变量.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/shell-2-%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97.md">shell-2-数值计算.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/shell-3-%E4%B8%AD%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB.md">shell-3-中括号的区别.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/shell-4-%E5%AD%97%E7%AC%A6%E4%B8%B2.md">shell-4-字符串.md</a><br>
-	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/shell-5-%E5%B0%96%E6%8B%AC%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB.md">shell-5-尖括号的区别.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/exec%E8%A7%A3%E6%9E%90.md">exec解析.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/">iptables</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-1-%E4%BB%8B%E7%BB%8D.md">iptables-1-介绍.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-2-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.md">iptables-2-基本操作.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-3-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%93%BE.md">iptables-3-自定义链.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-4-NAT%E8%A1%A8.md">iptables-4-NAT表.md</a><br>
-	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-5-ipset.md">iptables-5-ipset.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/oh-my-zsh%E8%A7%A3%E5%86%B3%E6%95%B0%E5%AD%97%E9%94%AE%E7%9B%98%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8.md">oh-my-zsh解决数字键盘无法使用.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/ps%E5%88%97%E8%AF%B4%E6%98%8E.md">ps列说明.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/vim%E9%85%8D%E7%BD%AE.md">vim配置.md</a><br>
-	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/xxf.zsh-theme.md">xxf.zsh-theme.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/Shell-01-%E5%8F%98%E9%87%8F.md">Shell-01-变量.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/Shell-02-%E8%BF%90%E7%AE%97.md">Shell-02-运算.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/Shell-03-%E5%AD%97%E7%AC%A6.md">Shell-03-字符.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/Shell-04-%E6%8B%AC%E5%8F%B7.md">Shell-04-括号.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/Shell-05-%E6%95%B0%E7%BB%84.md">Shell-05-数组.md</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Shell/Shell-06-%E5%8F%82%E6%95%B0%E6%89%A9%E5%B1%95.md">Shell-06-参数扩展.md</a><br>
+	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/">iptables</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-01-%E4%BB%8B%E7%BB%8D.md">iptables-01-介绍.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-02-%E6%93%8D%E4%BD%9C.md">iptables-02-操作.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/iptables/iptables-03-ipset.md">iptables-03-ipset.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Nginx/">Nginx</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Nginx/HTTP2/">HTTP2</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Nginx/HTTP2/HTTP2-1-HTTP2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B(HTTP2-Complete-Tutorial).md">HTTP2-1-HTTP2完整教程(HTTP2-Complete-Tutorial).md</a><br>
@@ -110,4 +110,4 @@
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>24 directories, 87 files
+<br/>25 directories, 86 files
