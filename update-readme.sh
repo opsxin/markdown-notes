@@ -18,5 +18,5 @@
 # URL 正确，但是 PC 端显示会有些变形，Mobile 端正常
 tree -I "*.png|*.gif|*.webp|*.pdf" -v -L 3 --ignore-case \
     -H 'https://github.com/opsxin/markdown-notes/blob/master' \
-    | awk 'BEGIN{print "<h4>Markdown-Notes</h4>"} /─/{print} /directories/{print "<br/>" $0}' \
+    | awk 'BEGIN{print "Markdown-Notes<br/>"} /─/{print} /directories/{print "<br/>" $0}' \
     > README.md
