@@ -1016,3 +1016,482 @@ sys	0m 0.03s
 > 注意：如果`CMD`是从基础镜像定义的，设置`ENTRYPOINT`将把`CMD`重置为空值。在这种情况下，必须在当前映像中重新定义`CMD`才能获得一个值。 
 
 ## VOLUME
+
+```dockerfile
+VOLUME ["/data"]
+```
+
+`VOLUME`指令使用指定的名称创建一个挂载点，并将其标记为来自本机主机或其他容器的外部挂载卷。 这个值是一个 JSON 数组， `VOLUME ["/var/log/"]`，或者是一个带多个参数的纯字符串，例如 `VOLUME /var/log`， `VOLUME/var/log /var/db`。了解更多通过 Dockers 客户端挂载指令的信息/例子，请参考[共享目录通过 VOLUMES](https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume)
+
+ 文档。
+
+`docker run` 命令初始化创建卷时使用基础镜像上的存在的指定位置。例如，考虑下列的片段：
+
+```dockerfile
+FROM ubuntu
+RUN mkdir /myvol
+RUN echo "hello world" > /myvol/greeting
+VOLUME /myvol
+```
+
+这个 Dockerfile 的结果是使`docker run` 创建一个新的挂载点`/myvol`，并拷贝`greeting`文件到新的卷中的镜像。
+
+### 关于指定卷的说明 
+
+在 Dockerfile 中，时刻记得下面的事情。
+
+- **基于 Windows 容器的卷：**当使用基于 Windows 的容器，容器的目的卷必须满足下面的一个：
+
+  - 一个不存在的或者空的目录
+  - 不是`C:`盘
+
+- **在 Dockerfile 中改变卷：** 如果任何构建步骤在声明卷之后更改了该卷中的数据，那么这些更改将被丢弃。 
+
+- **JSON 格式：**列表是解析为 JSON 数据。你必须通过双引号(“”)包含单词，而不是单引号（‘’）。
+
+- **在容器运行时声明主机目录：** 主机目录（挂载点）本质上依赖于主机。这是为了保持镜像的可移植性，因为不能保证给定的主机目录在所有主机上都可用。由于这个原因，您不能从 Dockerfile 中装入主机目录。`VOLUME`指令不支持指定主机目录参数。在创建或运行容器时，必须指定挂载点。
+
+## USER
+
+```dockerfile
+USER <user>[:<group>] 
+# or
+USER <UID>[:<GID>]
+```
+
+`USE`指令在运行镜像时设置用户名（或 UID）和可选的用户组（或 GID），以及 Dockerfile 中紧随其后的`RUN`、`CMD`和`ENTRYPOINT`指令的用户。
+
+> 警告：当用户没有主要组，那么这个镜像（或者下条指令）将通过`root`组运行。
+
+> 在 Windows，用户如果不存在，必须先创建。这个可以通过`net user` 完成。
+
+```dockerfile
+FROM microsoft/windowsservercore
+# Create Windows user in the container
+RUN net user /add patrick
+# Set it for subsequent commands
+USER patrick
+```
+
+##  WORKDIR
+
+```dockerfile
+WORKDIR /path/to/workdir
+```
+
+`WORKDIR`指令为 Dockerfile 中的`RUN`、`CMD`、`ENTRYPOINT`、`COPY`和`ADD`指令设置工作目录。如果`WORKDIR`不存在，即使后续的 Dockerfile 指令中没有使用它，也会创建它。
+
+ `WORKDIR`指令能被使用多次在一个 Dockerfile 中。如果提供一个相对路径，它将相对于`WORKDIR	` 的相对路径。例如：
+
+```dockerfile
+WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd
+```
+
+`pwd`命令输出的是`/a/b/c`。
+
+`WORKDIR`能解析`ENV`设置的环境变量。你只能在 Dockerfile 中使用明确的环境变量，例如：
+
+```dockerfile
+ENV DIRPATH /path
+WORKDIR $DIRPATH/$DIRNAME
+RUN pwd
+```
+
+`pwd`命令输出的是`/path/$DIRNAME`。
+
+## ARG
+
+```dockerfile
+ARG <name>[=<default value>]
+```
+
+`ARG`指令定义了一个用户可以在构建时通过`docker build`命令`--build-ARG <varname>=<value>`参数传递给构建器的变量。如果用户指定了一个 Dockerfle 中没有定义的参数，那么构建将会产生警告。
+
+```bash
+[Warning] One or more build-args [foo] were not consumed.
+```
+
+一份 Dockerfile 文件可以包含一个或多个`ARG` 指令，例如，下面是正确的 Dockerfile：
+
+```dockerfile
+FROM busybox
+ARG user1
+ARG buildno
+...
+```
+
+> 警告：不建议使用构建时变量来传递密码，如 github 密钥、用户凭证等。使用`docker history`命令，任何用户都可看到镜像的变量。
+
+### 默认值
+
+`ARG`可以指定默认值：
+
+```dockerfile
+FROM busybox
+ARG user1=someuser
+ARG buildno=1
+...
+```
+
+如果`ARG`指令有默认值，并且在构建时没有传递值，那么构建器将使用默认值。 
+
+### 范围
+
+`ARG`变量从 Dockerfile 中定义它的行开始生效，而不是从命令行或其他地方使用时。例如，这个 Dockerfile：
+
+```dockerfile
+FROM busybox
+USER ${user:-some_user}
+ARG user
+USER $user
+...
+```
+
+ 用户通过调用来构建此文件：
+
+```bash
+docker build --build-arg user=what_user .
+```
+
+第 2 行中的`USER`为`some_user`，因为`USER`变量是在随后的第 3 行中定义。第 4 行中的`USER`为`what_user`,是通过在命令行上传递的用户值。在`ARG`指令定义变量之前，任何使用变量都会产生一个空字符串。 
+
+`ARG`指令在定义它的构建阶段结束后失效。若要在多个阶段中使用`ARG`，则每个阶段必须包含`ARG`指令。  
+
+```dockerfile
+FROM busybox
+ARG SETTINGS
+RUN ./run/setup $SETTINGS
+
+FROM busybox
+ARG SETTINGS
+RUN ./run/other $SETTINGS
+```
+
+### 使用 `ARG` 变量
+
+您可以使用`ARG`或`ENV`指令来指定`RUN`指令可用的变量。`ENV`指令总会覆盖`ARG`指令同名的环境变量。
+
+```dockerfile
+1 FROM ubuntu
+2 ARG CONT_IMG_VER
+3 ENV CONT_IMG_VER v1.0.0
+4 RUN echo $CONT_IMG_VER
+```
+
+然后，假设这个镜像是用这个命令构建的：
+
+```bash
+docker build --build-arg CONT_IMG_VER=v2.0.1 .
+```
+
+在本例中，`RUN`指令使用的是`v1.0.0`，而不是用户传递的`ARG`设置`v2.0.1`。这种行为类似于 shell 脚本，其中局部作用域的变量从定义的角度覆盖作为参数传递或从环境中继承的变量。 
+
+使用上面的示例，但使用不同的`ENV`，您可以在`ARG`和`ENV`指令之间创建更有用的交互：
+
+```dockerfile
+1 FROM ubuntu
+2 ARG CONT_IMG_VER
+3 ENV CONT_IMG_VER ${CONT_IMG_VER:-v1.0.0}
+4 RUN echo $CONT_IMG_VER
+```
+
+不像`ARG`指令，`ENV`值始终保存在构建的镜像中。考虑一个没有`–build-arg`标志的 docker 构建：
+
+```bash
+docker build .
+```
+
+使用这个 Dockerfile ，`CONT_IMG_VER`仍然保存在镜像中，但是它的值应该是`v1.0.0`，因为它是`ENV`指令在第 3 行中设置的默认值。
+
+ 本例中的变量扩展技术允许您从命令行传递参数，并通过`ENV`指令将它们持久化到最终镜像中。变量扩展只支持一组有限的 Dockerfile 指令。 
+
+#### 预定义 ARGs
+
+Docker 有一组预定义的`ARG`变量，您可以在 Dockerfile 中使用它们，而不需要相应的`ARG`指令。
+
+- `HTTP_PROXY`
+- `http_proxy`
+- `HTTPS_PROXY`
+- `https_proxy`
+- `FTP_PROXY`
+- `ftp_proxy`
+- `NO_PROXY`
+- `no_proxy`
+
+要使用它们，只需在命令行上传递参数：
+
+```bash
+--build-arg <varname>=<value>
+```
+
+默认情况下，这些预先定义的变量不会显示在 `docker history`的输出之中。以降低意外泄漏 `HTTP_PROXY`中的敏感身份验证信息的风险。
+
+…
+
+## ONBUILD
+
+```dockerfile
+ONBUILD [INSTRUCTION]
+```
+
+`ONBUILD`指令向镜像添加了一条触发器指令，以便在稍后将镜像用作另一个构建的基础时执行。触发器将在下游构建的上下文中执行，就好像它是在下游 Dockerfile 中的 `FROM` 指令之后立即加入的一样。
+
+任何构建指令都能被注册为触发器。
+
+ 如果您正在构建一个镜像，该镜像将用作构建其他映像的基础。例如一个应用程序构建环境或一个可以使用特定于用户的配置进行自定义的守护进程，那么这是非常有用的。 
+
+例如，如果您的镜像是一个可重用的 Python 应用程序构建器，那么它将需要在特定的目录中添加应用程序源代码，并且可能需要在此之后调用构建脚本。您现在不能只调用`ADD`和 `RUN`，因为您还没有访问应用程序源代码的权限，而且每个应用程序的构建都是不同的。您可以简单地为应用程序开发人员提供一个 Dockerfile 样例文件来复制粘贴到他们的应用程序中，但这是低效的，容易出错的，并且难以更新，因为它与应用程序特定的代码混合在一起。
+
+解决方案是使用`ONBUILD`来注册要在下一个构建阶段运行的预先指令。 
+
+它是这样工作的：
+
+1. 当遇到`ONBUILD`指令时，构建器将触发器添加到正在构建的镜像的元数据中。该指令不会影响当前构建。 
+2. 在构建结束时，所有触发器的列表存储在镜像清单中的键`OnBuild`中。它们可以通过`docker inspect`命令查看。
+3. 然后，可以使用`FROM`指令将镜像用作新构建的基础。作为处理`FROM`指令的一部分，下游构建器查找`ONBUILD`触发器，并按照它们被注册的相同顺序执行它们。如果任何触发器失败，则会终止`FROM`指令，从而导致构建失败。如果所有触发器都成功，则`FROM`指令完成，构建照常进行。
+4. 触发器在执行后将从最终镜像中清除。换句话说，它们不会被孙辈继承。 
+
+例如，您可以添加类似这样的内容：
+
+```dockerfile
+[...]
+ONBUILD ADD . /app/src
+ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+[...]
+```
+
+> 警告：`ONBUILD`指令不能调用 `ONBUILD`，如` ONBUILD ONBUILD `。
+
+> 警告：`ONBUILD`不能触发`FROM`和 `MAINTAINER`指令。  
+
+## STOPSIGNAL
+
+```dockerfile
+STOPSIGNAL signal
+```
+
+`STOPSIGNAL`指令设置将发送到容器以退出的系统调用信号。这个信号可以是与内核的 syscall 表中的某个位置(例如 9)匹配的有效无符号数字，也可以是格式为 SIGNAME 的信号名(例如 SIGKILL)。
+
+##  HEALTHCHECK
+
+`HEALTHCHECK`有两种格式：
+
+- `HEALTHCHECK [OPTIONS] CMD command`：检查容器健康通过在容器内运行命令 
+- `HEALTHCHECK NONE`：禁止任何健康检查
+
+`HEALTHCHECK`指令告诉 Docker 如何检查容器，检查它是否仍在工作。这可以检查某些情况，比如 web 服务器陷入无限循环，即使服务器进程仍在运行，却无法处理新连接。 
+
+当容器指定了 healthcheck 时，除了正常状态外，它还有一个健康状态。此状态最初是`starting`。当一个健康检查通过时，它就变成`healthy`(不管它以前处于什么状态)。经过一定数量的连续失败之后，它就变得`unhealthy`。 
+
+可以出现在`CMD`之前的选项有：
+
+- `--interval=DURATION` (default: `30s`)
+- `--timeout=DURATION` (default: `30s`)
+- `--start-period=DURATION` (default: `0s`)
+- `--retries=N` (default: `3`)timeout
+
+健康检查首先在容器启动后的**间隔（interval）**内运行，然后在前一次检查完成后的**间隔（interval）**内再次运行。 
+
+如果检查的运行时间**超时（timeout）**，则认为检查失败。 
+
+如果容器的健康检查失败，则需要达到**重试（retries）**次数才能认为是`unhealthy`。 
+
+**start period** 为需要时间初始化的容器提供时间。在此期间的探测失败将不计入最大重试次数。但是，如果在开始期间的健康检查成功，则认为容器已经启动，所有连续的失败都将被计入最大重试次数。 
+
+在一个 Dockerfile 中只能有一个`HEALTHCHECK`指令。如果你列出多于一个，那么只有最后一次`HEALTHCHECK`才会生效。 
+
+`CMD`后面的命令可以是 shell 命令(例如`HEALTHCHECK CMD /bin/check-running`)，也可以是 exec 数组(与其他 Dockerfile 命令一样，如：`ENTRYPOINT`)。
+
+命令的退出状态说明容器的健康状态。可能的值是：
+
+- 0: 成功- the container is healthy and ready for use
+- 1: 不健康- the container is not working correctly
+- 2: 保留- 未使用这个退出码
+
+例如，每隔 5 分钟检查一次，使 web 服务器能够在 3 秒内为站点提供服务：
+
+```dockerfile
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+
+为了帮助调试失败探测，命令在 stdout 或 stderr 上写的任何输出文本(UTF-8 编码)都将存储在健康状态中，并可以通过`docker inspect`进行查询。但输出应该保持简短(当前只存储前 4096 个字节)。 
+
+当容器的健康状态更改时，将使用新的状态生成健康状态事件。 
+
+`HEALTHCHECK`在 docker 1.12 之后可用。 
+
+## SHELL
+
+```dockerfile
+SHELL ["executable", "parameters"]
+```
+
+`SHELL`指令允许覆盖默认 SHELL。Linux 上的默认 shell 是 `["/bin/sh"， "-c"]`， Windows 上是`["cmd"， "/S"， "/C"]`。`SHELL`指令必须以 JSON 格式写入 Dockerfile 中。
+
+`SHELL`指令在 Windows 上特别有用，因为 Windows 有两种常用的、完全不同的本机 SHELL:` cmd`和`powershell`，还有其他可用的 SHELL，包括`sh`。 
+
+`SHELL`指令可以出现多次。每个 `SHELL` 指令覆盖以前的所有 `SHELL` 指令，并影响所有后续指令。例如：
+
+```dockerfile
+FROM microsoft/windowsservercore
+
+# Executed as cmd /S /C echo default
+RUN echo default
+
+# Executed as cmd /S /C powershell -command Write-Host default
+RUN powershell -command Write-Host default
+
+# Executed as powershell -command Write-Host hello
+SHELL ["powershell", "-command"]
+RUN Write-Host hello
+
+# Executed as cmd /S /C echo hello
+SHELL ["cmd", "/S", "/C"]
+RUN echo hello
+```
+
+当在 Dockerfile 中使用 `SHELL` 指令时，以下指令可能会受到 `SHELL` 指令的影响：`RUN`、`CMD`和`ENTRYPOINT`。 
+
+下面的示例是在 Windows 上发生的一个常见模式，可以通过使用`SHELL`指令对其进行简化：
+
+```dockerfile
+...
+RUN powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
+...
+```
+
+ docker 调用的命令将是：
+
+```dockerfile
+cmd /S /C powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
+```
+
+这是低效的，原因有二。首先，调用了一个不必要的 cmd.exe 命令处理器(即 shell)。其次，shell 形式的每条`RUN`指令都需要一个额外的 `powershell -command` 作为前缀。 
+
+为了提高效率，可以使用两种机制中的一种。一种是使用`RUN`命令的 JSON 形式，比如：
+
+```dockerfile
+...
+RUN ["powershell", "-command", "Execute-MyCmdlet", "-param1 \"c:\\foo.txt\""]
+...
+```
+
+JSON 格式是明确的，不使用不必要的 cmd.exe，但它需要更多的双引号和转义。另一种机制是使用 `SHELL`指令和 SHELL 格式，为 Windows 用户提供更自然的语法，特别是与 `escape` 解析指令结合使用时：
+
+```dockerfile
+# escape=`
+
+FROM microsoft/nanoserver
+SHELL ["powershell","-command"]
+RUN New-Item -ItemType Directory C:\Example
+ADD Execute-MyCmdlet.ps1 c:\example\
+RUN c:\example\Execute-MyCmdlet -sample 'hello world'
+```
+
+结果是：
+
+```bash
+PS E:\docker\build\shell> docker build -t shell .
+Sending build context to Docker daemon 4.096 kB
+Step 1/5 : FROM microsoft/nanoserver
+ ---> 22738ff49c6d
+Step 2/5 : SHELL powershell -command
+ ---> Running in 6fcdb6855ae2
+ ---> 6331462d4300
+Removing intermediate container 6fcdb6855ae2
+Step 3/5 : RUN New-Item -ItemType Directory C:\Example
+ ---> Running in d0eef8386e97
+
+
+    Directory: C:\
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       10/28/2016  11:26 AM                Example
+
+
+ ---> 3f2fbf1395d9
+Removing intermediate container d0eef8386e97
+Step 4/5 : ADD Execute-MyCmdlet.ps1 c:\example\
+ ---> a955b2621c31
+Removing intermediate container b825593d39fc
+Step 5/5 : RUN c:\example\Execute-MyCmdlet 'hello world'
+ ---> Running in be6d8e63fe75
+hello world
+ ---> 8e559e9bf424
+Removing intermediate container be6d8e63fe75
+Successfully built 8e559e9bf424
+PS E:\docker\build\shell>
+```
+
+`SHELL`指令还可以用来修改 SHELL 的操作方式。例如，使用`SHELL cmd /S /C /V:ON|OFF`，可以修改延迟的环境变量扩展语义。
+
+如果需要另一个 SHELL，比如`zsh`、`csh`、`tcsh`等，也可以在 Linux 上使用`SHELL`指令。 
+
+`SHELL`在 docker 1.12 之后可用。 
+
+###  外部实现功能 
+
+此特性仅在使用 BuildKit 后端时可用。
+
+ `Docker build`支持缓存挂载、构建密钥和 ssh 转发等实验性特性，这些特性是通过使用带有语法指令的生成器的外部实现来启用的。要了解这些特性，请参考 [BuildKit 存储库](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/experimental.md)中的文档。 
+
+## Dockerfile 例子 
+
+下面你可以看到一些 Dockerfile 语法的例子。如果您对这些东西感兴趣，可以看看 [Dockerization](https://docs.docker.com/engine/examples/) 示例列表。
+
+```dockerfile
+# Nginx
+#
+# VERSION               0.0.1
+
+FROM      ubuntu
+LABEL Description="This image is used to start the foobar executable" Vendor="ACME Products" Version="1.0"
+RUN apt-get update && apt-get install -y inotify-tools nginx apache2 openssh-server
+```
+
+```dockerfile
+# Firefox over VNC
+#
+# VERSION               0.3
+
+FROM ubuntu
+
+# Install vnc, xvfb in order to create a 'fake' display and firefox
+RUN apt-get update && apt-get install -y x11vnc xvfb firefox
+RUN mkdir ~/.vnc
+# Setup a password
+RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
+# Autostart firefox (might not be the best way, but it does the trick)
+RUN bash -c 'echo "firefox" >> /.bashrc'
+
+EXPOSE 5900
+CMD    ["x11vnc", "-forever", "-usepw", "-create"]
+```
+
+```dockerfile
+# Multiple images example
+#
+# VERSION               0.1
+
+FROM ubuntu
+RUN echo foo > bar
+# Will output something like ===> 907ad6c2736f
+
+FROM ubuntu
+RUN echo moo > oink
+# Will output something like ===> 695d7793cbe4
+
+# You'll now have two images, 907ad6c2736f with /bar, and 695d7793cbe4 with
+# /oink.
+```
+
+<br/>
+
+> [Dockerfile reference]( https://docs.docker.com/engine/reference/builder/#volume )
+
