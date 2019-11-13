@@ -133,6 +133,29 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 
 Ansible 将记录一些关于远程主机模块参数的信息到远程 syslog 中。企业用户可能对 [Ansible Tower](https://docs.ansible.com/ansible/2.7/reference_appendices/tower.html#ansible-tower) 感兴趣。Tower 提供了一个非常健壮的数据库日志记录功能，可以根据主机、项目和特定的库存随时间查看，可通过图形化和通过 REST API 进行查询。
 
+### SSH 密钥认证
+
+```shell
+# 生成密钥对
+ssh-keygen
+# 生成密钥到指定目录
+ssh-keygen -f ${PATH}
+# 使用指定密钥连接远程主机
+ssh -i ${PATH} root@10.0.0.2
+# 设置私钥密码
+ssh-keygen -p '123456' 
+# 生成指定的加密类型的密钥
+# type=rsa, dsa, ecdsa, ed25519
+ssh-keygen -t ${type} 
+# 生成指定位数的密钥
+ssh-keygen -b 2048 
+
+# 无交互式生成 key
+ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa
+# 将公钥添加到远程主机
+ssh-copy-id root@10.0.0.2 -p 22
+```
+
 ## 命令行工具
 
 ### ansible
