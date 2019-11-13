@@ -1,28 +1,15 @@
 Markdown-Notes<br/>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/">Ansible</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/">Docs</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-01-%E6%96%87%E6%A1%A3.md">Ansible-01-文档.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-02-%E5%AE%89%E8%A3%85%E5%90%91%E5%AF%BC.md">Ansible-02-安装向导.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-03-%E9%85%8D%E7%BD%AE.md">Ansible-03-配置.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-04-%E8%BF%81%E7%A7%BB%E5%90%91%E5%AF%BC.md">Ansible-04-迁移向导.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-05-%E4%BD%BF%E7%94%A8%E5%90%91%E5%AF%BC.md">Ansible-05-使用向导.md</a><br>
-	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-06-playbook.md">Ansible-06-playbook.md</a><br>
-	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-07-jinja2.md">Ansible-07-jinja2.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-1-%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3.md">ansible-1-基本了解.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-2-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9D%97.md">ansible-2-文件操作模块.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-3-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%9D%97.md">ansible-3-命令模块.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-4-%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97.md">ansible-4-系统模块.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-5-%E5%8C%85%E7%AE%A1%E7%90%86.md">ansible-5-包管理.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-6-%E5%88%9D%E8%AF%86playbook.md">ansible-6-初识playbook.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-7-handlers.md">ansible-7-handlers.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-8-tags.md">ansible-8-tags.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-9-%E5%8F%98%E9%87%8F.md">ansible-9-变量.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-10-%E5%BE%AA%E7%8E%AF.md">ansible-10-循环.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-11-%E5%88%A4%E6%96%AD.md">ansible-11-判断.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-12-%E8%BF%87%E6%BB%A4.md">ansible-12-过滤.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-13-include.md">ansible-13-include.md</a><br>
-	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-14-galaxy.md">ansible-14-galaxy.md</a><br>
-	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/ansible-15-%E6%A8%A1%E6%9D%BF.md">ansible-15-模板.md</a><br>
+	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/">Docs</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-01-%E6%96%87%E6%A1%A3.md">Ansible-01-文档.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-02-%E5%AE%89%E8%A3%85%E5%90%91%E5%AF%BC.md">Ansible-02-安装向导.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-03-%E9%85%8D%E7%BD%AE.md">Ansible-03-配置.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-04-%E8%BF%81%E7%A7%BB%E5%90%91%E5%AF%BC.md">Ansible-04-迁移向导.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-05-%E4%BD%BF%E7%94%A8%E5%90%91%E5%AF%BC.md">Ansible-05-使用向导.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-06-playbook.md">Ansible-06-playbook.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-07-jinja2.md">Ansible-07-jinja2.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-08-%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.md">Ansible-08-常用模块.md</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Ansible/Docs/Ansible-09-%E4%BD%BF%E7%94%A8%E5%89%A7%E6%9C%AC.md">Ansible-09-使用剧本.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Docker/">Docker</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Docker/Document/">Document</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Docker/Document/ComposeVersion3%E5%8F%82%E8%80%83.md">ComposeVersion3参考.md</a><br>
@@ -121,4 +108,4 @@ Markdown-Notes<br/>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>27 directories, 95 files
+<br/>27 directories, 82 files
