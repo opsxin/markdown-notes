@@ -58,7 +58,8 @@
 
    - ==Leader==：主要管理者节点
    - ==Reachable==：如果 Leader 节点不可用，则这这些节点有资格选举为新的 Leader
-   - ==Unavailable==：该节点不能和其他 Manager 节点产生任何联系，这种情况下，应该添加一个新的 Manager 节点到集群，或者将一个 Worker 节点提升为 Manager 节点
+   - ==Unavailable==：该节点不能和其他 Manager 节点产生任何联系，
+这种情况下，应该添加一个新的 Manager 节点到集群，或者将一个 Worker 节点提升为 Manager 节点
 
 3. 检查节点的详细信息
 
@@ -78,9 +79,9 @@
    1. 升级
    docker node promote <node>
    2. 降级
-   docker node demote <node> 
+   docker node demote <node>
    ```
-   
+
 6. **Service** 部署
 
    1. 创建服务
@@ -132,9 +133,9 @@
    1. 数据卷挂载
 
       ```bash
-      docker service create \ 
-      --mount type=volume,src=<volume-name>, dst=<container-path> \ 
-      --name <name> \ 
+      docker service create \
+      --mount type=volume,src=<volume-name>, dst=<container-path> \
+      --name <name> \
       <image>
       ```
 
@@ -202,7 +203,6 @@
       docker stack rm <stack-name>
       ```
 
-
 ## kubernetes
 
 1. 集群的创建与加入
@@ -239,11 +239,11 @@
    1. replication-control
    kubectl get rc
    2. replicas-set
-   kubectl get rs 
-   3. deployment 
+   kubectl get rs
+   3. deployment
    kubectl get deploy
-   4. service 
-   kuctl get svc 
+   4. service
+   kuctl get svc
    5. namespace
    kuberctl get namespace
    6. pod
@@ -255,8 +255,8 @@
    ```bash
    1. pod
    kubectl describe po <po-name>
-   2. service 
-   kubectl describe svc 
+   2. service
+   kubectl describe svc
    ```
 
 4. 创建 Pod
@@ -283,7 +283,7 @@
    ```bash
    kubectl delete -f <name.yaml>
    kubectl delete po <pod-name>
-   kubectl delete po -lapp=nginx-2 
+   kubectl delete po -lapp=nginx-2
    ```
 
 8. **kubectl apply**
@@ -301,7 +301,7 @@
 10. **rolling-update**
 
     ```bash
-    1. 更新 
+    1. 更新
     kubectl rolling-update <name> -f <name.yaml>
     2. 回滚
     kubectl rolling-update <name> —rollback
@@ -314,13 +314,10 @@
     kubectl autoscale rc <name> --min=1 --max=4
     ```
 
-12. **kubectl exec **
+12. **kubectl exec**
 
     ```bash
     kubectl exec <po-name> [cmd]
     ```
-
-
-<br/>
 
 > 1. [Docker Swarm 系列教程](http://www.spring4all.com/article/1254)

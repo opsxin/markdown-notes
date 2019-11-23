@@ -1,22 +1,24 @@
-##### 创建 PVC
+# 安装 grafana
+
+## 创建 PVC
 
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
-metadata: 
+metadata:
   name: grafana-pvc
   namespace: kube-prometheus
-  annotations: 
+  annotations:
     volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
 spec:
-  accessModes: 
+  accessModes:
     - ReadWriteMany
   resources:
-    requests: 
+    requests:
       storage: 200M
 ```
 
-##### 创建 Grafana Deploy
+## 创建 Grafana Deploy
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -94,7 +96,7 @@ spec:
           claimName: grafana-pvc
 ```
 
-##### 创建 SVC
+## 创建 SVC
 
 ```yaml
 apiVersion: v1
@@ -111,17 +113,17 @@ spec:
     targetPort: grafana-port
 ```
 
-##### 应用 YAML
+## 应用 YAML
 
-```bash 
+```bash
 kubectl apply -f ./
 ```
 
-浏览器访问 http://NodeIP:Port 访问。
+浏览器访问`http://NodeIP:Port`访问。
 
 ---
 
-##### 添加数据源
+## 添加数据源
 
 ![1566452696772](1566452696772.png)
 
@@ -132,7 +134,7 @@ URL：因为 Grafana 和 Prometheus 在同一个 Namespace 中，所以只需填
 > - 服务器（Server）访问模式（默认）：所有请求都将从浏览器发送到 Grafana 后端的服务器，后者又将请求转发到数据源，通过这种方式可以避免一些跨域问题，其实就是在 Grafana 后端做了一次转发，需要从 Grafana 后端服务器访问该 URL。
 > - 浏览器（Browser）访问模式：所有请求都将从浏览器直接发送到数据源，但是有可能会有一些跨域的限制，使用此访问模式，需要从浏览器直接访问该 URL。
 
-##### 添加 Dashboard
+## 添加 Dashboard
 
 从 [官方 dashboard](https://grafana.com/grafana/dashboards) 寻找合适的 dashboard，记下 Dashboard ID 号。在自建的 Grafana 后台中选择 Import ，输入 ID 号即可。
 
@@ -148,7 +150,7 @@ URL：因为 Grafana 和 Prometheus 在同一个 Namespace 中，所以只需填
 
 ---
 
-##### 报警
+## 报警
 
 > grafana 支持很多种形式的报警功能，比如 email、钉钉、slack、webhook 等。
 

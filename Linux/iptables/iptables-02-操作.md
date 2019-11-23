@@ -31,7 +31,7 @@ iptables -A OUTPUT -t filter -d 192.168.0.0/16 -j REJECT
 # 删除 INPUT 链的第一条规则，删除匹配源地址为 192.168.0.0/16 的规则
 iptables -D INPUT 1 -t filter ； iptables -D INPUT -s 192.168.0.0/16
 # 清空 filter 表的所有规则
-iptables -t filter -F 
+iptables -t filter -F
 # 修改 OUTPUT 链的第一条规则为 DROP。注意：-d 192.168.0.0/16 不能省略
 iptables -R OUTPUT 1 -t filter -d 192.168.0.0/16 -j DROP
 # 设置 INPUT 的默认匹配规则为 DROP
@@ -83,7 +83,7 @@ iptables -t nat -I POSTROUTING -S 10.0.0.0/16（内网 IP 段） -o eth0（外�
 ```bash
 # DNAT
 iptables -t nat -I PREROUTING  -d 1.1.1.1(公网 IP) -p tcp --dport 80(公网端口) -j DNAT --to-destination 10.0.0.2:80(私网 IP：PORT)
-# SNAT 
+# SNAT
 iptables -t nat -I POSTROUTING -s 10.0.0.0/16(私网网段) --to-source 1.1.1.1(公网 IP)
 
 # 或指定端口
@@ -155,7 +155,7 @@ service iptables save
 iptables-save > /etc/iptables-rules
 # 设置开机加载
 cat << EOF > /etc/network/if-pre-up.d/iptables
-#!/bin/bash 
+#!/bin/bash
 iptables-restore < /etc/iptables.rules
 EOF
 chmod +x /etc/network/if-pre-up.d/iptables
@@ -164,7 +164,7 @@ chmod +x /etc/network/if-pre-up.d/iptables
 cat << EOF > /etc/network/if-post-down.d/iptables
 #!/bin/bash
 iptables-save > /etc/iptables.rules
-EOF 
+EOF
 chmod +x /etc/network/if-post-down.d/iptables
 ```
 
@@ -173,10 +173,7 @@ chmod +x /etc/network/if-post-down.d/iptables
 > [常用模块](<http://www.zsythink.net/archives/1564>)
 >
 > [tcp模块](<http://www.zsythink.net/archives/1578>)
-
-<br/>
-
+>
 > 1. [iptables用例](<https://wangchujiang.com/linux-command/c/iptables.html>)
 > 2. [iptables详解](<http://www.zsythink.net/archives/1517>)
 > 3. [iptables详解-nat](<http://www.zsythink.net/archives/1764>)
-

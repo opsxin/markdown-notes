@@ -1,3 +1,5 @@
+# Nginx Root 和 Alias 根路径实验
+
 ```bash
 # 文件路径
 # /var/www/default.conf
@@ -71,17 +73,15 @@ location /t/ {
 
 ```bash
 # root
-location /dir/ 
+location /dir/
 root root_path ->  http://host/dir/file.txt  -> root_path/dir/file.txt
 
 # alias
 location /dir
 alias alias_path ->  http://host /dir /file.txt  -> alias_path/file.txt
 
-location /dir/ 
+location /dir/
 alias alias_path/ ->  http://host /dir/ file.txt  -> alias_path/file.txt
 ```
-
-
 
 > [Nginx静态服务配置---详解root和alias指令](<https://www.jianshu.com/p/4be0d5882ec5>)

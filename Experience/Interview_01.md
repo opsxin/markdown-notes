@@ -1,4 +1,6 @@
-##### Apache和Nginx区别
+# Interview 01
+
+## Apache和Nginx区别
 
 1. 工作模式
 
@@ -12,18 +14,18 @@
         **缺点：**　相比worker模式消耗资源更多。
 
       - **worker模式：**多个子进程，每个子进程同时有多个线程。每个`线程`在确定的时间只能维持一个连接，所以一个进程可以处理多个请求。
-      
+
         工作原理：控制进程生成若干个子进程，每个子进程包含固定的线程数。为了不在请求到来时再生成线程，在配置文件中设置了最小和最大的空闲子进程的线程总数。如果现有子进程的线程总数不能满足并发和负载，控制进程会派生新的子进程。
-      
+
         **优点：**内存占用比prefork模式低，适合高并发高流量HTTP服务。
         **缺点：**假如一个线程崩溃，整个进程就会连同其任何线程一起“挂掉”，由于线程共享内存空间，所以一个程式在运行时必须被系统识别为"每个线程都是安全的"。服务稳定性不如prefork模式。在keep-alive长连接的方式下，某个线程会被一直占用，即使中间没有请求，也需要等待到超时才会被释放。
-        
+
       - **event模式：**同worker模式，但解决了在keep-alive模式下，线程被长期占用直到超时，从而导致资源浪费的问题。
-      
+
           在event模块中，有一个专门的线程来管理这些keep-alive类型的线程，当接收到真实的请求时，会将请求传递给服务线程，执行完毕后，会将对应的服务线程释放，这样就能实现线程的**异步非阻塞**。
-      
+
    2. Nginx工作模式：
-   
+
       - master进程：
         - 管理worker进程，包含：接收来自外界的信号，向各worker进程发送信号，监控worker进程的运行状态，当worker进程退出后(异常情况下)，会自动重新启动新的worker进程。
         - 充当整个进程组与用户的交互接口，同时对进程进行监护。它不需要处理网络事件，不负责业务的执行，只会通过管理worker进程来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能。
@@ -32,7 +34,7 @@
         - 一个请求，只可能在一个worker进程中处理，一个worker进程，不可能处理其它进程的请求。
         - worker进程的个数是可以设置的，一般我们会设置与机器cpu核数一致。
         - **采用了异步非阻塞的方式**。
-   
+
 2. 模块加载
 
    - Apache： [动态模块加载](http://howtolamp.com/lamp/httpd/2.4/dso/) 能够在无需重新编译主服务器文件的基础上，将模块编译并添加到 Apache 扩展中。在使用系统包管理器安装后，可以通过诸如 [a2enmod](http://manpages.ubuntu.com/cgi-bin/search.py?cx=003883529982892832976%3A5zl6o8w6f0s&cof=FORID%3A9&ie=UTF-8&titles=404&lr=lang_en&q=a2enmod.8) 这样的命令，将其添加到扩展中。
@@ -50,11 +52,11 @@
 
 ---
 
-##### LVS和Nginx的负载区别
+## LVS和Nginx的负载区别
 
 [参考HAproxy](https://github.com/opsxin/script/blob/master/markdown/LB/HAproxy.md)
 
-----
+---
 
 K8S的基础模块
 
@@ -64,7 +66,7 @@ Etcd，kubeadmin，kubeproxy，kubectl。
 
 ---
 
-##### Python的列表和字典的遍历
+## Python的列表和字典的遍历
 
 ```python
 # 定义列表
@@ -75,24 +77,22 @@ dict={“a”:1, “b”:2}
 # 遍历列表
 for i in list:
     print(i)
-    
+
 # 遍历字典
 # dict.keys()遍历key
 # dict.values()遍历value
 for key, value in dict.items():
-	print(key, value) 
+    print(key, value)
 ```
 
 ---
 
-##### Python WEB框架
+## Python WEB框架
 
 1. [Django](https://docs.djangoproject.com/zh-hans/2.2/)
 2. [Flask](http://docs.jinkan.org/docs/flask/)
    - [Flask Web开发实战：入门、进阶与原理解析](https://read.douban.com/ebook/110053633/)
 3. [Tornado](https://tornado-zh.readthedocs.io/zh/latest/)
-
-
 
 > [Apache worker/prefork模式说明和优化配置](https://www.kancloud.cn/curder/apache/91277)
 >
@@ -105,4 +105,3 @@ for key, value in dict.items():
 > [GINX 加载动态模块（NGINX 1.9.11开始增加加载动态模块支持）](https://www.cnblogs.com/tinywan/p/6965467.html)
 >
 > [Apache 与 Nginx 性能对比：Web 服务器优化技术](https://learnku.com/articles/16074)
-

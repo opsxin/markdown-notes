@@ -1,10 +1,10 @@
-### Python操作Redis
+# Python 操作 Redis
 
-1. #### 字符串 String
+## 字符串 String
 
    PYTHON对于字符串的主要操作函数包括：SET, GET, GETSET, SETNX, MSET, MSEINX, INCR（INCRBY, DECR, DECRBY）, APPEND, SETRANGE, STRLEN。
 
-   1. SET：为指定的键（key）设定值（value）,set(self, name, value, **kwargs)。
+   1. SET：为指定的键（key）设定值（value）,set(self, name, value, \*\*kwargs)。
    2. GET：获取指定键（key）的值（value），get(self, name)。
    3. GETSET：为指定的键设置新的值，并返回旧的值，getset(self, name, value)。
    4. SETEX：为指定的键设置过期时间（以秒计），setex(self, name, value, time)。
@@ -19,14 +19,14 @@
 
    ```python
    #!/usr/bin/python3
-   # -*- coding: utf-8 -*- 
+   # -*- coding: utf-8 -*-
    # __author__ = 'Xin'
    import redis
-   
+
    pool = redis.ConnectionPool(host='119.28.9.229', port=6379)
    r = redis.Redis(connection_pool=pool)
    r.flushall()
-   
+
    # 设置新值，过期时间5s
    r.setex('name', value='xin', time=5)
    # 批量设置新值
@@ -39,7 +39,7 @@
    print(r.getrange('name', 0, 1))
    # 修改字符串内容，从指定字符串索引开始向后替换（新值太长时，则向后添加），返回值的长度
    r.setrange('name', 0, 'ye')
-   
+
    source = 'foo'
    r.set('n1', source)
    r.setbit('n1', 7, 1)
@@ -55,7 +55,7 @@
    r.set('n2', '汉字char')
    # 返回对应的字节长度（一个汉字3个字节）
    print(r.strlen('n2'))
-   
+
    r.set('num', 1)
    # 自增，步长为10
    r.incr('num', amount=10)
@@ -66,7 +66,7 @@
    # 在redis num对应的值后面追加内容
    r.append('num', 111)
    print(r.get('num'))
-   
+
    结果：
    [b'v1', b'v2', b'v3']
    b'xin'
@@ -78,7 +78,7 @@
    b'10111'
    ```
 
-2. #### 列表 List
+## 列表 List
 
    Python操作redis主要的操作命令时LPUSH, LRANGE, LINDEX, BLPOP, BRPOP。函数说明如下：
 
@@ -100,33 +100,33 @@
    print(r.lrange('list', 0, -1))
    # name对应的list的元素个数
    print(r.llen('list'))
-   
+
    # 在11之前插入18
    r.linsert('list', 'before', 11, 18)
    # 在name对应的索引位置修改值
    r.lset('list', 2, 222)
    print(r.lrange('list', 0, -1))
-   
+
    # 在name对应的list中删除指定的值.num=0，删除列表中所有的指定值；num=2,从前到后，删除2个；num=-2,从后向前，删除2个
    r.lrem('list', 222, num=1)
    print(r.lrange('list', 0, -1))
-   
+
    # 在name对应的列表的左侧获取第一个元素并在列表中移除，返回值则是第一个元素
    print(r.lpop('list'))
    # 在name对应的列表中根据索引获取列表元素
    print(r.lindex('list', 0))
-   
+
    # 在name对应的列表中移除没有在[start-end]索引之间的值
    print(r.lrange('list', 0, -1))
    r.ltrim('list', 1, 2)
    print(r.lrange('list', 0, -1))
-   
+
    # 从一个列表取出最右边的元素，同时将其添加至另一个列表的最左边;src要取数据的列表的name, dst要添加数据的列表的name
    r.rpoplpush('list', 'list_2')
-   
+
    # timeout，当src对应的列表中没有数据时，阻塞等待其有数据的超时时间（秒），0 表示永远阻塞
    r.brpoplpush('list', 'list_2', timeout=3)
-   
+
    '''
        # 由于redis类库中没有提供对列表元素的增量迭代，如果想要循环name对应的列表的所有元素，那么就需要：
        # 1、获取name对应的所有列表
@@ -140,18 +140,15 @@
    r.rpush('l1', 33)
    r.rpush('l1', 44)
    r.rpush('l1', 55)  # index为4
-   
-   
+
    def list_iter(name):
        list_count = r.llen(name)
        for index in range(list_count):
            yield r.lindex(name, index)
-   
-   
+
    for item in list_iter('l1'):
        print(item)
-   
-       
+
    结果：[b'44', b'33', b'22', b'11']
    4
    [b'44', b'33', b'222', b'18', b'11']
@@ -168,7 +165,7 @@
    b'55'
    ```
 
-3. #### 集合sets
+## 集合 sets
 
    集合对象是由string类型的无重复元素的集合，底层编码是intset或者hashtable。inset编码的集合对象用整数集合最为底层实现，所有对象元素保存在整数集合中。Python的redis模块实现了 SADD、SCARD 、SDIFF 、SDIFFSTORE、SINTER 、SINTERSTORE、SISMEMBER 、SMEMBERS 、SMOVE、SPOP、SRANDMEMBER、SREM、SUNION、SUNIONSTORE操作命令的基本用法。函数说明如下：
 
@@ -213,41 +210,40 @@
        print(r.scard('s1'))  
        #在第一个name对应的集合中且不在其他name对应的集合的元素集合
        print(r.sdiff('s1', 's2'))  
-       
+
        # 获取第一个name对应的集合中且不在其他name对应的集合，再将其新加入到dest对应的集合中
        r.sdiffstore('s3', 's1', 's2')  
        # 获取s3对应的集合的所有成员
        print(r.smembers('s3'))  
-       
+
        # 获取s1, s2对应集合的交集
        print(r.sinter('s1', 's2'))  
        # 获取s1, s2对应集合的交集，并将其存放到集合是s4中
        r.sinterstore('s4', 's1', 's2')  
        print(r.smembers('s4'))
-       
+
        # 获取s1, s2对应集合的并集
        print(r.sunion('s1', 's2'))  
-       
+
        # 获取s1, s2对应集合的交集，并将其存放到集合是s5中
        r.sunionstore('s5', 's1', 's2')  
        print(r.smembers('s5'))
-       
+
        # 检查value是否是name对应的集合的成员
        print(r.sismember('s4', 'v4'))  
-       
+
        # 将集合s2中成员v4移至集合s1中
        r.smove('s2', 's1', 'v4')  
        print(r.smembers('s1'))
        # 在name对应的集合中删除某些值
        r.srem('s1', 'v1')  
-       
+
        # 从集合的右侧（尾部）移除一个成员，并将其返回 注意：集合是无序的，故结果随机！
        print(r.spop('s1'))  
-       
+
        # 从name对应的集合中随机获取 numbers 个元素(Redis 2.6+)
        print(r.srandmember('s1'))  
-       
-       
+
        结果：
        3
        {b'v3', b'v1'}
@@ -262,7 +258,7 @@
        b'v3'
        ```
 
-4. #### 有序集合 sorted sets
+## 有序集合 sorted sets
 
    | 命令                                                         | 描述                                                         |
    | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -342,7 +338,7 @@ print(r.zrange('zset_name2', 0, -1, desc=False, withscores=True))
 [(b'a1', 13.0)]
 ```
 
-5. #### 哈希 hashes
+## 哈希 hashes
 
    Redis 数据库hash数据类型是一个string类型的key和value的映射表，适用于存储对象。redis 中每个hash可以存储键值对多达40亿。Python的redis模块实现了Redis哈希（Hash）命令行操作的几乎全部命令，包括HDEL、HEXISTS、HGET、HGETALL、HINCRBY、HKEYS、HLEN 、HMGET 、HMSET 、HSET 、HSETNX 、HVALS 、HINCRBYFLOAT等命令。函数说明如下：
 
@@ -372,13 +368,13 @@ print(r.hmget('n2', 'k2'))
 # 获取name对应hash的所有键值
 print(r.hgetall('n2'))  
 # 获取name对应的hash中键值对的个数
-print(r.hlen('n2')) 
+print(r.hlen('n2'))
 # 获取name对应的hash中所有的key的值
-print(r.hkeys('n2')) 
+print(r.hkeys('n2'))
 # 获取name对应的hash中所有的value的值
-print(r.hvals('n2')) 
+print(r.hvals('n2'))
 # 检查name对应的hash是否存在当前传入的key
-print(r.hexists('n2', 'k4')) 
+print(r.hexists('n2', 'k4'))
 # 将name对应的hash中指定key的键值对删除
 r.hdel('n2', 'k3')  
 r.hset('n3', 'k1', 1)
@@ -397,8 +393,5 @@ b'v1'
 False
 {b'k1': b'2'}
 ```
-
-
-
 
 > [Python操作Redis大全](https://segmentfault.com/a/1190000016696863)

@@ -1,6 +1,8 @@
+# Pod
+
 1. pod 是逻辑主机， 其行为与非容器世界中的物理主机或虚拟机非常相似。此外， 运行在同一个pod 中的进程与运行在同一物理机或虚拟机上的进程相似， 只是每个进程都封装在一个容器之中。
 
-2. pod 定义由这么几个部分组成： 首先是 YAML 中使用的 Kubemetes API 版本和 YAML 描述的资源类型；其次是几乎在所有 Kubemetes 资源中都可以找到的三大重要部分： 
+2. pod 定义由这么几个部分组成： 首先是 YAML 中使用的 Kubemetes API 版本和 YAML 描述的资源类型；其次是几乎在所有 Kubemetes 资源中都可以找到的三大重要部分：
 
    - metadata 包括名称、命名空间、标签和关于该容器的其他信息。
    - spec 包含pod 内容的实际说明， 例如 pod 的容器、卷和其他数据。
@@ -29,24 +31,24 @@
 
    ```bash
    zkubectl logs &lt;Pod-NAME&gt;
-   
+
    # 如果有多个容器，需要指定容器名字
    kubectl logs <Pod-Name> -c <Contain-Name>
    ```
 
 7. 端口转发
-   
+
    ```bash
    kubectl port-forward <Pod-Name> <out-port>:<inter-port>
    ```
-   
+
 8. 全丝雀发布：在部署新版本时， 先只让一小部分用户体验新版本以观察新版本的表现， 然后再向所有用户进行推广，这样可以防止暴露有问题的版本给过多的用户。
 
 9. 显示标签（label）
 
    ```bash
    kubectl get pod --show-labels
-   
+
    # 单独列显示label
    kubectl get pod -L <label-key>,<label-key>
    ```
@@ -55,7 +57,7 @@
 
     ```bash
     kubectl label po <pod-name> <label-key>=<label-value>
-    
+
     # 在更改现有标签时， 需要使用--overwrite选项。
     kubectl label po <pod-name> <label-key>=<label-value> --overwrite
     ```
@@ -70,7 +72,7 @@
 
     ```bash
     kubectl get pod -l <label-key>[=<label-value>]
-    
+
     # !:取反，in，notin，
     ```
 
@@ -79,11 +81,11 @@
     ```bash
     kubectl label node node1 gpu=true
     kubectl get nodes -1 gpu=true
-    
+
     # 在 yaml 中说明使用此节点
-    #spec： 
+    #spec：
     #  nodeSelector:
-    #  	gpu: "true"
+    #  gpu: "true"
     ```
 
 14. 添加或修改注解
@@ -112,16 +114,16 @@
     ```bash
     # 按照名称
     kubectl delete pod <Pod-Name>
-    
+
     # 按照标签
     kubectl delete pod -l <label-key>=<label-volue>
-    
+
     # 按照命名空间
     kubectl delete ns <NS-Name>
-    
+
     # 删除此NS下所有Pod
     kubectl delete pod --all
-    
+
     # 删除RC和Pod
     kubectl delete all -all
     ```

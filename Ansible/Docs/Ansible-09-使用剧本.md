@@ -1,4 +1,4 @@
-# Playbooks 
+# Playbooks
 
 [TOC]
 
@@ -24,11 +24,11 @@
       state: directory
 
 # 第 2 个场景（PLAY）
-- hosts: 
+- hosts:
     A
     B
   remote_user: root
-  tasks: 
+  tasks:
   - name: rmdir /root/test
     file:
       path: /root/test
@@ -59,27 +59,27 @@ ansible-playbook --check PLAYBOOK-FILE
         path: /root/test
         state: directory
       notify: handler1
-      
+
     # 执行以上任务的 ‘handler’
     # 默认为等待所有 tasks 完成后才执行 ‘handler’
     - meta: flush_handlers
-      
+
     - name: mkdir /root/test2
-      file: 
+      file:
         path: /root/test
         state: directory
       notify: handler2
 
   # handler 中也可以使用 ‘notify’，调用指定的 handler
-  handlers: 
+  handlers:
     - name: handler1
-      file: 
+      file:
         path: /root/test/test1.txt
         state: touch
       #notify: handler2
-      
+
     - name: handler2
-      file: 
+      file:
         path: /root/test/test2.txt
         state: touch
 ```
@@ -98,25 +98,25 @@ ansible-playbook --check PLAYBOOK-FILE
       # 调用 handler 组
       notify: handler group
     - name: mkdir /root/test 2
-      file: 
+      file:
         path: /root/test
         state: directory
       notify: handler3
 
   # 利用 ‘listen’，设置 handler 组
-  handlers: 
+  handlers:
     - name: handler1
       listen: handler group
-      file: 
+      file:
         path: /root/test/test1.txt
         state: touch
     - name: handler2
       listen: handler group
-      file: 
+      file:
         path: /root/test/test2.txt
         state: touch
     - name: handler3
-      file: 
+      file:
         path: /root/test/test3.txt
         state: touch
 ```
@@ -135,26 +135,26 @@ ansible-playbook --check PLAYBOOK-FILE
       notify: handler group
       tags: tag1,tag
     - name: mkdir /root/test 2
-      file: 
+      file:
         path: /root/test
         state: directory
       notify: handler3
       # 设置 tag，多个任务可以用同一个 tag
       tags: tag2,tag
 
-  handlers: 
+  handlers:
     - name: handler1
       listen: handler group
-      file: 
+      file:
         path: /root/test/test1.txt
         state: touch
     - name: handler2
       listen: handler group
-      file: 
+      file:
         path: /root/test/test2.txt
         state: touch
     - name: handler3
-      file: 
+      file:
         path: /root/test/test3.txt
         state: touch
 ```
@@ -196,16 +196,16 @@ ansible-playbook --list-tags TAGS-FILE.yaml
     - name: mkdir /root/test
       file:
         path: /{{ var1 }}/{{ var2 }}
-        state: directory 
+        state: directory
 
     - name: mkdir /tmp/text
-      file: 
+      file:
         # 如果在行首，需要用引号包围
         path: "{{ var3.var31 }}/{{ var3.var32 }}"
         state: touch
         # 或者使用 "="
         # path={{ var3.var31 }}/{{ var3.var32 }}
-        # state=touch 
+        # state=touch
     - name: debug msg
       debug:
         # var 和 msg 选项只能 2 选 1
@@ -232,14 +232,12 @@ ansible A -m debug -a 'msg={{ansible_version}}'
 - name: "play 1: Gather facts of test71"
   hosts: test71
   remote_user: root
- 
 - name: "play 2: Get facts of test71 when operating on test70"
   hosts: test70
   remote_user: root
   tasks:
   - debug:
       msg: "{{hostvars['test71'].ansible_ens35.ipv4}}"
-      
 # inventory_hostname
 # 获取在 hosts 中配置的名字
 ansible A -m debug -a 'msg={{inventory_hostname}}'
@@ -327,7 +325,7 @@ ansible-playbook PLAYBOOK-YAML -e "@/root/test.txt"
   # set_fact 模块可以设置变量
   # 通过 set_fact 设置的变量，在其他的 play 中同一台 hosts，也可以引用
     - name: set_fact
-      set_fact: 
+      set_fact:
         var1: "{{you_name}}"
     - name: debug msg
       debug:
@@ -338,16 +336,16 @@ ansible-playbook PLAYBOOK-YAML -e "@/root/test.txt"
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   vars_files:
     - /root/varsfile
   tasks:
     - name: var1, var2
-      debug: 
+      debug:
         msg: "{{var1}}, {{var2}}"
     - name: add var3
-      lineinfile: 
+      lineinfile:
         dest: /root/varsfile
         line: "var3: var3"
     # 重新读取变量文件
@@ -369,8 +367,8 @@ ansible-playbook PLAYBOOK-YAML -e "@/root/test.txt"
     - name: var3
       debug:
         msg: "{{var3}}"
-    - name: 
-      debug: 
+    - name:
+      debug:
         msg: "{{trans_var.var1}}"
 ```
 
@@ -378,7 +376,7 @@ ansible-playbook PLAYBOOK-YAML -e "@/root/test.txt"
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   gather_facts: no
   vars:
@@ -388,28 +386,27 @@ ansible-playbook PLAYBOOK-YAML -e "@/root/test.txt"
       - "/tmp/c"
   tasks:
     - name: debug msg
-      debug: 
+      debug:
         msg: "{{item}}"
       with_items: "{{dirs}}"
-      
 # 输出
 ok: [172.18.0.4] => (item=/tmp/b) => {
-    "item": "/tmp/b", 
+    "item": "/tmp/b",
     "msg": "/tmp/b"
 }
 ok: [172.18.0.4] => (item=/tmp/a) => {
-    "item": "/tmp/a", 
+    "item": "/tmp/a",
     "msg": "/tmp/a"
 }
 ok: [172.18.0.4] => (item=/tmp/c) => {
-    "item": "/tmp/c", 
+    "item": "/tmp/c",
     "msg": "/tmp/c"
 }
 ```
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   gather_facts: no
   vars:
@@ -423,7 +420,7 @@ ok: [172.18.0.4] => (item=/tmp/c) => {
       with_items: "{{dirs}}"
       register: result_var
     - name: debug msg
-      debug: 
+      debug:
         msg: "{{item.stdout}}"
       with_items: "{{result_var.results}}"
 ```
@@ -498,28 +495,28 @@ start=1 end=5 stride=1
 
 # with_dict
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   gather_facts: no
   vars:
     dirs:
       a: 1
       b: 2
-  tasks: 
+  tasks:
     - name: debug msg
       debug:
         msg: "{{item}}"
       with_dict: "{{dirs}}"
 # 输出
-"key": "a", 
+"key": "a",
 "value": 1
 # 可使用 item.key 单独获取键
-"key": "b", 
+"key": "b",
 "value": 2
 
 # with_subelements
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   gather_facts: no
   vars:
@@ -559,7 +556,7 @@ start=1 end=5 stride=1
   remote_user: root
   tasks:
     - name: ls /root
-      shell: 
+      shell:
         ls /root
       register: return_result
     - name: debug msg
@@ -579,15 +576,15 @@ start=1 end=5 stride=1
     dir: /root/test
   tasks:
     - name: debug msg 1
-      debug: 
+      debug:
         msg: "YES"
       # 文件存在执行
-      when: dir is exists 
+      when: dir is exists
     - name: debug msg 2
-      debug: 
+      debug:
         msg: "NO"
       # 文件不存在执行
-      when: not dir is exists  
+      when: not dir is exists
 ```
 
 ```bash
@@ -632,21 +629,21 @@ number（是否为数字）
 ### block
 
 ```yaml
---- 
+---
 - hosts: A
   remote_user: root
-  tasks: 
+  tasks:
     - name: block 1
-      debug: 
+      debug:
         msg: "block 1"
-    - block: 
+    - block:
       - name: block 2.1
-        debug: 
+        debug:
           msg: "block 2.1"
       - name: block 2.2
-        debug: 
+        debug:
           msg: "block 2.2"
-      when: YES  
+      when: YES
 # 输出
 block 1
 block 2.1
@@ -657,14 +654,14 @@ block 2.2
 ---
 - hosts: A
   remote_user: root
-  tasks: 
+  tasks:
     - name: ls /root/test
-      shell: 
+      shell:
         ls /root/test
       register: return_valus
       ignore_errors: true
     - name: debug msg
-      debug: 
+      debug:
         msg: "have a error"
       # shell 执行失败
       when: return_valus.rc != 0
@@ -674,15 +671,15 @@ block 2.2
 ---
 - hosts: A
   remote_user: root
-  tasks: 
-    - block: 
+  tasks:
+    - block:
       - name: ls /root/sss
         shell: ls /root/sss
       - name: ls /tmp
         shell: ls /tmp
       # 如果上述任务有错误，就会执行 rescue 中代码
       # block 中，错误 task 后的 task 不会执行
-      rescue: 
+      rescue:
         - name: debug msg
           debug:
             msg: "have a error"
@@ -692,34 +689,34 @@ block 2.2
 ---
 - hosts: A
   remote_user: root
-  tasks: 
-    - block: 
+  tasks:
+    - block:
       - name: ls /root
         shell: ls /root
       - name: false
         command: /bin/false
       - name: ls /tmp
         shell: ls /tmp
-      rescue: 
-        - name: debug msg 1 
+      rescue:
+        - name: debug msg 1
           debug:
             msg: "rescue 1"
         - name: debug msg 2
           debug:
             msg: "rescue 2"
       # 无论失败还是成功，always 都会执行
-      always: 
+      always:
         - name:
           debug:
-            msg: "always" 
+            msg: "always"
 ```
 
 ```yaml
 ---
 - hosts: A
   remote_user: root
-  tasks: 
-    - block: 
+  tasks:
+    - block:
       - name: echo "error"
         shell:
           echo "error"
@@ -732,9 +729,8 @@ block 2.2
         # in 判断是否在字符串内
         when: '"error" in return_values.stdout'
       - name: debug msg 1
-        debug:  
+        debug:
           msg: "debug msg 1"
-          
 # failed_when
 # failed_when 条件成立时，对应的任务状态就为失败
 # 任务会执行，只是影响返回的状态
@@ -749,7 +745,7 @@ block 2.2
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   vars:
     - var1: "abcdefg"
@@ -757,10 +753,10 @@ block 2.2
     - var3: "   123 "
   tasks:
     - name: "将字符串变成大写"
-      debug: 
+      debug:
         msg: "{{ var1|upper }}"
     - name: "将字符串变成小写"
-      debug: 
+      debug:
         msg: "{{ var2|lower }}"
     - name: "首字母变成大写"
       debug:
@@ -772,7 +768,7 @@ block 2.2
       debug:
         msg: "{{ var1|first }}"
     - name: "输出字符串的最后一个字母"
-      debug: 
+      debug:
         msg: "{{ var1|last }}"
     - name: "将字符串开头和末尾的空格删除"
       debug:
@@ -784,7 +780,7 @@ block 2.2
       debug:
         msg: "{{ var1|length }}"
     - name: "将字符串转化为列表"
-      debug: 
+      debug:
         msg: "{{ var1|list }}"
     - name: "打乱字符串的顺序"
       debug:
@@ -795,14 +791,14 @@ block 2.2
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   tasks:
     - name: "将字符串转为int"
-      debug: 
+      debug:
         msg: "{{ 8+('-4'|int) }}"
     - name: "如果无法转换，就返回默认数值"
-      debug: 
+      debug:
         msg: "{{ 8+('a'|int(default=6)) }}"
     - name: "将字符串转为float"
       debug:
@@ -814,7 +810,7 @@ block 2.2
       debug:
         msg: "{{ 12.4|abs }}"
     - name: "四舍五入"
-      debug: 
+      debug:
         msg: "{{ 8.8|round }}"
     - name: "取小数点位数"
       debug:
@@ -828,7 +824,7 @@ block 2.2
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   vars:
     var1: [11, 18, 2, 22, 33, 54]
@@ -836,10 +832,10 @@ block 2.2
     var3: [1, 'a', 3, 1]
   tasks:
     - name: "返回列表长度"
-      debug: 
+      debug:
         msg: "{{ var1|length }}"
     - name: "返回第一个值"
-      debug: 
+      debug:
         msg: "{{ var1|first }}"
     - name: "最后一个值"
       debug:
@@ -851,7 +847,7 @@ block 2.2
       debug:
         msg: "{{ var1|max }}"
     - name: "倒序"
-      debug: 
+      debug:
         msg: "{{ var1|sort(reverse=true) }}"
     - name: "求和"
       debug:
@@ -886,16 +882,16 @@ block 2.2
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   vars:
-    paths: 
+    paths:
       - path: /tmp/test1
         mode: '0111'
       - path: /tmp/test2
       - path: /tmp/test3
   tasks:
-    - file: 
+    - file:
         dest: "{{ item.path }}"
         state: touch
         # 通过 default，设置默认值
@@ -908,15 +904,15 @@ block 2.2
 
 ```yaml
 ---
-- hosts: A 
+- hosts: A
   remote_user: root
   tasks:
     - name: read log
-      include_vars: 
+      include_vars:
         file: /root/test.log
         name: test_log
     - name: cat log
-      debug: 
+      debug:
         # item.0 是 test_log.logs 中的元素
         # item.1 是 test_log.logs.files 中的元素
         msg: "{{item.0.domainName}} logUrl is {{item.1.logUrl}}"
@@ -925,16 +921,15 @@ block 2.2
         # 相当与过滤
         - files
     - name: 直接使用 json_query 显示 logUrl
-      debug: 
+      debug:
         msg: "{{item}}"
       with_items: "{{ test_log | json_query('logs[*].files[*].logUrl')}}"
-    
     # ansible主机需要python-jmespath包支持
     - name: json_query domainName
       debug:
         msg: "{{test_log | json_query('logs[*].domainName')}}"
     - name: 将 domainName 在 msg 中显示 dn
-   debug:  
+   debug:
         msg: "{{ test_log | json_query('logs[*].{dn:domainName}') }}"
 ```
 
@@ -960,7 +955,7 @@ block 2.2
   # ternary 过滤器可以实现三元运算的效果 示例如下
   # 如下示例表示如果 name 变量的值是 John，那么对应的值则为 Mr,否则则为 Ms
   # 简便的实现类似 if else 对变量赋值的效果
-  - debug: 
+  - debug:
       msg: "{{ (name == 'John') | ternary('Mr','Ms') }}"
     vars:
       name: "John"
@@ -1025,7 +1020,7 @@ block 2.2
   - debug:
       msg: "{{ teststr | to_uuid }}"
     vars:
-      teststr: "This is a test statement" 
+      teststr: "This is a test statement"
   ######################################################################
   # bool 过滤器可以根据字符串的内容返回 bool 值 true 或者 false
   # 字符串的内容为 yes、1、True、true 则返回布尔值 true，字符串内容为其他内容则返回 false
@@ -1126,15 +1121,15 @@ block 2.2
   gather_facts: no
   tasks:
     - name: msg 1
-      debug: 
+      debug:
         msg: "msg 1"
     - name: touch /tmp/test
-      file: 
-        path: /tmp/test 
+      file:
+        path: /tmp/test
         state: touch
       notify: touch /tmp/test
     - name: mkdir /tmp/test
-      file: 
+      file:
         path: /tmp/test
         state: directory
       notify: mkdir /tmp/test
@@ -1146,7 +1141,7 @@ block 2.2
       # 判断是否执行 playbook
       when: 2 < 1
       # 传递变量
-      vars: 
+      vars:
         var:
           var1: var1
           var2: var2
@@ -1154,7 +1149,7 @@ block 2.2
 
     - name: mkdir /tmp/test
       include: include2.yaml
-      loop: 
+      loop:
         - "1"
         - "2"
       # loop_control 不设置，include 的 playbook 的 item 使用内层循环
@@ -1172,13 +1167,13 @@ block 2.2
   debug:
     msg: "{{ item }}"
   with_items: "{{ var }}"
- 
+
 # include2.yaml
-- name: debug 
-  debug:  
+- name: debug
+  debug:
     # outer_item 外层变量【1，2】，item 内层变量【a，b】
     msg: "{{ outer_item }} -- {{ item }} include2.yaml"
-  loop: 
+  loop:
     - a
     - b
 ```
@@ -1210,7 +1205,8 @@ block 2.2
 
 ### include_playbook
 
-> 使用"include"引用整个playbook，在之后的版本中，如果想要引入整个 playbook，则需要使用"import_playbook"模块代替"include"模块，因为在 2.8 版本以后，使用"include"关键字引用整个 playbook 的特性将会被弃用。
+> 使用"include"引用整个playbook，在之后的版本中，如果想要引入整个 playbook，则需要使用"import_playbook"模块代替"include"模块，
+> 因为在 2.8 版本以后，使用"include"关键字引用整个 playbook 的特性将会被弃用。
 
 ## Template
 
@@ -1303,7 +1299,7 @@ ansible-doc -s template
 {% for i in [3,1,7,8,2] -%}
 {{ i }}{{' '}}{{ loop.index }}  #或{{i~' '~loop.index}}表示join
 {%- endfor %}
-3 1 7 8 2 
+3 1 7 8 2
 
 loop.index     当前循环操作为整个循环的第几次循环，序号从 1 开始
 loop.index0    当前循环操作为整个循环的第几次循环，序号从 0 开始
@@ -1391,8 +1387,7 @@ Itachi----team1
   # varargs 接受多传入的参数
   {{varargs}}
 {% endmacro %}
- 
-{{ testfunc('a','b','c','d','e') }} 
+{{ testfunc('a','b','c','d','e') }}
 # test string
 # a
 # b
@@ -1405,7 +1400,6 @@ Itachi----team1
   # 构成字典
   {{kwargs}}
 {% endmacro %}
- 
 {{ testfunc('a',2,'test',testkeyvar='abc') }}
 # test string
 # (2, 'test')
@@ -1416,7 +1410,6 @@ Itachi----team1
   test string
   {{caller()}}
 {% endmacro %}
- 
 {%call testfunc()%}
 something~~~~~
 something else~~~~~
@@ -1437,7 +1430,6 @@ caller属性：如果宏中使用了 caller 变量，此属性值为 true。
 {% macro _test() %}
 something in test macro
 {% endmacro %}
- 
 {{_test()}}
 ```
 
@@ -1487,7 +1479,7 @@ ansible-galaxy install -r requirements.yml
 - src: git@gitlab.company.com:mygroup/ansible-base.git
   scm: git
   version: "0.1"  # quoted, so YAML doesn't parse this as a floating-point value
- 
+
 # 依赖于其他角色
 dependencies:
  - src: geerlingguy.ansible
@@ -1536,8 +1528,6 @@ ansible-galaxy list
 # 删除 role
 ansible-galaxy remove username.rolename
 ```
-
-<br/>
 
 > [初识 playbook](http://www.zsythink.net/archives/2602)
 >

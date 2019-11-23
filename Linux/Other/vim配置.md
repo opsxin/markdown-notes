@@ -1,4 +1,4 @@
-自用的 vim 配置。
+# 自用的 vim 配置
 
 1. 行号显示
 2. Tab 转 4 个空格
@@ -10,7 +10,7 @@
 cat >> ~/.vimrc << EOF
 filetype on
 filetype plugin on
-filetype indent on 
+filetype indent on
 set langmenu=none
 set fileencodings=utf-8
 set fileencoding=utf-8

@@ -1,6 +1,6 @@
 # Shell 运算
 
- Bash 支持算数运算符、关系运算符、布尔运算符、字符串运算符和文件测试运算符。 
+ Bash 支持算数运算符、关系运算符、布尔运算符、字符串运算符和文件测试运算符。
 
 [TOC]
 
@@ -105,11 +105,6 @@ echo $[a+b]
 | -s     | 检测文件是否为空（文件大小是否大于 0），不为空返回 true。    |
 | -e     | 检测文件（包括目录）是否存在，如果是，则返回 true。          |
 
-<br/>
-
 > [Shell 算数运算](http://www.zsythink.net/archives/1145)
 >
 > [Shell运算符]( http://c.biancheng.net/cpp/view/2736.html )
-
-
-

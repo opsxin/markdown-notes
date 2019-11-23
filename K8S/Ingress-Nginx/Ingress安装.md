@@ -4,7 +4,7 @@
 >
 > The Ingress resource embodies this idea, and an Ingress controller is meant to handle all the quirks associated with a specific "class" of Ingress.
 >
-> An Ingress Controller is a daemon, deployed as a Kubernetes Pod, that watches the apiserver's `/ingresses` endpoint for updates to the [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/). 
+> An Ingress Controller is a daemon, deployed as a Kubernetes Pod, that watches the apiserver's `/ingresses` endpoint for updates to the [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 >
 > 配置一个 Web 服务器或者负载均衡器比想象的难。大多数 Web 服务的配置文件非常相似。有些应用需要一些奇怪的需求，但是在大多数的情况下，可以使用相同的逻辑以达到预期的效果。
 >
@@ -105,19 +105,19 @@ spec:
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: Ingress 
+kind: Ingress
 metadata:
   name: nginx-ingress
-  annotations: 
+  annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
-  rules: 
-  	# host: 确保域名与 Node 的 IP 对应
-  	# 1.1.1.1 test.test.com
+  rules:
+    # host: 确保域名与 Node 的 IP 对应
+    # 1.1.1.1 test.test.com
     - host: test.test.com
-      http: 
+      http:
         paths:
-          - path: 
+          - path:
             backend:
               serviceName: ingress-nginx-svc
               servicePort: 80
@@ -131,7 +131,7 @@ kubectl apply -f ./
 
 ### 查看 Ingress
 
-```bash 
+```bash
 kubectl get ingress
 # 查看详细信息
 kubectl describe ingress nginx-ingress
@@ -140,8 +140,6 @@ kubectl describe ingress nginx-ingress
 ### 验证 Ingress
 
 通过外网访问域名加端口，此处为 test.test.com:30080。
-
-<br/>
 
 > 1. [一个nginx-ingress部署示例](https://haojianxun.github.io/2018/10/14/nginx-ingress/)
 > 2. [Ingress-nginx Installation Guide](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md)

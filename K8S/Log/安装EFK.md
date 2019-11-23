@@ -1,10 +1,14 @@
+# 安装 EFK
+
 **Elasticsearch[^1] **可以用于搜索各种文档。它提供**可扩展的搜索**，具有接近**实时的搜索**，并支持多租户。Elasticsearch 是**分布式**的，这意味着索引可以被分成分片，每个分片可以有 0 个或多个副本。每个节点托管一个或多个分片，并充当协调器将操作委托给正确的分片，再平衡和路由是自动完成的。相关数据通常存储在同一个索引中，该索引由一个或多个主分片和零个或多个复制分片组成。一旦创建了索引，就不能更改主分片的数量。
 
 **Fluentd** 是一个开源数据收集器，在 Kubernetes 集群节点上安装 Fluentd，通过获取容器日志文件、过滤和转换日志数据，然后将数据传递到 Elasticsearch 集群，在该集群中对其进行索引和存储。
 
-**Kibana ** 是一个数据可视化 Dashboard。
+**Kibana** 是一个数据可视化 Dashboard。
 
-##### 创建 Elasticsearch 集群
+[TOC]
+
+## 创建 Elasticsearch 集群
 
 ```yaml
 # 创建命名空间
@@ -129,7 +133,7 @@ spec:
 ```bash
 kubectl apply -f . --record
 # 查看运行后的 Pod
-kubectl get pod -o wide -n efk 
+kubectl get pod -o wide -n efk
 ```
 
 查看是否启动成功
@@ -184,7 +188,7 @@ curl http://$(上一步得到的 Pod IP)/_cluster/state?pretty
 ...
 ```
 
-##### 创建 Kibana 服务
+## 创建 Kibana 服务
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -229,38 +233,38 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: kibana-svc
-  namespace: efk 
-  labels: 
+  namespace: efk
+  labels:
     app: kibana
-spec: 
+spec:
   type: NodePort
-  ports: 
+  ports:
     - port: 5601
       targetPort: kibana-port
-  selector: 
+  selector:
     app: kibana
 ```
 
-##### 部署 Fluentd
+## 部署 Fluentd
 
-###### 创建 RBAC
+### 创建 RBAC
 
 ```yaml
 # Fluentd 的服务账号
 apiVersion: v1
 kind: ServiceAccount
-metadata: 
+metadata:
   name: fluentd
   namespace: efk
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
-metadata: 
+metadata:
   name: fluentd
-rules: 
+rules:
   - apiGroups: [""]
     resources: ["namespaces", "pods"]
     verbs: ["get", "list", "watch"]
@@ -268,29 +272,29 @@ rules:
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
-metadata: 
+metadata:
   name: fluentd
 subjects:
   - kind: ServiceAccount
     name: fluentd
     namespace: efk
-roleRef: 
+roleRef:
   kind: ClusterRole
   name: fluentd
   apiGroup: rbac.authorization.k8s.io
 ```
 
-###### 创建 ConfigMap
+### 创建 ConfigMap
 
 [~~fluentd-es-configmap.yaml~~](https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-configmap.yaml)
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
-metadata: 
+metadata:
   name: fluentd-cm
   namespace: efk
-data: 
+data:
   system.conf: |-
     <system>
       root_dir /tmp/fluentd-buffers
@@ -317,8 +321,8 @@ data:
         </pattern>
      </parse>
     </source>
-	
-	# 检测日志输出中的异常并将其作为一个日志条目转发。
+
+    # 检测日志输出中的异常并将其作为一个日志条目转发
     <match raw.k8s.**>
       @id raw.kubernetes
       @type detect_exceptions
@@ -338,13 +342,13 @@ data:
       multiline_end_regexp /\n$/
       separator ""
     </filter>
-    
+
     # 用 Kubernetes 元数据丰富记录
     <filter k8s.**>
       @id filter_kubernetes_metadata
       @type kubernetes_metadata
     </filter>
-    
+
     # 修复 Json 字段
     <filter k8s.**>
       @id filter_parser
@@ -362,7 +366,7 @@ data:
         </pattern>
       </parse>
     </filter>
-    
+
   system.input.conf: |-
     # I1118 21:26:53.975789       6 proxier.go:1096] Port "nodePort for kube-system/default-http-backend:http" (:31429/tcp) was open before and is still needed
     <source>
@@ -377,7 +381,7 @@ data:
       pos_file /var/log/es-kube-proxy.log.pos
       tag kube-proxy
     </source>
-    
+
     # systemd 管理的日志
     <source>
       @id journald-docker
@@ -431,7 +435,7 @@ data:
     </match>
 ```
 
-###### 创建 DaemonSet
+### 创建 DaemonSet
 
 ```yaml
 # [fluentd-es-ds.yaml](https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-ds.yaml)
@@ -489,13 +493,13 @@ spec:
           name: fluentd-cm
 ```
 
-#### Kibana 添加展示
+## Kibana 添加展示
 
-###### 创建索引
+### 创建索引
 
 ![create index](1567502148990.png)
 
-###### 创建测试 Pod
+### 创建测试 Pod
 
 ```yaml
 apiVersion: v1
@@ -511,11 +515,9 @@ spec:
             'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
 ```
 
-###### 过滤显示测试 Pod 的日志
+### 过滤显示测试 Pod 的日志
 
 ![counter pod](1567502275707.png)
-
-
 
 > 1. [^1]: [Elasticsearch](https://zh.wikipedia.org/wiki/Elasticsearch)
 >

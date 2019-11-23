@@ -1,8 +1,10 @@
-##### 简介
+# 简介
 
 Prometheus 是一套开源的系统监控报警框架。它启发于 Google 的 borgmon 监控系统，由工作在 SoundCloud 的 google 前员工在 2012 年创建，作为社区开源项目进行开发，并于 2015 年正式发布。2016 年，Prometheus 正式加入 CNCF（Cloud Native Computing Foundation），成为受欢迎度仅次于 Kubernetes 的项目。
 
-##### 特点
+[TOC]
+
+## 特点
 
 - 强大的多维度数据模型：
   1. 时间序列数据通过 metric 名和键值对来区分。
@@ -23,7 +25,7 @@ Prometheus 是一套开源的系统监控报警框架。它启发于 Google 的 
 >
 > 对于记录时间序列数据，Prometheus 具有很大的查询优势，此外，Prometheus 适用于微服务的体系架构。
 
-##### 组成及架构
+## 组成及架构
 
 - **Prometheus Server**: 用于收集和存储时间序列数据。
 - **Client Library**: 客户端库，为需要监控的服务生成相应的 metrics 并暴露给 Prometheus server。当 Prometheus server 来 pull 时，直接返回实时状态的 metrics。
@@ -40,18 +42,18 @@ Prometheus 是一套开源的系统监控报警框架。它启发于 Google 的 
 3. Alertmanager 根据配置文件，对接收到的警报进行处理，发出告警。
 4. 在图形界面中，可视化采集数据。
 
-##### 相关概念
+## 相关概念
 
-###### 数据模型
+### 数据模型
 
 Prometheus 中存储的数据为时间序列，是由 metric 的名字和一系列的标签（键值对）唯一标识的，不同的标签则代表不同的时间序列。
 
 - metric 名字：该名字应该具有语义，一般用于表示 metric 的功能，例如：http_requests_total, 表示 http 请求的总数。其中，metric 名字由 ASCII 字符，数字，下划线，以及冒号组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。
 - 标签：使同一个时间序列有了不同维度的识别。例如 http_requests_total{method="Get"} 表示所有 http 请求中的 Get 请求。当 method="post" 时，则为新的一个 metric。标签中的键由 ASCII 字符，数字，以及下划线组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。
 - 样本：实际的时间序列，每个序列包括一个 float64 的值和一个毫秒级的时间戳。
-- 格式：<metric name>{<label name>=<label value>, …}，例如：http_requests_total{method="POST",endpoint="/api/tracks"}。
+- 格式：\<metric name\>{\<label name\>=\<label value\>, …}，例如：http_requests_total{method="POST",endpoint="/api/tracks"}。
 
-###### **Metric 类型**
+### **Metric 类型**
 
 1. **Counter**
 
@@ -81,7 +83,7 @@ Prometheus 中存储的数据为时间序列，是由 metric 的名字和一系�
    - 提供观测值的 count 和 sum 功能。
    - 提供百分位的功能，即可以按百分比划分跟踪结果。
 
-###### Instance 和 Jobs
+### Instance 和 Jobs
 
 **Instance**：一个单独的 scrape 的目标，一般对应一个进程
 
@@ -100,8 +102,6 @@ job: api-server
 ![Metrics 示例](image003.png)
 
 如上图所示，这三个 metric 的名字都一样，他们仅凭 handler 不同而被标识为不同的 metrics。这类 metrics 只会向上累加，是属于 Counter 类型的 metric，且 metrics 中都含有 instance 和 job 这两个标签。
-
-
 
 > 1. [Prometheus 入门与实践](https://www.ibm.com/developerworks/cn/cloud/library/cl-lo-prometheus-getting-started-and-practice/index.html)
 > 2. [Prometheus 入门](https://www.hi-linux.com/posts/25047.html)

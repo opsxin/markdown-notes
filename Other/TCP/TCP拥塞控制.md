@@ -38,12 +38,11 @@
 
 1. 连接建立，开始传输数据，cwnd = 1 , ssthresh 的初始值为 16
 2. 发送端收到一个确认后，cwnd + 1，于是可以发送 2 个数据包
-
-2. 收到 2 个 ACK 之后，这时候 cwnd + 2 , 于是可以发送 4 个数据包
-3. 收到 4 个 ACK 后，这个时候 cwnd + 4 ,于是可以发送 8 个数据包
-4. 当拥塞的窗口达到 ssthresh 后，慢启动算法结束，开始进入拥塞避免算法
-5. cwnd 按照一个 RTT 进行 cwnd + 1 的线性增加，假设到达 24 时，出现网络拥塞
-6. ssthresh = 1/2 * cwnd = 12, cwnd = 1  继续重新执行慢启动算法
+3. 收到 2 个 ACK 之后，这时候 cwnd + 2 , 于是可以发送 4 个数据包
+4. 收到 4 个 ACK 后，这个时候 cwnd + 4 ,于是可以发送 8 个数据包
+5. 当拥塞的窗口达到 ssthresh 后，慢启动算法结束，开始进入拥塞避免算法
+6. cwnd 按照一个 RTT 进行 cwnd + 1 的线性增加，假设到达 24 时，出现网络拥塞
+7. ssthresh = 1/2 * cwnd = 12, cwnd = 1  继续重新执行慢启动算法
 8. 同样当 cwnd = 12 时执行拥塞避免算法
 
 ## 判定网络拥塞及措施
@@ -54,42 +53,42 @@
 
    2. cwnd =1
 
-   3. 重新进入慢启动过程 
+   3. 重新进入慢启动过程
 
 2. 收到 3 个相同的 ACK（快速重传）
 
    1. ssthresh = cwnd / 2
-   
+
    2. cwnd = ssthresh（有些为 cwnd = ssthresh + 3）
-   
-   3. 重新进入拥塞避免阶段 
-   
+
+   3. 重新进入拥塞避免阶段
+
    > [TCP 快速重传为什么是三次冗余 ACK](
    > https://www.zhihu.com/question/21789252/answer/110640581)
    >
    > **两次 duplicated ACK 肯定是乱序造成的，丢包肯定会造成三次 duplicated ACK!**
    >
-   > A 方发送顺序 
+   > A 方发送顺序
    >
-   > N-1，N，N+1，N+2 
+   > N-1，N，N+1，N+2
    >
-   > B 方到达顺序 
+   > B 方到达顺序
    >
-   > N-1，N，N+1，N+2 | A 收到 1 个 ACK (N) 
+   > N-1，N，N+1，N+2 | A 收到 1 个 ACK (N)
    >
-   > N-1，N，N+2，N+1 | A 收到 1 个 ACK (N) 
+   > N-1，N，N+2，N+1 | A 收到 1 个 ACK (N)
    >
-   > N-1，N+1，N，N+2 | A 收到 2 个 ACK (N) 
+   > N-1，N+1，N，N+2 | A 收到 2 个 ACK (N)
    >
-   > N-1，N+1，N+2，N | A 收到 3 个 ACK (N) 
+   > N-1，N+1，N+2，N | A 收到 3 个 ACK (N)
    >
-   > N-1，N+2，N，N+1 | A 收到 2 个 ACK (N) 
+   > N-1，N+2，N，N+1 | A 收到 2 个 ACK (N)
    >
-   > N-1，N+2，N+1，N | A 收到 3 个 ACK (N) 
+   > N-1，N+2，N+1，N | A 收到 3 个 ACK (N)
    >
-   > 如果 N 丢了，没有到达 B 
+   > 如果 N 丢了，没有到达 B
    >
-   > N-1，N+1，N+2 | A 收到 3 个 ACK (N) 
+   > N-1，N+1，N+2 | A 收到 3 个 ACK (N)
    >
    > N-1，N+2，N+1 | A 收到 3 个 ACK (N)
 
@@ -102,8 +101,6 @@
 3. 当收到**重复的 ACK** 时，cwnd = cwnd + 1
 4. 当收到**新的数据包 ACK** 时，cwnd = ssthresh
 5. 重新进入拥塞避免阶段
-
-<br/>
 
 > 1. [TCP-IP详解: 慢启动和拥塞控制](https://blog.csdn.net/wdscq1234/article/details/52517420)
 > 2. [TCP慢启动、拥塞避免、快速重传、快速恢复](https://blog.csdn.net/itmacar/article/details/12278769)

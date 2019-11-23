@@ -32,7 +32,7 @@ spec:
     app: redis-cluster
   ports:
   - port: 6379
-  # 不设置集群 IP 
+  # 不设置集群 IP
   clusterIP: None
 ```
 
@@ -102,9 +102,9 @@ nslookup redis-cluster-0.redis-cluster-svc
 #redis-cli --cluster create $(dig +short redis-cluster-0.redis-cluster-svc):6379 \
 #    $(dig +short redis-cluster-1.redis-cluster-svc):6379 \
 #    $(dig +short redis-cluster-2.redis-cluster-svc):6379 \
-#    $(dig +short redis-cluster-3.redis-cluster-svc):6379 \ 
+#    $(dig +short redis-cluster-3.redis-cluster-svc):6379 \
 #    $(dig +short redis-cluster-4.redis-cluster-svc):6379 \
-#    $(dig +short redis-cluster-5.redis-cluster-svc):6379 \ 
+#    $(dig +short redis-cluster-5.redis-cluster-svc):6379 \
 #    --cluster-replicas 1
 redis-cli --cluster create 10.244.1.8{0..2}:6379 10.244.2.17{1..3}:6379 --cluster-replicas 1
 ```
@@ -163,8 +163,6 @@ Slave 角色已变成 Master。
 [Redis-Cluster](https://github.com/opsxin/k8s-yaml/tree/master/Redis-Cluster)
 
 - 使用了 [NFS-Client](https://github.com/opsxin/k8s-yaml/tree/master/NFS-Client)，以持久化保存文件。
-
-<br/>
 
 > [Redis集群的原理和搭建](https://www.jianshu.com/p/c869feb5581d)
 >

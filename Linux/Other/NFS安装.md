@@ -1,3 +1,5 @@
+# 安装 NFS
+
 1. 关闭 SeLinux 和防火墙（CentOS）
 
    ```bash
@@ -5,7 +7,7 @@
    setenforce 0
    # 永久关闭 SeLinux
    sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
-   
+
    # 关闭 iptables
    systemctl stop iptables
    # 关闭 firewalld
@@ -17,7 +19,7 @@
    ```bash
    # CentOS
    yum install -y nfs-utils rpcbind
-   
+
    # Debian
    apt-get install -y nfs-common nfs-kernel-server
    ```
@@ -41,9 +43,9 @@
 
    ```bash
    # CentOS
-   systemctl start nfs.service    
-   systemctl start rpcbind.service 
-   
+   systemctl start nfs.service
+   systemctl start rpcbind.service
+
    # Debian
    systemctl start nfs-server
    systemctl restart nfs-kernel-server
@@ -71,7 +73,7 @@
 
       IP，IP/Mask，Domain，*
 
-   2. option： 
+   2. option：
 
       - ro：只读
       - rw：读写
@@ -90,9 +92,6 @@
       - subtree：若输出目录是一个子目录，则 nfs 服务器将检查其父目录的权限(默认设置)；
       - no_subtree：即使输出目录是一个子目录，nfs 服务器也不检查其父目录的权限，这样可以提高效率；
 
-   
-
 > [Debian Linux安装NFS](https://www.centos.bz/2018/06/debian-linux安装nfs/)
 >
 > [Linux NFS服务器的安装与配置](https://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html)
-

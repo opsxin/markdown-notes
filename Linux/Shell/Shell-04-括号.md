@@ -48,7 +48,7 @@
 #### 将文件的内容作为标准输入
 
 ```bash
-# cat < /etc/os-release 
+# cat < /etc/os-release
 NAME="CentOS Linux"
 VERSION="8 (Core)"
 ID="centos"
@@ -69,9 +69,9 @@ PRETTY_NAME="CentOS Linux 8 (Core)"
 
 ```bash
 # 可以正常显示文件
-sudo cat myfile.txt 
+sudo cat myfile.txt
 # 可能显示权限不足
-sudo cat < myfile.txt 
+sudo cat < myfile.txt
 ```
 
 ### `<<`
@@ -145,21 +145,19 @@ echo <(date)
 管道和输入重定向将内容推送到 `STDIN` 流。进程替换运行命令，将其输出保存到特殊的临时文件，然后传递该文件名代替命令。无论您使用什么命令，都将其视为文件名。**请注意，创建的文件不是常规文件，而是在不再需要时自动删除的命名管道**。
 
 ```bash
-wc -l < <(cat /etc/os-release) 
+wc -l < <(cat /etc/os-release)
 # 17
-wc -l <(cat /etc/os-release) 
+wc -l <(cat /etc/os-release)
 # 17 /dev/fd/63
-wc -l /etc/os-release 
+wc -l /etc/os-release
 # 17 /etc/os-release
 
 cat < <(date)
 # Wed Oct 23 05:53:40 UTC 2019
 echo < <(date)
-# <Blank> 
+# <Blank>
 # 由于 echo 不读取 STDIN 并且没有传递任何参数，因此什么也没有。
 ```
-
-<br/>
 
 >1. [difference-between-cat-and-cat](<https://unix.stackexchange.com/questions/258931/difference-between-cat-and-cat>)
 >2. [Here document](<https://en.wikipedia.org/wiki/Here_document>)
@@ -167,16 +165,3 @@ echo < <(date)
 >4. [Here Strings](<http://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings>)
 >5. [Process substitution and pipe](https://unix.stackexchange.com/questions/17107/process-substitution-and-pipe)
 >6. [whats-the-difference-between-and-in-bash](<https://askubuntu.com/questions/678915/whats-the-difference-between-and-in-bash>)
-
-
-
-
-
-
-
-   
-
-   
-
-   
-

@@ -46,7 +46,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 
   ![install_succeed](install_succeed.PNG)
 
- - 网络配置
+- 网络配置
 
    KVM 默认会开启一个虚拟的网络接口 `virbr0`，它创建一个 NAT 网络提供虚拟机接入网络，默认的网络为 192.168.122.0/24。但这个取决与你的系统环境，也可以创建一个桥接网络使虚拟机接入网络。
 
@@ -57,7 +57,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
   1. 默认的 VNC 将会监听 127.0.0.1，这样只有本地的主机可以通过 VNC 接入。如果需要通过其他主机接入 VNC，则需要配置 ‘/etc/libvirt/qemu.conf’ 中的 `vnc_listen = '0.0.0.0'`，将它的注释去掉，并重启 ‘libvirtd’。
 
      ```bash
-     systemctl restart libvirtd 
+     systemctl restart libvirtd
      ```
 
   2. 设置 SSH 转发（适用于 NAT 网络）
@@ -88,7 +88,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
   --disk /home/windows7/win7.qcow2,bus=virtio,size=40 \ # 虚拟系统盘 40G
   --disk /home/windows7/virtio-win_x86.vfd,device=floppy \ # 挂载 virtio 为软盘，提供网络及磁盘驱动
   --graphics vnc,password=Passw0rd,port=5910 \ # 开启 vnc，端口 5910，VNC 密码 Passw0rd
-  --hvm # 完全虚拟化，基于 QEMU 的系统管理程序，则隐含此参数 
+  --hvm # 完全虚拟化，基于 QEMU 的系统管理程序，则隐含此参数
   --virt-type kvm # 安装的系统管理程序。示例是 kvm、qemu、xen 或 kqemu。优先推荐 qemu(软件+硬件虚拟)>kvm(硬件虚拟)>kqemu(软件+硬件虚拟)^6^
   ```
 
@@ -114,7 +114,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
   BOOTPROTO=none #手动
   NAME=enp1s0
   DEVICE=enp1s0
-  ONBOOT=yes 
+  ONBOOT=yes
   BRIDGE=br0 #桥接 br0 设备
   NM_CONTROLLED=no #不由 NetworkManager 管理
   ```
@@ -136,7 +136,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 - virt-install 内使用桥接网络
 
   ```bash
-  --network bridge=br0,model=virtio 
+  --network bridge=br0,model=virtio
   ```
 
 ## 常用操作命令^9^
@@ -155,7 +155,7 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 | 通过控制窗口登录虚拟机        | virsh console virtual_name             |
 | 编辑虚拟机配置                | virsh edit virtual_name                |
 
-5. 删除虚拟机
+1. 删除虚拟机
 
    ```bash
    virsh shutdown virtual_name #停止虚拟机
@@ -163,10 +163,10 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
    virsh undefine  virtual_name #取消定义虚拟机
    rm /home/windows7/win7.qcow2 #删除虚拟磁盘
    ```
-   
-6. 桥接网络（bridge）管理
 
-   ```
+2. 桥接网络（bridge）管理
+
+   ```bash
    # 添加网桥
    brctl addbr [name]
    # 显示网桥信息
@@ -180,19 +180,18 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
    brctl delif br0 eth0
    ```
 
-7. **删除网桥步骤**
+3. **删除网桥步骤**
 
    ```bash
    # 将物理网口从网桥中删除
    brctl delif br0 eno1
    # 关闭网桥
-   ifdown br0 
+   ifdown br0
    # 删除网桥
    brctl delbr br0
    # 删除配置文件
    mv /etc/sysconfig/network-scripts/ifcfg-br0 /tmp
    ```
-
 
 ## 重点
 
@@ -206,11 +205,8 @@ KVM 内部使用 SeaBIOS 作为 16 位 x86 BIOS 的开源模拟。
 brctl addif br0 vnet0 #绑定 vnet0 至 br0 接口
 ```
 
-<br/>
-
-
 > 1. [基于内核的虚拟机](https://zh.wikipedia.org/zh-hans/基于内核的虚拟机)
-> 2. [virtIO下载 ](https://docs.fedoraproject.org/en-US/quick-docs/creating-windows-virtual-machines-using-virtio-drivers/index.html)
+> 2. [virtIO下载](https://docs.fedoraproject.org/en-US/quick-docs/creating-windows-virtual-machines-using-virtio-drivers/index.html)
 > 3. [KVM 与 CentOS-6](https://wiki.centos.org/zh/HowTos/KVM)
 > 4. [Setting up KVM on Red Hat Enterprise Linux](https://developers.redhat.com/blog/2016/08/18/setting-up-kvm-on-rhel/)
 > 5. [在 Ubuntu 的 KVM 中安装 Windows 系统](https://www.jianshu.com/p/6cccc7f3e1f9)

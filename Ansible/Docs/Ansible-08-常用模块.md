@@ -19,7 +19,7 @@ ansible A -m copy -a 'content="aaa\bbb\t" dest=/root/test.txt2'
 # 创建目录时，将 state 的值设置为 directory
 # 创建文件时，将 state 的值设置为 touch
 # 创建软链接时，将 state 设置为 link
-# 创建硬链接时，将 state 设置为 hard 
+# 创建硬链接时，将 state 设置为 hard
 # 删除文件时（不用区分目标是文件、目录、链接），将 state 设置为 absent
 
 # 创建目录
@@ -55,7 +55,7 @@ ansible A -m lineinfile -a 'dest=/root/test regexp="t$" line="asdf"'
 # 删除行
 ansible A -m lineinfile -a 'dest=/root/test regexp="^a" state=absent'
 # 正则替换，如果需要引用匹配出来的内容，backrefs 一定要为 yes；\1 不能加 "" 号
-ansible A -m lineinfile -a 'dest=/root/test regexp="\(test\)-\(02\)" line=\1 backrefs=yes' 
+ansible A -m lineinfile -a 'dest=/root/test regexp="\(test\)-\(02\)" line=\1 backrefs=yes'
 ```
 
 ### find 模块
@@ -192,8 +192,6 @@ ansible A -m apt -a 'name=nginx state=absent'
 # 更新本地所有包
 ansible A -m apt -a 'upgrade=dist update_cache=yes'
 ```
-
-<br/>
 
 > [文件操作](http://www.zsythink.net/archives/2542)
 >

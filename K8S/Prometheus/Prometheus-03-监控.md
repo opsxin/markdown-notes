@@ -1,4 +1,6 @@
-##### 监控 Ingress-Nginx
+# 监控
+
+## 监控 Ingress-Nginx
 
 ```yaml
 ...
@@ -26,7 +28,7 @@ spec:
   - name: export-port
     port: 10254
     targetPort: 10254
-    
+
 ---
 # 在 Prometheus 的 ConfigMap 中添加 Job
 ...
@@ -47,7 +49,7 @@ curl -X POST http://NodeIP:Port/-/reload
 
 ---
 
-##### 使用 Exporter 监控应用
+## 使用 Exporter 监控应用
 
 官方文档已分类总结 Exporter（包括第三方）：[EXPORTERS AND INTEGRATIONS](https://prometheus.io/docs/instrumenting/exporters/)
 
@@ -72,7 +74,7 @@ spec:
     spec:
       containers:
       - name: redis-prome
-        image: redis 
+        image: redis
         resources:
           limits:
             memory: "100Mi"
@@ -86,7 +88,7 @@ spec:
       - name: redis-export
         image: oliver006/redis_exporter
         resources:
-          limits: 
+          limits:
             memory: "100Mi"
             cpu: "50m"
           requests:
@@ -114,7 +116,7 @@ spec:
     name: export-svc
 ```
 
-```yaml 
+```yaml
 # 修改 ConfigMap，注意修改文件名和 Namespace
 # kubectl edit cm prometheus-config -n kube-prometheus
 # 添加 Job
@@ -133,7 +135,7 @@ curl -X POST http://NodeIP:Port/-/reload
 
 ---
 
-##### 监控集群节点
+## 监控集群节点
 
 > - kube-state-metrics 主要关注的是业务相关的一些元数据，比如 Deployment、Pod、副本状态等
 > - metrics-server 主要关注的是[资源度量 API](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/instrumentation/resource-metrics-api.md) 的实现，比如 CPU、文件描述符、内存、请求延时等指标。
@@ -203,7 +205,7 @@ spec:
             path: /
 ```
 
-###### 服务发现
+## 服务发现
 
 > 在 Kubernetes 下，Promethues 通过与 Kubernetes API 集成，目前主要支持5中服务发现模式，分别是：Node、Service、Pod、Endpoints、Ingress。
 
@@ -230,7 +232,5 @@ curl -X POST http://NodeIP:Port/-/reload
 ```
 
 浏览器访问 `http://NodeIP:Port`，查看。
-
-
 
 > [kubernetes_sd_config]([https://prometheus.io/docs/prometheus/latest/configuration/configuration/#%3Ckubernetes_sd_config%3E](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#))

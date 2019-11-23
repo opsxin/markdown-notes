@@ -25,7 +25,7 @@ Compose 的默认管理的对象是项目，通过子命令对项目中的一组
 
    ```bash
    curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" > /usr/bin/docker-compose
-   $ chmod +x /usr/bin/docker-compose
+   chmod +x /usr/bin/docker-compose
    ```
 
 3. 卸载
@@ -50,12 +50,12 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 
 ### 使用说明
 
-1. ` build`
+1. `build`
 
    ```bash
    docker-compose build [options] [SERVICE...]
    ```
-   
+
    构建（后者重新构建）项目中的服务容器。
 
    选项包括：
@@ -63,7 +63,7 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
    - `--force-rm`：删除构建过程中的临时容器
    - `--no-cache`：构建过程中不使用 cache
    - `--pull`：尝试使用 pull 来更新镜像
-   
+
 2. `config`
 
    验证 Compose 是否正确，若正确则显示配置，若格式错误显示错误原因。
@@ -140,11 +140,11 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 
     - `--ignore-pull-failures`：忽略拉取镜像过程中的错误。
 
- 12. `push`
+12. `push`
 
      推送服务依赖的镜像到 Docker 镜像仓库。
 
- 13. `restart`
+13. `restart`
 
      ```bash
      docker-compose restart [options] [SERVICE...]
@@ -179,7 +179,7 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
     例如：
 
     ```bash
-    $ docker-compose run ubuntu ping docker.com
+    docker-compose run ubuntu ping docker.com
     ```
 
     将会启动一个 ubuntu 服务容器，并执行 `ping docker.com` 命令。
@@ -196,7 +196,7 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
     如果不希望自动启动关联的容器，可以使用 `--no-deps` 选项，例如
 
     ```bash
-    $ docker-compose run --no-deps web python manage.py shell
+    docker-compose run --no-deps web python manage.py shell
     ```
 
     将不会启动 web 容器所关联的其它容器。
@@ -225,7 +225,7 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
     通过 `service=num` 的参数来设置数量。例如：
 
     ```bash
-    $ docker-compose scale web=3 db=2
+    docker-compose scale web=3 db=2
     ```
 
     将启动 3 个容器运行 web 服务，2 个容器运行 db 服务。
@@ -249,18 +249,18 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
     ```bash
     docker-compose stop [options] [SERVICE...]
     ```
-    
+
     停止已经处于运行状态的容器，但不删除它。通过 `docker-compose start` 可以再次启动这些容器。
-    
+
     选项：
-    
+
     - `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒）。
 
- 19. `top`
+19. `top`
 
      查看各个服务容器内运行的进程。
 
- 20. `unpause`
+20. `unpause`
 
      ```bash
      docker-compose unpause [SERVICE...]
@@ -268,7 +268,7 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 
      恢复处于暂停状态中的服务。
 
- 21. `up`
+21. `up`
 
      ```bash
      docker-compose up [options] [SERVICE...]
@@ -276,11 +276,17 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
 
      该命令十分强大，它将尝试自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作。链接的服务都将会被自动启动，除非已经处于运行状态。
 
-     默认情况，`docker-compose up` 启动的容器都在前台，控制台将会同时打印所有容器的输出信息，可以很方便进行调试。当通过 `Ctrl-C` 停止命令时，所有容器将会停止。
+     默认情况，`docker-compose up` 启动的容器都在前台，控制台将会同时打印所有容器的输出信息，可以很方便进行调试。
+当通过 `Ctrl-C` 停止命令时，所有容器将会停止。
 
      如果使用 `docker-compose up -d`，将会在后台启动并运行所有的容器。一般推荐生产环境下使用该选项。
 
-     默认情况，如果服务容器已经存在，`docker-compose up` 将会尝试停止容器，然后重新创建（保持使用 `volumes-from` 挂载的卷），以保证新启动的服务匹配 `docker-compose.yml` 文件的最新内容。如果用户不希望容器被停止并重新创建，可以使用 `docker-compose up --no-recreate`。这样将只会启动处于停止状态的容器，而忽略已经运行的服务。如果用户只想重新部署某个服务，可以使用 `docker-compose up --no-deps -d <SERVICE_NAME>` 来重新创建服务并后台停止旧服务，启动新服务，并不会影响到其所依赖的服务。
+     默认情况，如果服务容器已经存在，`docker-compose up` 将会尝试停止容器，
+然后重新创建（保持使用 `volumes-from` 挂载的卷），以保证新启动的服务匹配`docker-compose.yml`文件的最新内容。
+如果用户不希望容器被停止并重新创建，可以使用`docker-compose up --no-recreate`。
+这样将只会启动处于停止状态的容器，而忽略已经运行的服务。
+如果用户只想重新部署某个服务，可以使用`docker-compose up --no-deps -d <SERVICE_NAME>`来重新创建服务并后台停止旧服务，
+启动新服务，并不会影响到其所依赖的服务。
 
      选项：
 
@@ -291,8 +297,6 @@ docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
      - `--no-recreate`：如果容器已经存在了，则不重新创建，不能与 `--force-recreate` 同时使用。
      - `--no-build`：不自动构建缺失的服务镜像。
      - `-t, --timeout TIMEOUT`：停止容器时候的超时（默认为 10 秒）。
-
-<br/>
 
 > 1. [Compose介绍](https://yeasy.gitbooks.io/docker_practice/compose/introduction.html)
 > 2. [Compose File Doc](https://docs.docker.com/compose/compose-file/)

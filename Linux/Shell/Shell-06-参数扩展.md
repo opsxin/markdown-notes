@@ -55,6 +55,4 @@ echo ${!foo@}
 # foo1 foo2
 ```
 
-<br/>
-
 > [Shell Bash 中的参数扩展]( https://www.jianshu.com/p/c623ef6f2342 )

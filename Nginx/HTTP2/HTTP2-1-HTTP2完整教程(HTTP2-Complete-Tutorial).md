@@ -45,10 +45,7 @@ HTTP/2 客户端默认不发送 HTTP/2 请求，它总是发送一个 HTTP/1.1 �
 
 客户端通常记着服务端是否支持 HTTP/2。下一次请求就会直接尝试使用 HTTP/2 请求。
 
-
-
 > 1. [HTTP/2 Complete Tutorial](<http://qnimate.com/post-series/http2-complete-tutorial/#comments>)
 > 2. [HTTP/2 Compatibility with old Browsers and Servers](<http://qnimate.com/http2-compatibility-with-old-browsers-and-servers/>)
 > 3. [**HTTP/2 简介**](<https://developers.google.com/web/fundamentals/performance/http2/>)
 > 4. [HTTP2简介和基于HTTP2的Web优化](<https://github.com/creeperyang/blog/issues/23>)
-

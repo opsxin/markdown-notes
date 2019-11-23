@@ -1,4 +1,8 @@
-##### 使用 RBAC 认证
+# RBAC
+
+[TOC]
+
+## 使用 RBAC 认证
 
 基于角色的访问控制（RBAC）是一种基于企业中单个用户角色来调节对计算机或网络资源访问的方法。
 
@@ -10,11 +14,11 @@
 
 ---
 
-##### API 概述
+## API 概述
 
 本节将介绍 RBAC API 所定义的四种顶级类型。用户可以像其他 Kubernetes API 资源一样 （例如通过`kubectl`、API调用等）与这些资源进行交互。
 
-###### Role 和 ClusterRole
+### Role 和 ClusterRole
 
 在 RBAC API 中，一个角色规则代表了一组权限。 权限以纯粹是累加的（没有”否定”的规则）。角色可以在命名空间（namespace）内的`Role`对象定义，而整个 Kubernetes 集群范围内有效的角色则通过`ClusterRole`对象实现。
 
@@ -28,7 +32,7 @@ metadata:
   name: pod-reader
 rules:
 # "" 代表 core API group
-- apiGroups: [""] 
+- apiGroups: [""]
   resources: ["pods"]
   verbs: ["get", "watch", "list"]
 ```
@@ -54,7 +58,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ```
 
-###### RoleBinding 和 ClusterRoleBinding
+### RoleBinding 和 ClusterRoleBinding
 
 角色绑定（RoleBinding）将一个角色（Role）中定义的权限授予一个用户或一组用户。它包含一个主题列表(用户（users）、组（groups）或服务帐户（service accounts）)，以及对被授予角色的引用。命名空间内通过角色绑定（RoleBinding）授予权限，在集群范围内使用集群绑定（ClusterRoleBinding）授予权限。
 
@@ -74,15 +78,15 @@ subjects:
 - kind: User
   # Name is case sensitive
   # 大小写敏感
-  name: jane 
+  name: jane
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   # this must be Role or ClusterRole
   # 必须是 Role 或者 ClusterRole
-  kind: Role 
+  kind: Role
   # this must match the name of the Role or ClusterRole you wish to bind to
   # 这里是你希望绑定的角色名字
-  name: pod-reader 
+  name: pod-reader
   apiGroup: rbac.authorization.k8s.io
 ```
 
@@ -98,12 +102,12 @@ metadata:
   name: read-secrets
   # This only grants permissions within the "development" namespace.
   # 只被授权 “development” 命名空间
-  namespace: development 
+  namespace: development
 subjects:
 - kind: User
-  # Name is case sensitive 
+  # Name is case sensitive
   # 大小写敏感
-  name: dave 
+  name: dave
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
@@ -136,7 +140,7 @@ roleRef:
 
 `kubectl auth`命令行能够创建或更新包含 RBAC 对象的清单文件（manifest），并处理删除和重新创建绑定对象(如果需要更改它们所引用的角色)。
 
-###### 引用资源（Referring to Resources）
+### 引用资源（Referring to Resources）
 
 大多数资源都用字符串表示名字，比如 pods，就像它出现在相关 API 端点（API Endpoint）的URL中一样。然而，一些 Kubernetes api 涉及子资源（subresource），比如 pod 的日志，pods 日志端点的 URL 是：
 
@@ -175,7 +179,7 @@ rules:
 
 注意，create 不能设置 resourceName，因为在授权时不知道对象名称（object name）。一个例外是删除收集（delete collection）。
 
-###### 分配集群角色（Aggregated ClusterRoles）
+### 分配集群角色（Aggregated ClusterRoles）
 
 从1.9开始，可以使用 aggregationRule 组合其他集群角色来创建集群角色。聚合集群角色的权限由控制器管理，并通过统一与提供的标签选择器匹配的任何集群角色的规则来填充。聚合的 ClusterRole 示例：
 
@@ -190,7 +194,7 @@ aggregationRule:
       rbac.example.com/aggregate-to-monitoring: "true"
 # Rules are automatically filled in by the controller manager.
 # Rules 被控制器自动填充
-rules: [] 
+rules: []
 ```
 
 创建标签选择器匹配的 ClusterRole 将向聚合的 ClusterRole 添加规则。在这种情况下，可以通过创建 “monitoring” 集群角色通过创建另一个有标签为 `rbac.example.com/aggregate-to-monitoring：true` 的集群角色:
@@ -239,7 +243,7 @@ rules:
   verbs: ["get", "list", "watch"]
 ```
 
-###### 角色示例（Role Examples）
+### 角色示例（Role Examples）
 
 允许读 pods 资源
 
@@ -298,7 +302,7 @@ rules:
   verbs: ["get", "post"]
 ```
 
-###### 引用对象（Referring to Subjects）
+### 引用对象（Referring to Subjects）
 
 `RoleBinding`或者`ClusterRoleBinding`将角色绑定到*角色绑定主体*（Subject）。 角色绑定主体可以是用户组（Group）、用户（User）或者服务账户（Service Accounts）。
 
@@ -308,7 +312,7 @@ Kubernetes 中的用户组信息由授权模块提供。用户组与用户一样
 
 [服务账户](https://k8smeetup.github.io/docs/tasks/configure-pod-container/configure-service-account/)拥有包含 `system:serviceaccount:`前缀的用户名，并属于拥有`system:serviceaccounts:`前缀的用户组。
 
-###### 角色绑定示例
+### 角色绑定示例
 
 对于用户 “alice@example.com”
 
@@ -387,13 +391,13 @@ subjects:
 
 ---
 
-###### 默认角色和角色绑定
+### 默认角色和角色绑定
 
-API Server 会创建一组默认的 `ClusterRole` 和 `ClusterRoleBinding` 对象。 这些默认对象中有许多包含 `system: `前缀，表明这些资源由 Kubernetes 基础组件 ”拥有”。 对这些资源的修改可能导致非功能性集群（non-functional cluster）。一个例子是 `system:node` ClusterRole 对象。 这个角色定义了 kubelets 的权限。如果这个角色被修改，可能会导致 kubelets 无法正常工作。
+API Server 会创建一组默认的 `ClusterRole` 和 `ClusterRoleBinding` 对象。 这些默认对象中有许多包含 `system:`前缀，表明这些资源由 Kubernetes 基础组件 ”拥有”。 对这些资源的修改可能导致非功能性集群（non-functional cluster）。一个例子是 `system:node` ClusterRole 对象。 这个角色定义了 kubelets 的权限。如果这个角色被修改，可能会导致 kubelets 无法正常工作。
 
 所有默认的 ClusterRole 和 ClusterRoleBinding 对象都会被标记为`kubernetes.io/bootstrapping=rbac-defaults`。
 
-###### 自动协调（Auto-reconciliation）
+### 自动协调（Auto-reconciliation）
 
 在每次启动时，API 服务器都会使用任何丢失的（missing）权限更新默认集群角色，并使用任何丢失的主题更新默认集群角色绑定。这允许集群修复意外的修改，并在新版本中随着权限和主题的更改而更新角色和角色绑定。
 
@@ -401,17 +405,12 @@ API Server 会创建一组默认的 `ClusterRole` 和 `ClusterRoleBinding` 对�
 
 自动协调可用在 Kubernetes 1.6+，并当 RBAC 授权器处于活动状态时。
 
-###### 发现角色（Discovery Roles）
+### 发现角色（Discovery Roles）
 
 未理解翻译加拷贝太痛苦，先理解再来试着翻译。
 
 To-Do…
 
-
-
 > [Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 >
 > [RBAC——基于角色的访问控制](https://jimmysong.io/kubernetes-handbook/guide/rbac.html)
-
-
-

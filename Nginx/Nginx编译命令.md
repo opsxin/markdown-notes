@@ -1,6 +1,8 @@
+# 自用的 Nginx 编译命令
+
 ```bash
-./configure --user=nginx --group=nginx \ 
-	--with-http_v2_module --with-http_ssl_module \
+./configure --user=nginx --group=nginx \
+    --with-http_v2_module --with-http_ssl_module \
     --with-stream --with-stream_ssl_module --with-http_sub_module \
     --with-http_realip_module --with-stream_realip_module \
     --with-pcre=<PATH> --with-zlib=<PATH> --with-openssl=<PATH>
@@ -16,4 +18,3 @@
 8. [with-pcre](https://www.pcre.org/)：Rewrite 需要
 9. [with-zlib](https://zlib.net/)：Gzip 需要
 10. [with-openssl](https://www.openssl.org/)：SSL 需要
-

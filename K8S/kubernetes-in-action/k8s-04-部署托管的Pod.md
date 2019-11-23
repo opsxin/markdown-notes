@@ -1,3 +1,5 @@
+# 部署托管的 Pod
+
 1. 存活探针(liveness probe) ：检查容器是否还在运行，探测失败， Kubemetes 将定期执行探针并重新启动容器。
 
    - HTTP GET 探针对容器的 IP 地址（你指定的端口和路径）执行 HTTP GET 请求。
@@ -97,7 +99,7 @@
 
 23. Job：运行完成工作后就终止任务。completions 指定次数，parallelism 指定并行任务。
 
-24. 小结： 
+24. 小结：
 
     1. 使用存活探针，让 Kubemetes 在容器不健康的情况下立即重启它（应用程
        序定义了健康的条件）。
@@ -106,12 +108,7 @@
     4. 水平缩放（Scale） pod 与在 ReplicationController 上更改所需的副本个数一样简单。
     5. pod 不属于 ReplicationController, 如有必要可以在它们之间移动。
     6. ReplicationController 将从 pod 模板创建新的 pod。更改模板对现有的 pod 没有影响。
-    7.  ReplicationController 应该替换为 ReplicaSet 和 Deployment, 它们提供相同的能力， 但具有额外的强大功能。
+    7. ReplicationController 应该替换为 ReplicaSet 和 Deployment, 它们提供相同的能力， 但具有额外的强大功能。
     8. ReplicationController 和 ReplicaSet 将 pod 安排到随机集群节点， 而 DaemonSet 确保每个节点都运行一个 DaemonSet 中定义的 pod 实例。
     9. 执行批处理任务（batch）的 pod 应通过 Kubernetes Job 资源创建， 而不是直接或通过ReplicationController 或类似对象创建。
     10. 需要在未来某个时候运行的 Job 可以通过 CronJob 资源创建。
-
-
-
-
-

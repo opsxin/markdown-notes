@@ -65,8 +65,6 @@ Click on the link below and follow the Installation Wizard steps to finish setup
 
 ![1569331350257](1569331350257.png)
 
-
-
 ### WEB 页面中配置
 
 1. #### 常规配置
@@ -75,8 +73,6 @@ Click on the link below and follow the Installation Wizard steps to finish setup
 
    ![1569331391278](1569331391278.png)
 
-
-
 2. #### DNS 设置
 
    上游服务器，国内阿里和腾讯的 DNS 相对还可靠，所以设置上游 DNS 服务器为这两家的。
@@ -84,8 +80,6 @@ Click on the link below and follow the Installation Wizard steps to finish setup
    建议选上 ”通过同时查询所有上流服务器以使用并行查询加速解析“ 加速解析。
 
    ![1569331605853](1569331605853.png)
-
-   
 
 3. #### 配置过滤器
 
@@ -99,10 +93,7 @@ Click on the link below and follow the Installation Wizard steps to finish setup
    4. [ChinaList](https://www.runningcheese.com/go?url=http://tools.yiclear.com/ChinaList2.0.txt)：视频广告拦截。
 
    ![1569331837033](1569331837033.png)
-   
-   
-
-
+  
 ## 使用 AdGuard Home
 
 ### Windows 设置
@@ -111,15 +102,11 @@ Click on the link below and follow the Installation Wizard steps to finish setup
 
 ![1569379835368](1569379835368.png)
 
-
-
 ### Android 设置
 
 在 WIFI 的设置界面，选择静态 IP。
 
 ![1569380174204](1569380174204.png)
-
-
 
 ## 域名访问 WEB 配置页面
 
@@ -129,7 +116,7 @@ Click on the link below and follow the Installation Wizard steps to finish setup
 ...
 location / {
         proxy_pass http://127.0.0.1:3000;
-          
+
         proxy_set_header   Host             $host;
         proxy_set_header   X-Real-IP        $remote_addr;
         proxy_set_header   User-Agent       $http_user_agent;
@@ -239,4 +226,3 @@ log_file: ""
 verbose: false
 schema_version: 4
 ```
-

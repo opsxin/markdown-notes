@@ -48,8 +48,6 @@ TCP 流控制（[TCP flow control](http://en.wikipedia.org/wiki/Transmission_Con
 
 注意：服务器只能暗示属于同一源策略的其他资源。
 
-
-
 > [What is Multiplexing in HTTP/2?](<http://qnimate.com/what-is-multiplexing-in-http2/>)
 >
 > [What is Server Push and Promises in HTTP/2?](<http://qnimate.com/what-is-server-push-and-server-hint-in-http-2/>)

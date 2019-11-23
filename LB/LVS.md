@@ -40,14 +40,15 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 
 ![LVS/NAT原理](lvs-nat.png)
 
-1. 当用户请求到达 DS，此时请求的数据报文会先到内核空间的 PREROUTING 链。 此时报文的源 IP 为 CIP，目标 IP 为 VIP。 
+1. 当用户请求到达 DS，此时请求的数据报文会先到内核空间的 PREROUTING 链。 此时报文的源 IP 为 CIP，目标 IP 为 VIP。
 2. PREROUTING 检查发现数据包的目标 IP 是本机，将数据包送至 INPUT 链。
 3. IPVS 比对数据包请求的服务是否为集群服务，若是，修改数据包的目标 IP 地址为后端服务器 IP，然后将数据包发至 POSTROUTING 链。 此时报文的源 IP 为 CIP，目标 IP 为 RIP。
 4. POSTROUTING 链通过选路，将数据包发送给 RS。
-5. RS 比对发现目标为自己的 IP，开始构建响应报文发回给 DS。 此时报文的源 IP 为 RIP，目标 IP 为 CIP。 
+5. RS 比对发现目标为自己的 IP，开始构建响应报文发回给 DS。 此时报文的源 IP 为 RIP，目标 IP 为 CIP。
 6. DS 在响应客户端前，此时会将源 IP 地址修改为自己的 VIP 地址，然后响应给客户端。 此时报文的源 IP 为 VIP，目标 IP 为 CIP。
 
 ### 特点
+
 - RS 尽可能使用私有地址，RS 的网关必须指向 DIP。
 - DIP 和 RIP 必须在同一个网段内。
 - 请求和响应报文都需要经过 Director Server，高负载场景中，Director Server 易成为性能瓶颈。
@@ -83,12 +84,12 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 - RS 上的 lo 接口配置 VIP 的 IP 地址。
 - 缺陷：RS 和 DS 必须在同一机房中。
 
-3. ###### 特点 1 解决方案
+#### 特点 1 解决方案
 
-   - 在前端路由器做静态地址路由绑定，将对于 VIP 的地址仅路由到 Director Server。
-   - 存在问题：用户未必有路由操作权限，因为有可能是运营商提供的，所以这个方法未必实用。
-   - arptables：在 arp 的层次上实现在 ARP 解析时做防火墙规则，过滤 RS 响应 ARP 请求。这是由 iptables 提供的。
-   - 修改 RS 上内核参数（arp_ignore 和 arp_announce）将 RS 上的 VIP 配置在 lo 接口的别名上，并限制其不能响应对 VIP 地址解析请求。 
+- 在前端路由器做静态地址路由绑定，将对于 VIP 的地址仅路由到 Director Server。
+- 存在问题：用户未必有路由操作权限，因为有可能是运营商提供的，所以这个方法未必实用。
+- arptables：在 arp 的层次上实现在 ARP 解析时做防火墙规则，过滤 RS 响应 ARP 请求。这是由 iptables 提供的。
+- 修改 RS 上内核参数（arp_ignore 和 arp_announce）将 RS 上的 VIP 配置在 lo 接口的别名上，并限制其不能响应对 VIP 地址解析请求。
 
 ## LVS/Tun 原理和特点
 
@@ -100,7 +101,7 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 
 1. 当用户请求到达 Director Server，此时请求的数据报文会先到内核空间的 PREROUTING 链。 此时报文的源 IP 为 CIP，目标 IP 为 VIP。
 
-2. PREROUTING 检查发现数据包的目标 IP 是本机，将数据包送至 INPUT 链。 
+2. PREROUTING 检查发现数据包的目标 IP 是本机，将数据包送至 INPUT 链。
 
 3. IPVS 比对数据包请求的服务是否为集群服务，若是，在请求报文的首部再次封装一层 IP 报文，封装源 IP 为 DIP，目标 IP 为 RIP。然后发至 POSTROUTING 链。 此时源 IP 为 DIP，目标 IP 为 RIP。
 
@@ -128,7 +129,7 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 
 ### 最少链接 lc
 
-这个算法会根据后端 RS 的连接数来决定把请求分发给谁，比如 RS1 连接数比 RS2 连接数少，那么请求就优先发给 RS1。 
+这个算法会根据后端 RS 的连接数来决定把请求分发给谁，比如 RS1 连接数比 RS2 连接数少，那么请求就优先发给 RS1。
 
 ### 加权最少链接 wlc
 
@@ -149,8 +150,6 @@ LVS 是 Linux Virtual Server 的简称，也就是 Linux 虚拟服务器。这�
 ### 源地址散列调度算法 sh
 
 与目标地址散列调度算法类似，但它是根据源地址散列算法进行静态分配固定的服务器资源。
-
-<br/>
 
 > 1. [LVS官网](http://www.linuxvirtualserver.org/zh/lvs1.html)
 > 2. [使用LVS实现负载均衡原理及安装配置详解](https://www.cnblogs.com/liwei0526vip/p/6370103.html)

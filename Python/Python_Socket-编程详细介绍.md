@@ -1,4 +1,4 @@
-## Python Socket 编程详细介绍
+# Python Socket 编程详细介绍
 
 python 提供了两个基本的Socket模块：
 
@@ -8,7 +8,7 @@ python 提供了两个基本的Socket模块：
 
 下面讲解Socket模块的功能。
 
-### Socket类型
+## Socket类型
 
 套接字格式：Socket(family, type[,protocal])使用给定的套接族，套接字类型，协议编号（编号未0）来创建套接字
 
@@ -34,12 +34,12 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 ```
 
-### Socket函数
+## Socket函数
 
 - TCP发送数据时，已建立好的TCP链接，所以不需要地址，而UDP是面向无连接的，每次发送都需要指定发送给谁。
 - 服务器与客户端不能直接发送列表，元素，字典等带有数据类型的格式，发送的内容必须是字符串数据。
 
-#### 服务器端Socket函数
+### 服务器端Socket函数
 
 | Socket函数        | 描述                                                         |
 | :---------------- | ------------------------------------------------------------ |
@@ -47,14 +47,14 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 | s.listen(backlog) | 开始监听TCP传入链接，backlog指定在拒绝链接前，操作系统可以挂起的最大链接数，该值最少为1，大部分应用程序设置为5就够了 |
 | s.accept()        | 接受TCP链接并返回(conn, address)， 其中conn是新的套接字对象，可以用来接受和发送数据，address是链接客户端的地址 |
 
-#### 客户端Socket函数
+### 客户端Socket函数
 
 | Socket函数            | 描述                                                         |
 | :-------------------- | ------------------------------------------------------------ |
 | s.connect(address)    | 链接到address处的套接字，一般address的格式为tuple(host, port)，如果链接出错，则返回socket.error错误 |
 | s.connect_ex(address) | 功能与s.connect(address)相同，但成功返回0，失败返回error的值 |
 
-#### 公共Socket函数
+### 公共Socket函数
 
 | Socket 函数                            | 描述                                                         |
 | :------------------------------------- | :----------------------------------------------------------- |
@@ -74,43 +74,44 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 | s.setblocking(flag)                    | 如果flag为0，则将套接字设置为非阻塞模式，否则将套接字设置为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常 |
 | s.makefile()                           | 创建一个与该套接字相关的文件                                 |
 
-### Socket编程思想 
+## Socket编程思想
 
-#### TCP服务器
+### TCP服务器
 
-1. 创建套接字，绑定套接字到本地IP与端口
+- 创建套接字，绑定套接字到本地IP与端口
 
    ```python
    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    s.bind()
    ```
 
-2. 开始监听链接
+- 开始监听链接
 
    ```python
    s.listen()
    ```
 
-3. 进入循环，不断接受客户端的链接请求
+- 进入循环，不断接受客户端的链接请求
+
   ```python
   while True:
-  	s.accept()
+    s.accept()
   ```
 
-4. 接受客户端传来的数据，并且发送给对方数据
+- 接受客户端传来的数据，并且发送给对方数据
 
    ```python
    s.recv()
    s.sendall()
    ```
 
-5. 传输完成后，关闭套接字
+- 传输完成后，关闭套接字
 
-   ```python 
+   ```python
    s.close()
    ```
 
-#### TCP客户端
+### TCP客户端
 
 1. 创建套接字并链接至远端地址
 
@@ -121,14 +122,14 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 2. 链接后发送数据和接受数据
 
-   ```python 
+   ```python
    s.sendall()
    s.recv()
    ```
 
 3. 传输完毕后，关闭套接字
 
-#### Socket编程实践之服务器端代码
+### Socket编程实践之服务器端代码
 
 ```python
 import socket
@@ -146,7 +147,7 @@ print('wait for connect...')
 while True:
     conn, addr = s,accept()
     print('Connected by ', addr)
-    
+
     while True:
         data = conn.recv(1024)
         print(data)
@@ -155,14 +156,14 @@ while True:
             break
         conn.send(data)
         conn.send('Server receive you message.')
-        
+
     conn.close()
 ```
 
 #### Socket编程实践之客户端代码
 
-```python 
-import socket 
+```python
+import socket
 
 HOST = '127.0.0.1'
 PORT = 1234
@@ -181,10 +182,6 @@ while True:
 s.close()
 ```
 
-
-
-### 补充：
+## 补充
 
 1. 对于python3，每次发送数据之前需要encode。
-
- 

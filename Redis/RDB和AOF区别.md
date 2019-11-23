@@ -56,6 +56,4 @@ Redis 主要作为数据缓存，缓存的目标主要是那些需要经常访�
 2. AOF 每秒 `fsync` 一次指令硬盘，如果硬盘 IO 慢，会阻塞父进程；风险是会丢失 1 秒多的数据
 3. AOF 在 Rewrite 过程中，主进程把指令存到 mem-buffer 中，最后写盘时会阻塞主进程。
 
-<br/>
-
 > [Redis持久化----RDB和AOF 的区别](https://blog.csdn.net/ljheee/article/details/76284082)

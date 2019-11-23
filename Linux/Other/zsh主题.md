@@ -1,4 +1,5 @@
-适用于 **oh\~my\~zsh** 的主题
+# 适用于 **oh\~my\~zsh** 的主题
+
 XShell 字体推荐使用 **Consolas，11号**
 颜色模式使用 **Xterm**
 
@@ -40,20 +41,20 @@ ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 # HG info
 local hg_info='$(ys_hg_prompt_info)'
 ys_hg_prompt_info() {
-	# make sure this is a hg dir
-	if [ -d '.hg' ]; then
-		echo -n "${YS_VCS_PROMPT_PREFIX1}hg${YS_VCS_PROMPT_PREFIX2}"
-		echo -n $(hg branch 2>/dev/null)
-		if [ -n "$(hg status 2>/dev/null)" ]; then
-			echo -n "$YS_VCS_PROMPT_DIRTY"
-		else
-			echo -n "$YS_VCS_PROMPT_CLEAN"
-		fi
-		echo -n "$YS_VCS_PROMPT_SUFFIX"
-	fi
+    # make sure this is a hg dir
+    if [ -d '.hg' ]; then
+        echo -n "${YS_VCS_PROMPT_PREFIX1}hg${YS_VCS_PROMPT_PREFIX2}"
+        echo -n $(hg branch 2>/dev/null)
+        if [ -n "$(hg status 2>/dev/null)" ]; then
+            echo -n "$YS_VCS_PROMPT_DIRTY"
+        else
+            echo -n "$YS_VCS_PROMPT_CLEAN"
+        fi
+        echo -n "$YS_VCS_PROMPT_SUFFIX"
+    fi
 }
 
-# Prompt format: \n # TIME USER at MACHINE in [DIRECTORY] on git:BRANCH STATE \n $ 
+# Prompt format: \n # TIME USER at MACHINE in [DIRECTORY] on git:BRANCH STATE \n $
 PROMPT="
 %{$fg_bold[cyan]%}%n%{$reset_color%} \
 %{$fg[white]%}at \
@@ -81,4 +82,3 @@ ${git_info}
 fi
 EOF
 ```
-

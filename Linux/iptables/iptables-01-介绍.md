@@ -1,8 +1,8 @@
 # iptables 介绍
 
-iptables 是一个配置 Linux 内核[防火墙](https://wiki.archlinux.org/index.php/Firewall)的命令行工具，是 [netfilter](https://en.wikipedia.org/wiki/Netfilter) 项目的一部分。术语 iptables 也经常代指该内核级防火墙。 
+iptables 是一个配置 Linux 内核[防火墙](https://wiki.archlinux.org/index.php/Firewall)的命令行工具，是 [netfilter](https://en.wikipedia.org/wiki/Netfilter) 项目的一部分。术语 iptables 也经常代指该内核级防火墙。
 
-iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包。过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成**表**的集合。**表**由一组预先定义的**链**组成，**链**包含遍历顺序规则。每一条规则包含一个谓词的潜在匹配和相应的动作（称为**目标**），如果谓词为真，该动作会被执行。也就是说条件匹配。iptables 是用户工具，允许用户使用**链**和**规则**。 
+iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包。过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成**表**的集合。**表**由一组预先定义的**链**组成，**链**包含遍历顺序规则。每一条规则包含一个谓词的潜在匹配和相应的动作（称为**目标**），如果谓词为真，该动作会被执行。也就是说条件匹配。iptables 是用户工具，允许用户使用**链**和**规则**。
 
 [TOC]
 
@@ -26,7 +26,7 @@ iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包。�
 
 ### security 表
 
- [强制访问控制](https://wiki.archlinux.org/index.php/Security#Mandatory_access_control) 网络规则 。（例如： SELinux -- 详细信息参考 [该文章](http://lwn.net/Articles/267140/)）。 
+ [强制访问控制](https://wiki.archlinux.org/index.php/Security#Mandatory_access_control) 网络规则 。（例如： SELinux -- 详细信息参考 [该文章](http://lwn.net/Articles/267140/)）。
 
 ### 表优先级
 
@@ -71,10 +71,8 @@ raw > managle > nat > filter。
 - **MASQUERADE** ：IP伪装（NAT）。
 - **LOG** ：只记录日志，然后将数据包传递给下一条规则。
 
-<br/>
-
 > 1. [iptables详解](<http://www.zsythink.net/archives/1199>)
 > 2. [iptables用例](<https://wangchujiang.com/linux-command/c/iptables.html>)
->2. [Linux防火墙与iptables介绍(以及4表5链概念)](<http://www.mikewootc.com/wiki/linux/usage/linux_firewall_iptables_intro.html>)
-> 3. [iptables详细教程：基础、架构、清空规则、追加规则、应用实例](https://lesca.me/archives/iptables-tutorial-structures-configuratios-examples.html)
-> 5. [Iptables (简体中文)](https://wiki.archlinux.org/index.php/Iptables_(简体中文)) 
+> 3. [Linux防火墙与iptables介绍(以及4表5链概念)](<http://www.mikewootc.com/wiki/linux/usage/linux_firewall_iptables_intro.html>)
+> 4. [iptables详细教程：基础、架构、清空规则、追加规则、应用实例](https://lesca.me/archives/iptables-tutorial-structures-configuratios-examples.html)
+> 5. [Iptables (简体中文)](https://wiki.archlinux.org/index.php/Iptables_(简体中文))

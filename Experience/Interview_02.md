@@ -1,3 +1,5 @@
+# Interview 02
+
 1. Zabbix Server 的子进程的作用[^1]
 
    ![1564814874054](1564814874054.png)
@@ -61,7 +63,7 @@
 
    4. [TCP的三次握手与四次挥手](https://github.com/opsxin/markdown-notes/blob/master/Other/TCP/TCP的三次握手与四次挥手.md)
 
-   5. TIME_WAIT 状态需要等 2MSL 后才 CLOSED 
+   5. TIME_WAIT 状态需要等 2MSL 后才 CLOSED
 
       > 虽然双方都同意关闭连接了，而且握手的 4 个报文也都协调和发送完毕，按理可以直接回到 CLOSED状态（就好比从 SYN_SEND 状态到 ESTABLISH 状态那样），但是因为我们必须要假想网络是不可靠的，你无法保证你最后发送的 ACK 报文会一定被对方收到，因此对方处于 LAST_ACK 状态下的SOCKET 可能会因为超时未收到 ACK 报文，而重发 FIN 报文，所以这个 TIME_WAIT 状态的作用就是用来重发可能丢失的 ACK 报文。
 

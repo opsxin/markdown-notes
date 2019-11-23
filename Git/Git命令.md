@@ -34,8 +34,6 @@ git push origin <local_branch_name>:<remote_branch_name>
 git log --pretty=oneline
 ```
 
-
-
 ![git_log](1571467322085.png)
 
 ### 合并最近三次的提交
@@ -114,4 +112,3 @@ git log --pretty=oneline
 ```
 
 ![git_log3](1571469175219.png)
-

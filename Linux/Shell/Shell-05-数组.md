@@ -73,8 +73,6 @@ echo ${a[@]/3/5}
 # 1 2 5 4 5
 ```
 
-<br/>
-
 > [Shell数组]( http://c.biancheng.net/cpp/view/7002.html )
 >
 > [Linux shell数组建立及使用]( https://www.jianshu.com/p/10359d0924cf )

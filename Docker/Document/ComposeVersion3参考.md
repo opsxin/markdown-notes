@@ -6,7 +6,7 @@
 
 ## Compose 和 Docker 兼容性
 
-有多种版本的 Compose 格式 - 1，2，2.x 和 3.x，下表是快速浏览。有关每个版本包括什么以及如何升级的详细信息，请[参阅版本和升级](https://docs.docker.com/compose/compose-file/compose-versioning/)。 
+有多种版本的 Compose 格式 - 1，2，2.x 和 3.x，下表是快速浏览。有关每个版本包括什么以及如何升级的详细信息，请[参阅版本和升级](https://docs.docker.com/compose/compose-file/compose-versioning/)。
 
 | **Compose 文件格式 | **Docker Engine 版本** |
 | :----------------- | :--------------------- |
@@ -25,7 +25,8 @@
 | 2.0                | 1.10.0+                |
 | 1.0                | 1.9.1。+               |
 
-除了表中显示的 Compose 文件格式版本外，Compose 本身也有发布计划，在 [Compose](https://github.com/docker/compose/releases/) 查看，但是文件格式版本不一定随每个版本增加。例如，Compose 文件格式 3.0 最初是在 [Compose 版本 1.10.0 ](https://github.com/docker/compose/releases/tag/1.10.0)引入的，并在随后的发布中逐渐版本化。
+除了表中显示的 Compose 文件格式版本外，Compose 本身也有发布计划，在[Compose](https://github.com/docker/compose/releases/)查看，但是文件格式版本不一定随每个版本增加。
+例如，Compose 文件格式 3.0 最初是在[Compose 版本 1.10.0](https://github.com/docker/compose/releases/tag/1.10.0)引入的，并在随后的发布中逐渐版本化。
 
 ## Compose 文件结构和示例
 
@@ -124,24 +125,32 @@ volumes:
   db-data:
 ```
 
-参考页上的主题按照顶级键（top-level）排序，以反映 Compose 文件的结构。顶级键是配置文件中的一部分，比如`build`，`deploy`，`depends_on`， `networks`等等，支持他们的子主题被列出。这个映射到的缩进结构是`<key>: <option>: <value>`。
+参考页上的主题按照顶级键（top-level）排序，以反映 Compose 文件的结构。
+顶级键是配置文件中的一部分，比如`build`，`deploy`，`depends_on`，`networks`等等，支持他们的子主题被列出。
+这个映射到的缩进结构是`<key>: <option>: <value>`。
 
-一个很好的起始是阅读[入门](https://docs.docker.com/get-started/)教程，该教程使用版本 3 的 Compose 文件来实现多容器程序，服务定义和集群模式。在指南中有一些 Compose 文件用法。
+一个很好的起始是阅读[入门](https://docs.docker.com/get-started/)教程，该教程使用版本 3 的 Compose 文件来实现多容器程序，服务定义和集群模式。
+在指南中有一些 Compose 文件用法。
 
 - [您的第一个 docker-compose.yml 文件](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file)
 - [添加新服务和重新部署](https://docs.docker.com/get-started/part5/#add-a-new-service-and-redeploy)
 
-另一个很好的参考是[Docker for Beginners 实验](https://github.com/docker/labs/tree/master/beginner/) 主题中有关[将应用程序部署到 Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md)的投票应用程序示例的 Compose 文件 。这也显示在本节可折叠的部分中。
+另一个很好的参考是[Docker for Beginners 实验](https://github.com/docker/labs/tree/master/beginner/)主题中
+有关[将应用程序部署到Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md)的
+投票应用程序示例的 Compose 文件。这也显示在本节可折叠的部分中。
 
 ## 服务配置参考（Service）
 
-Compose 文件是一个 [YAML](http://yaml.org/) 文件，用于定义 [服务](https://docs.docker.com/compose/compose-file/#service-configuration-reference)， [网络](https://docs.docker.com/compose/compose-file/#network-configuration-reference)和[卷](https://docs.docker.com/compose/compose-file/#volume-configuration-reference)。文件的默认路径为`./docker-compose.yml`。
+Compose 文件是一个[YAML](http://yaml.org/)文件，用于定义[服务](https://docs.docker.com/compose/compose-file/#service-configuration-reference)，[网络](https://docs.docker.com/compose/compose-file/#network-configuration-reference)和[卷](https://docs.docker.com/compose/compose-file/#volume-configuration-reference)。
+文件的默认路径为`./docker-compose.yml`。
 
 > **提示**：您可以为此文件使用 `.yml`或`.yaml`扩展名。它们都可以工作。
 
-服务定义包含应用于该服务启动的每个容器的配置，就像将命令行参数传递给一样 `docker container create`。同样，网络和卷定义类似于 `docker network create`和`docker volume create`。
+服务定义包含应用于该服务启动的每个容器的配置，就像将命令行参数传递给一样`docker container create`。
+同样，网络和卷定义类似于`docker network create`和`docker volume create`。
 
-正如`docker container create`，在 Dockerfile 指定选项，如`CMD`， `EXPOSE`，`VOLUME`，`ENV`，在默认情况下，你不需要再次指定它们`docker-compose.yml`。
+正如`docker container create`，在 Dockerfile 指定选项，如`CMD`，`EXPOSE`，`VOLUME`，`ENV`，
+在默认情况下，你不需要再次指定它们`docker-compose.yml`。
 
 您可以使用类似 Bash 的`${VARIABLE}`语法在配置值中使用环境变量 - 有关完整详细信息，请参见[变量替换](https://docs.docker.com/compose/compose-file/#variable-substitution)。
 
@@ -153,16 +162,18 @@ Compose 文件是一个 [YAML](http://yaml.org/) 文件，用于定义 [服务](
 
 `build` 可以指定为包含构建上下文的字符串：
 
-```
+``` yaml
 version: "3.7"
 services:
   webapp:
     build: ./dir
 ```
 
-或者，作为一个具有[上下文](https://docs.docker.com/compose/compose-file/#context)路径的对象，以及可选的 [Dockerfile](https://docs.docker.com/compose/compose-file/#dockerfile) 和 [args](https://docs.docker.com/compose/compose-file/#args)：
+或者，作为一个具有[上下文](https://docs.docker.com/compose/compose-file/#context)路径的对象，
+以及可选的[Dockerfile](https://docs.docker.com/compose/compose-file/#dockerfile)
+和[args](https://docs.docker.com/compose/compose-file/#args)：
 
-```
+```yaml
 version: "3.7"
 services:
   webapp:
@@ -175,14 +186,15 @@ services:
 
 如果您指定`image`以及`build`，则 Compose 使用`webapp`和可选`tag`作为`image`的名字：
 
-```
+```yaml
 build: ./dir
 image: webapp:tag
 ```
 
 这将产生一个名为`webapp`和 Tag 为`tag`的镜像，该镜像从`./dir`构建的。
 
-> **注意**：在以（版本 3） compose 文件以[群集模式部署堆栈](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，将忽略此选项 。该`docker stack`命令仅接受预构建的图像。
+> **注意**：在以（版本 3） compose 文件以[群集模式部署堆栈](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，
+> 将忽略此选项 。该`docker stack`命令仅接受预构建的图像。
 
 #### 语境（CONTEXT）
 
@@ -192,7 +204,7 @@ image: webapp:tag
 
 Compose 用生成的名称构建并标记它，然后使用该镜像。
 
-```
+```yaml
 build:
   context: ./dir
 ```
@@ -203,7 +215,7 @@ build:
 
 Compose 使用一个替换文件进行构建，还必须指定一个构建路径。
 
-```
+```yaml
 build:
   context: .
   dockerfile: Dockerfile-alternate
@@ -225,7 +237,7 @@ RUN echo "Based on commit: $gitcommithash"
 
 然后在`build`键下指定参数。您可以传递映射或列表：
 
-```
+```yaml
 build:
   context: .
   args:
@@ -238,11 +250,14 @@ build:
     - gitcommithash=cdc3b19
 ```
 
-> **注意**：在 Dockerfile 中，如果您`ARG`在`FROM`指令之前指定， `ARG`则在下方的构建指令中不可用`FROM`。如果您需要一个参数在两个地方都可用，请在`FROM`说明中也指定它。有关用法的详细信息，请参阅 [ARGS 和 FROM 的交互](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact)方式。
+> **注意**：在 Dockerfile 中，如果您`ARG`在`FROM`指令之前指定，
+> `ARG`则在下方的构建指令中不可用`FROM`。
+> 如果您需要一个参数在两个地方都可用，请在`FROM`说明中也指定它。
+> 有关用法的详细信息，请参阅[ARGS 和 FROM 的交互](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact)方式。
 
 您可以在指定构建参数时忽略该值，在这种情况下，构建时的值就是运行 Compose 环境中的值。
 
-```
+```yaml
 args:
   - buildno
   - gitcommithash
@@ -256,7 +271,7 @@ args:
 
 用于缓存解析的镜像列表。
 
-```
+```yaml
 build:
   context: .
   cache_from:
@@ -272,7 +287,7 @@ build:
 
 我们建议您使用反向 DNS 表示法，以防止您的标签与其他软件使用的标签冲突。
 
-```
+```yaml
 build:
   context: .
   labels:
@@ -289,11 +304,11 @@ build:
 
 #### SHM_SIZE
 
-> 在 [v3.5](https://docs.docker.com/compose/compose-file/compose-versioning/#version-35) 文件格式中添加
+> 在[v3.5](https://docs.docker.com/compose/compose-file/compose-versioning/#version-35)文件格式中添加
 
 设置`/dev/shm`此构建容器的分区大小。指定为表示字节数的整数值或表示[字节值](https://docs.docker.com/compose/compose-file/#specifying-byte-values)的字符串。
 
-```
+```yaml
 build:
   context: .
   shm_size: '2gb'
@@ -304,11 +319,11 @@ build:
 
 #### 目标（TARGET）
 
-> 在 [v3.4](https://docs.docker.com/compose/compose-file/compose-versioning/#version-34) 文件格式中添加
+> 在[v3.4](https://docs.docker.com/compose/compose-file/compose-versioning/#version-34)文件格式中添加
 
 构建 Dockerfile 中的指定阶段 。有关 TARGET 详细信息，请参见 [多阶段构建文档](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)。
 
-```
+```yaml
 build:
   context: .
   target: prod
@@ -318,7 +333,7 @@ build:
 
 添加或删除容器功能。请参阅`man 7 capabilities`以获取完整列表。
 
-```
+```yaml
 cap_add:
   - ALL
 
@@ -327,13 +342,14 @@ cap_drop:
   - SYS_ADMIN
 ```
 
-> **注意**：在（版本 3）编写[以群集模式部署堆栈](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，将忽略这些选项 。
+> **注意**：在（版本 3）编写[以群集模式部署堆栈](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，
+> 将忽略这些选项 。
 
 ### cgroup_parent
 
 为容器指定一个可选的父 cgroup。
 
-```
+```yaml
 cgroup_parent: m-executor-abcd
 ```
 
@@ -343,13 +359,13 @@ cgroup_parent: m-executor-abcd
 
 覆盖默认命令。
 
-```
+```yaml
 command: bundle exec thin -p 3000
 ```
 
 该命令也可以是列表，类似于 [dockerfile](https://docs.docker.com/engine/reference/builder/#cmd)：
 
-```
+```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
 ```
 
@@ -365,11 +381,13 @@ command: ["bundle", "exec", "thin", "-p", "3000"]
 
 短语法变量仅指定配置名称。这将授予容器访问配置的权限，并将其安装在`/<config_name>` 容器内。源名称和目标挂载点均设置为配置名称。
 
-以下示例使用短语法来授予`redis`服务对`my_config`和`my_other_config`配置的访问权限。`my_config`的值设置为`./my_config.txt`的内容， `my_other_config`定义为外部资源，这意味着它已经在 Docker 中定义，可以通过运行`docker config create` 命令或通过其他集群部署进行定义。如果外部配置不存在，则集群部署失败并显示`config not found`错误。
+以下示例使用短语法来授予`redis`服务对`my_config`和`my_other_config`配置的访问权限。
+`my_config`的值设置为`./my_config.txt`的内容，`my_other_config`定义为外部资源，这意味着它已经在 Docker 中定义，可以通过运行`docker config create` 命令或通过其他集群部署进行定义。
+如果外部配置不存在，则集群部署失败并显示`config not found`错误。
 
 > **注意**：`config`仅在 3.3 版及更高版本的 COMPOSE文件格式中支持。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -393,11 +411,15 @@ configs:
 - `source`：Docker 中存在的配置名称。
 - `target`：要在服务的任务容器中挂载的文件的路径和名称。如果未指定，则默认为`/<source>`。
 - `uid`和`gid`：服务的任务容器中拥有已挂载的配置文件的 UID 或 GID。如果未指定，在 Linux 上则两者默认为`0`，Windows 不支持。
-- `mode`：服务的容器中文件的权限，以八进制表示法。例如，`0444` 表示全部可读。默认值为`0444`。由于配置文件挂载在临时文件系统中，因此它们不可写。如果您修改可写位，则会被忽略。可执行位可以设置。如果您不熟悉 UNIX 文件权限模式，则可能会发现此 [权限计算器](http://permissions-calculator.org/) 很有用。
+- `mode`：服务的容器中文件的权限，以八进制表示法。
+例如，`0444` 表示全部可读。默认值为`0444`。
+由于配置文件挂载在临时文件系统中，因此它们不可写。
+如果您修改可写位，则会被忽略。可执行位可以设置。
+如果您不熟悉 UNIX 文件权限模式，则可能会发现此[权限计算器](http://permissions-calculator.org/)很有用。
 
 下面的示例设置的名称`my_config`，以`redis_config`在容器内，将模式设定为`0440`（组可读），并且将所述用户和组`103`。该`redis`服务无权访问该`my_other_config` 配置。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -423,7 +445,7 @@ configs:
 
 指定自定义容器名称，而不是生成的默认名称。
 
-```
+```yaml
 container_name: my-web-container
 ```
 
@@ -439,20 +461,20 @@ container_name: my-web-container
 
 使用时`file:`，引用的文件必须存在于`CredentialSpecs` Docker数据目录的子目录中，默认情况下`C:\ProgramData\Docker\` 在Windows上。以下示例从名为的文件中加载凭据规范 `C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`：
 
-```
+```yaml
 credential_spec:
   file: my-credential-spec.json
 ```
 
 使用`registry:`，将从守护程序主机上的 Windows 注册表中读取凭据规范。给定名称的注册表值必须位于：
 
-```
+```yaml
 HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
 ```
 
 以下示例从`my-credential-spec` 注册表中命名的值加载凭据规范：
 
-```
+```yaml
 credential_spec:
   registry: my-credential-spec
 ```
@@ -461,7 +483,7 @@ credential_spec:
 
 为服务配置 gMSA 凭据规范时，您只需使用`config`即可指定凭据规范，如以下示例所示：
 
-```
+```yaml
 version: "3.8"
 services:
   myservice:
@@ -484,7 +506,7 @@ configs:
 
 简单的例子：
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -500,7 +522,8 @@ services:
 
 > 使用时需要注意以下几点`depends_on`：
 >
-> - `depends_on` `web`不会等待`db`和`redis`“准备就绪”，只会等待到它们启动之时。如果需要等待服务准备就绪，请参阅[控制启动顺序](https://docs.docker.com/compose/startup-order/) 以获取有关此问题的更多信息以及解决该问题的策略。
+> - `depends_on` `web`不会等待`db`和`redis`“准备就绪”，只会等待到它们启动之时。
+> 如果需要等待服务准备就绪，请参阅[控制启动顺序](https://docs.docker.com/compose/startup-order/) 以获取有关此问题的更多信息以及解决该问题的策略。
 > - 版本 3 不再支持的`condition`形式`depends_on`。
 > - 在以[集群模式](https://docs.docker.com/engine/reference/commandline/stack_deploy/) 版本的 Compose 文件部署 `depends_on`时，将忽略该选项 。
 
@@ -510,7 +533,7 @@ services:
 
 指定与服务的部署和运行有关的配置。这只能部署到集群时生效，并且被忽略`docker-compose up`和`docker-compose run`。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -532,10 +555,13 @@ services:
 
 > **仅[版本 3.3](https://docs.docker.com/compose/compose-file/compose-versioning/#version-3)。**
 
-- `endpoint_mode: vip`-Docker 为服务分配了一个虚拟 IP（VIP），该虚拟 IP 充当客户端访问网络服务的前端。Docker 在客户端和服务的可用工作节点之间路由请求，而无需客户端知道有多少节点正在参与服务或其 IP 地址与端口。（这是默认设置。）
-- `endpoint_mode: dnsrr`-DNS 轮询（DNSRR）服务发现不使用单个虚拟 IP。Docker 设置服务 DNS 条目，以便对服务名称的 DNS 查询返回 IP 地址列表，并且客户端直接连接到其中之一。在想要使用自己的负载平衡器或混合 Windows 和 Linux 应用程序的情况下，DNS 轮询很有用。
+- `endpoint_mode: vip`-Docker 为服务分配了一个虚拟 IP（VIP），该虚拟 IP 充当客户端访问网络服务的前端。
+Docker 在客户端和服务的可用工作节点之间路由请求，而无需客户端知道有多少节点正在参与服务或其 IP 地址与端口。（这是默认设置。）
+- `endpoint_mode: dnsrr`-DNS 轮询（DNSRR）服务发现不使用单个虚拟 IP。
+Docker 设置服务 DNS 条目，以便对服务名称的 DNS 查询返回 IP 地址列表，并且客户端直接连接到其中之一。
+在想要使用自己的负载平衡器或混合 Windows 和 Linux 应用程序的情况下，DNS 轮询很有用。
 
-```
+```yaml
 version: "3.7"
 
 services:
@@ -568,7 +594,8 @@ networks:
   overlay:
 ```
 
-选项`endpoint_mode`还可以在群集模式 CLI 命令 [docker service create ](https://docs.docker.com/engine/reference/commandline/service_create/)上用作标志 。有关所有 swarm 相关`docker`命令的快速列表，请参阅 [Swarm 模式 CLI 命令](https://docs.docker.com/engine/swarm/#swarm-mode-key-concepts-and-tutorial)。
+选项`endpoint_mode`还可以在群集模式 CLI 命令[docker service create](https://docs.docker.com/engine/reference/commandline/service_create/)上用作标志 。
+有关所有 swarm 相关`docker`命令的快速列表，请参阅 [Swarm 模式 CLI 命令](https://docs.docker.com/engine/swarm/#swarm-mode-key-concepts-and-tutorial)。
 
 要了解有关在群集模式下进行服务发现和联网的更多信息，请参阅在群集模式下 [配置服务发现](https://docs.docker.com/engine/swarm/networking/#configure-service-discovery)主题。
 
@@ -576,7 +603,7 @@ networks:
 
 指定服务标签。这些标签仅在服务上设置，而不在服务的任何容器上设置。
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -588,7 +615,7 @@ services:
 
 在容器上设置标签，在`deploy`外使用`labels`：
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -601,7 +628,7 @@ services:
 
 `global`（一个节点一个容器）或`replicated`（指定数量的容器）。默认值为`replicated`。（要了解更多信息，请参阅[集群](https://docs.docker.com/engine/swarm/)主题中的[复制服务和全局服务](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/#replicated-and-global-services)。）
 
-```
+```yaml
 version: "3.7"
 services:
   worker:
@@ -612,9 +639,11 @@ services:
 
 #### 位置（PLACEMENT）
 
-指定约束和首选项的位置。有关[约束](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints-constraint)语法以及[首选项](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-placement-preferences-placement-pref)的可用类型的完整说明，请参阅 docker 服务 create 文档。
+指定约束和首选项的位置。有关[约束](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-constraints-constraint)语法
+以及[首选项](https://docs.docker.com/engine/reference/commandline/service_create/#specify-service-placement-preferences-placement-pref)的可用类型完整说明，
+请参阅 docker 服务 create 文档。
 
-```
+```yaml
 version: "3.7"
 services:
   db:
@@ -632,7 +661,7 @@ services:
 
 如果服务设置`replicated`服务，指定了应运行的容器数。
 
-```
+```yaml
 version: "3.7"
 services:
   worker:
@@ -649,13 +678,15 @@ services:
 
 配置资源约束。
 
-> **注意**：这取代了[旧的资源约束选项](https://docs.docker.com/compose/compose-file/compose-file-v2/#cpu-and-other-resources)，例如包含在编写非集群模式文件之前版本（`cpu_shares`，`cpu_quota`，`cpuset`， `mem_limit`，`memswap_limit`，`mem_swappiness`）看[升级版本 2.x 到 3.x ](https://docs.docker.com/compose/compose-file/compose-versioning/#upgrading)的描述。
+> **注意**：这取代了[旧的资源约束选项](https://docs.docker.com/compose/compose-file/compose-file-v2/#cpu-and-other-resources)，
+例如包含在编写非集群模式文件之前版本（`cpu_shares`，`cpu_quota`，`cpuset`， `mem_limit`，`memswap_limit`，`mem_swappiness`）
+看[升级版本 2.x 到 3.x](https://docs.docker.com/compose/compose-file/compose-versioning/#upgrading)的描述。
 
 其中每个都是一个值，类似于 [docker service create](https://docs.docker.com/engine/reference/commandline/service_create/) 的对应项。
 
 在示例中，`redis`服务被限制为使用不超过 50M 的内存和`0.50`（不超过单个内核的 50％）可用处理时间（CPU），并且具有保留`20M`的内存和`0.25`CPU 时间（始终可用）。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -674,11 +705,14 @@ services:
 
 > 寻找在非集群模式容器上设置资源的选项吗？
 >
-> 此处描述的选项特定于 `deploy`和集群模式。如果要在非群集部署中设置资源限制，请使用 [Compose文件格式版本 2 CPU，内存和其他资源选项](https://docs.docker.com/compose/compose-file/compose-file-v2/#cpu-and-other-resources)。如果您还有其他问题，请参阅有关GitHub问题 [docker / compose / 4513 ](https://github.com/docker/compose/issues/4513)的讨论。
+> 此处描述的选项特定于 `deploy`和集群模式。
+如果要在非群集部署中设置资源限制，请使用[Compose 文件格式版本 2 CPU，内存和其他资源选项](https://docs.docker.com/compose/compose-file/compose-file-v2/#cpu-and-other-resources)。
+如果您还有其他问题，请参阅有关GitHub问题 [docker / compose / 4513](https://github.com/docker/compose/issues/4513)的讨论。
 
 ##### 内存不足异常（OOME）
 
-如果您的服务或容器尝试使用的内存超过系统可用的内存，则可能会遇到内存不足异常（OOME），并且内核 OOM 杀手可能会杀死容器或 Docker 守护程序。为防止这种情况的发生，请确保您的应用程序在具有足够内存的主机上运行，请参阅了解[内存不足的风险](https://docs.docker.com/engine/admin/resource_constraints/#understand-the-risks-of-running-out-of-memory)。
+如果您的服务或容器尝试使用的内存超过系统可用的内存，则可能会遇到内存不足异常（OOME），并且内核 OOM 杀手可能会杀死容器或 Docker 守护程序。
+为防止这种情况的发生，请确保您的应用程序在具有足够内存的主机上运行，请参阅了解[内存不足的风险](https://docs.docker.com/engine/admin/resource_constraints/#understand-the-risks-of-running-out-of-memory)。
 
 #### RESTART_POLICY
 
@@ -689,7 +723,7 @@ services:
 - `max_attempts`：放弃之前尝试重新启动容器的次数（默认值：永不放弃）。如果重新启动在`windows`时间内未成功，则此尝试不会计入配置`max_attempts`值。例如，如果`max_attempts`设置为“ 2”，并且第 1 次尝试重启失败，则可能会再尝试 2 次。
 - `window`：重新启动是否成功之前要等待的时间，指定为[持续时间](https://docs.docker.com/compose/compose-file/#specifying-durations)（默认值：立即）。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -728,7 +762,7 @@ services:
 
 > **注意**：`order`仅 v3.4 及更高版本的受支持。
 
-```
+```yaml
 version: "3.7"
 services:
   vote:
@@ -765,7 +799,7 @@ services:
 
 设备映射列表。使用与`--device`和 `docker client create`相同的格式。
 
-```
+```yaml
 devices:
   - "/dev/ttyUSB0:/dev/ttyUSB0"
 ```
@@ -776,7 +810,7 @@ devices:
 
 自定义 DNS 服务器。可以是单个值或列表。
 
-```
+```yaml
 dns: 8.8.8.8
 dns:
   - 8.8.8.8
@@ -787,7 +821,7 @@ dns:
 
 自定义 DNS 搜索域。可以是单个值或列表。
 
-```
+```yaml
 dns_search: example.com
 dns_search:
   - dc1.example.com
@@ -798,13 +832,13 @@ dns_search:
 
 覆盖默认入口点。
 
-```
+```yaml
 entrypoint: /code/entrypoint.sh
 ```
 
 入口点也可以是列表，类似于 [dockerfile](https://docs.docker.com/engine/reference/builder/#entrypoint)：
 
-```
+```yaml
 entrypoint:
     - php
     - -d
@@ -824,7 +858,7 @@ entrypoint:
 
 在[环境](https://docs.docker.com/compose/compose-file/#environment)部分声明的环境变量将覆盖这些值 -- 即使这些值为空或未定义。
 
-```
+```yaml
 env_file: .env
 env_file:
   - ./common.env
@@ -834,7 +868,7 @@ env_file:
 
 Compose 环境文件中的每一行都采用`VAR=VAL`格式。以开头的行`#`被视为注释，并被忽略。空行也将被忽略。
 
-```
+```yaml
 # Set Rails/Rack environment
 RACK_ENV=development
 ```
@@ -845,7 +879,7 @@ RACK_ENV=development
 
 请记住， 在确定分配给多次出现的变量的值时，列表中的文件顺序非常重要 。列表中的文件从上到下进行处理。对于`a.env`指定变量一个值，但又在 `b.env`指定相同变量另一个值，而如果`b.env`在`a.env`下面列出，则变量的值来自`b.env`。例如，在以下docker-compose.yml`：
 
-```
+```yaml
 services:
   some-service:
     env_file:
@@ -855,14 +889,14 @@ services:
 
 和：
 
-```
+```yaml
 # a.env
 VAR=1
 ```
 
 和：
 
-```
+```yaml
 # b.env
 VAR=hello
 ```
@@ -873,9 +907,9 @@ VAR=hello
 
 添加环境变量。您可以使用数组或字典，任何布尔值（true，false，yes，no）需要用引号引起来，以确保 YAML 解析器不会将其转换为 True 或 False。
 
-只有一个键的环境变量被解析为运行在其上的机器上的值，这对于密钥或特定于主机的值很有帮助。 
+只有一个键的环境变量被解析为运行在其上的机器上的值，这对于密钥或特定于主机的值很有帮助。
 
-```
+```yaml
 environment:
   RACK_ENV: development
   SHOW: 'true'
@@ -892,7 +926,7 @@ environment:
 
 公开端口却不将其发布到主机上，只有链接的服务才能访问它们。只能指定内部端口。
 
-```
+```yaml
 expose:
  - "3000"
  - "8000"
@@ -902,7 +936,7 @@ expose:
 
 链接到这个`docker-compose.yml`外部启动的容器，甚至 Compose 之外，特别是对于提供共享或公共服务的容器。`external_links` 在同时指定容器名称和链接别名时（`CONTAINER:ALIAS`）遵循`links`。
 
-```
+```yaml
 external_links:
  - redis_1
  - project_db_1:mysql
@@ -913,13 +947,13 @@ external_links:
 >
 > 如果您使用的是版本 2 或更高版本，则外部创建的容器必须至少连接到与其链接的服务相同的网络。[Links](https://docs.docker.com/compose/compose-file/compose-file-v2#links)是旧选项。我们建议改为使用[netwarls](https://docs.docker.com/compose/compose-file/#networks)。
 >
-> 在（版本 3）[以集群模式部署](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，将忽略此选项。 
+> 在（版本 3）[以集群模式部署](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，将忽略此选项。
 
 ### extra_hosts
 
 添加主机名映射。使用与 docker client `--add-host`参数相同的值。
 
-```
+```yaml
 extra_hosts:
  - "somehost:162.242.195.82"
  - "otherhost:50.31.209.229"
@@ -927,7 +961,7 @@ extra_hosts:
 
 在`/etc/hosts`此服务的内部容器中创建一个具有 ip 地址和主机名的条目，例如：
 
-```none
+```yaml
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ```
@@ -938,7 +972,7 @@ extra_hosts:
 
 配置运行的检查以确定该服务的容器是否“健康”。有关运行[状况检查](https://docs.docker.com/engine/reference/builder/#healthcheck) 如何工作的详细信息，请参阅文档中的 [HEALTHCHECK Dockerfile 指令](https://docs.docker.com/engine/reference/builder/#healthcheck)。
 
-```
+```yaml
 healthcheck:
   test: ["CMD", "curl", "-f", "http://localhost"]
   interval: 1m30s
@@ -953,21 +987,21 @@ healthcheck:
 
 `test`必须是字符串或列表。如果它是一个列表，第一项必须是`NONE`，`CMD`或`CMD-SHELL`。如果是字符串，则等效于指定`CMD-SHELL`后跟该字符串。
 
-```
+```yaml
 # Hit the local web app
 test: ["CMD", "curl", "-f", "http://localhost"]
 ```
 
 如上所述，在`/bin/sh`中，以下两种形式是等效的。
 
-```
+```yaml
 test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
 test: curl -f https://localhost || exit 1
 ```
 
 要禁用图像设置的任何默认运行状况检查，可以使用`disable: true`。这等效于指定`test: ["NONE"]`。
 
-```
+```yaml
 healthcheck:
   disable: true
 ```
@@ -976,7 +1010,7 @@ healthcheck:
 
 指定要启动容器的镜像。可以是存储库/标签或部分镜像ID。
 
-```
+```yaml
 image: redis
 image: ubuntu:14.04
 image: tutum/influxdb
@@ -992,7 +1026,7 @@ image: a4bc65fd
 
 在容器内运行一个初始化程序，以转发信号并获取进程。设置此选项可以`true`为服务启用此功能。
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -1012,7 +1046,7 @@ services:
 
 建议您使用反向 DNS 表示法，以防止标签与其他软件使用的标签冲突。
 
-```
+```yaml
 labels:
   com.example.description: "Accounting webapp"
   com.example.department: "Finance"
@@ -1029,7 +1063,7 @@ labels:
 
 链接到另一个服务中的容器。指定服务名称和链接别名（`SERVICE:ALIAS`），或者仅指定服务名称。
 
-```
+```yaml
 web:
   links:
    - db
@@ -1052,7 +1086,7 @@ web:
 
 服务的日志记录配置。
 
-```
+```yaml
 logging:
   driver: syslog
   options:
@@ -1063,7 +1097,7 @@ logging:
 
 默认值为 json-file。
 
-```
+```yaml
 driver: "json-file"
 driver: "syslog"
 driver: "none"
@@ -1075,7 +1109,7 @@ driver: "none"
 
 日志记录选项是键值对。`syslog`选项示例：
 
-```
+```yaml
 driver: "syslog"
 options:
   syslog-address: "tcp://192.168.0.42:123"
@@ -1083,7 +1117,7 @@ options:
 
 默认驱动程序 [json-file](https://docs.docker.com/engine/admin/logging/overview/#json-file)，有限制存储日志量的选项。因此，请使用键值对以设置最大存储大小和最大文件数：
 
-```
+```yaml
 options:
   max-size: "200k"
   max-file: "10"
@@ -1093,7 +1127,7 @@ options:
 
 这是一个`docker-compose.yml`限制日志存储的示例文件：
 
-```
+```yaml
 version: "3.7"
 services:
   some-service:
@@ -1113,7 +1147,7 @@ services:
 
 网络模式。使用与docker client `--network`参数相同的值，以及特殊形式`service:[service name]`。
 
-```
+```yaml
 network_mode: "bridge"
 network_mode: "host"
 network_mode: "none"
@@ -1130,7 +1164,7 @@ network_mode: "container:[container name/id]"
 
 要加入的网络，参考 `networks` 关键词。
 
-```
+```yaml
 services:
   some-service:
     networks:
@@ -1148,7 +1182,7 @@ services:
 
 一般格式如下所示。
 
-```
+```yaml
 services:
   some-service:
     networks:
@@ -1163,7 +1197,7 @@ services:
 
 在下面的例子中，提供了三种服务（`web`，`worker`，和`db`），其中两个网络（`new`和`legacy`）。该`db`服务是在`db`或`database`的`new`网络，`db`与`mysql`在`legacy`网络。
 
-```
+```yaml
 version: "3.7"
 
 services:
@@ -1202,7 +1236,7 @@ networks:
 
 一个例子：
 
-```
+```yaml
 version: "3.7"
 
 services:
@@ -1224,7 +1258,7 @@ networks:
 
 #### pid
 
-```
+```yaml
 pid: "host"
 ```
 
@@ -1242,7 +1276,7 @@ pid: "host"
 
 > **注意**：以`HOST:CONTAINER`格式映射端口时，使用低于 60 的容器端口可能会遇到错误的结果，因为 YAML 会将格式的数字解析`xx:yy`为以 60 为底的值。因此，我们建议始终将端口映射显式指定为字符串。
 
-```
+```yaml
 ports:
  - "3000"
  - "3000-3005"
@@ -1263,7 +1297,7 @@ ports:
 - `protocol`：端口协议（`tcp`或`udp`）
 - `mode`：`host`用于在每个节点上发布主机端口，或`ingress`使群集模式端口达到负载平衡。
 
-```
+```yaml
 ports:
   - target: 80
     published: 8080
@@ -1277,7 +1311,7 @@ ports:
 
 `no`是默认的重启策略，在任何情况下都不会重启容器。当`always`指定时，容器总是重新启动。 `on-failure`如果启动失败，则重启容器。
 
-```
+```yaml
 restart: "no"
 restart: always
 restart: on-failure
@@ -1300,7 +1334,7 @@ restart: unless-stopped
 
 以下示例使用短语法授予`redis`服务对`my_secret`和`my_other_secret`密钥的访问权限。值 `my_secret`设置为file的内容`./my_secret.txt`， `my_other_secret`定义为外部资源，这意味着它已经在 Docker中 定义，可以通过运行`docker secret create` 命令或通过其他部署方式进行定义。如果外部密钥不存在，则部署将失败并显示`secret not found`错误。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -1328,7 +1362,7 @@ secrets:
 
 下面的示例设置名称`my_secret`，在容器内命名`redis_secret`，模式为`0440`（组可读），并且将用户和组设置为`103`。该`redis`服务无权访问该`my_other_secret` 机密。
 
-```
+```yaml
 version: "3.7"
 services:
   redis:
@@ -1354,7 +1388,7 @@ secrets:
 
 覆盖每个容器的默认标签方案。
 
-```
+```yaml
 security_opt:
   - label:user:USER
   - label:role:ROLE
@@ -1366,7 +1400,7 @@ security_opt:
 
 指定[`stop_signal`](https://docs.docker.com/compose/compose-file/#stopsignal)在发送 SIGKILL 之前，如果容器无法处理 SIGTERM（或已使用指定的任何停止信号）而试图停止容器的等待时间 。指定为[持续时间](https://docs.docker.com/compose/compose-file/#specifying-durations)。
 
-```
+```yaml
 stop_grace_period: 1s
 stop_grace_period: 1m30s
 ```
@@ -1377,7 +1411,7 @@ stop_grace_period: 1m30s
 
 设置替代信号以停止容器。默认情况下`stop`使用 SIGTERM。使用`stop_signal`原因设置替代信号会 `stop`改为发送该信号。
 
-```
+```yaml
 stop_signal: SIGUSR1
 ```
 
@@ -1385,7 +1419,7 @@ stop_signal: SIGUSR1
 
 在容器中设置内核参数。您可以使用数组或字典。
 
-```
+```yaml
 sysctls:
   net.core.somaxconn: 1024
   net.ipv4.tcp_syncookies: 0
@@ -1404,7 +1438,7 @@ sysctls:
 
 在容器内安装一个临时文件系统。可以是单个值或列表。
 
-```
+```yaml
 tmpfs: /run
 tmpfs:
   - /run
@@ -1412,12 +1446,12 @@ tmpfs:
 ```
 
 > 在（版本 3-3.5）Compose文件[以集群模式部署](https://docs.docker.com/engine/reference/commandline/stack_deploy/)时，将忽略此选项 。
-
+>
 > [3.6 版文件格式](https://docs.docker.com/compose/compose-file/compose-versioning/#version-3)及更高版本。
 
 在容器内安装一个临时文件系统。Size 参数指定 tmpfs 安装的大小（以字节为单位）。默认情况下不受限制。
 
-```
+```yaml
  - type: tmpfs
      target: /app
      tmpfs:
@@ -1428,7 +1462,7 @@ tmpfs:
 
 覆盖容器的默认 ulimit。您可以将单个限制指定为整数，也可以将软/硬限制指定为映射。
 
-```
+```yaml
 ulimits:
   nproc: 65535
   nofile:
@@ -1438,7 +1472,7 @@ ulimits:
 
 ### userns_mode
 
-```
+```yaml
 userns_mode: "host"
 ```
 
@@ -1458,7 +1492,7 @@ userns_mode: "host"
 
 这个例子显示了服务（`web`）正在使用的命名卷（`mydata`），以及为单个服务（`db`服务 下的第一个路径`volumes`）定义的绑定安装。该`db`服务还使用了一个名为`dbdata`（`db`service 下的第二个路径`volumes`）的命名卷，但是使用旧的字符串格式定义了该卷以挂载命名卷。`volumes`如图所示，必须在顶级键下列出命名的卷 。
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -1492,7 +1526,7 @@ volumes:
 
 您可以在主机上挂载相对路径，该相对路径相对于正在使用的 Compose 配置文件的目录进行扩展。相对路径应始终以`.`或开头`..`。
 
-```
+```yaml
 volumes:
   # Just specify a path and let the Engine create a volume
   - /var/lib/mysql
@@ -1526,7 +1560,7 @@ volumes:
   - `size`：tmpfs 挂载的大小（以字节为单位）
 - `consistency`：装载的一致性要求，`consistent`（主机和容器具有相同的视图），`cached`（读缓存，主机视图具有权威性）或`delegated`（读写缓存，容器的视图具有权威性）
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -1554,7 +1588,7 @@ volumes:
 
 #### 服务，集群和 STACK 文件的卷
 
-当使用服务、集群和 `docke-stack.yml`文件时，请记住，支持服务的任务(容器)可以部署在集群中的任何节点上，而且每次更新服务时可能是不同的节点。 
+当使用服务、集群和 `docke-stack.yml`文件时，请记住，支持服务的任务(容器)可以部署在集群中的任何节点上，而且每次更新服务时可能是不同的节点。
 
 在没有使用指定源命名卷的情况下，Docker 为支持服务的每个任务创建一个匿名卷。删除关联的容器后，匿名卷不会继续存在。
 
@@ -1562,7 +1596,7 @@ volumes:
 
 例如，[Docker Labs 中 votingapp 示例](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md)的`docker-stack.yml`文件定义了一个运行数据库的服务。它被配置为命名卷，以将数据持久存储在群集中， 并且被约束为仅在节点上运行。这是该文件的相关片段：
 
-```
+```yaml
 version: "3.7"
 services:
   db:
@@ -1588,7 +1622,7 @@ services:
 
 这是将卷配置为的示例`cached`：
 
-```
+```yaml
 version: "3.7"
 services:
   php:
@@ -1605,7 +1639,7 @@ services:
 
 每个标志都是一个值，类似于其 [docker run](https://docs.docker.com/engine/reference/run/) 对应项。请注意，`mac_address`是一个旧选项。
 
-```
+```yaml
 user: postgresql
 working_dir: /code
 
@@ -1627,7 +1661,7 @@ tty: true
 
 一些配置选项，例如`interval`和`timeout`子选项 [`check`](https://docs.docker.com/compose/compose-file/#healthcheck)，将持续时间作为字符串以如下格式显示：
 
-```
+```yaml
 2.5s
 10s
 1m30s
@@ -1641,7 +1675,7 @@ tty: true
 
 某些配置选项，例如的`shm_size`子选项 [`build`](https://docs.docker.com/compose/compose-file/#build)，接受字节值通过字符格式，格式如下：
 
-```
+```yaml
 2b
 1024kb
 2048k
@@ -1653,13 +1687,13 @@ tty: true
 
 ## 卷配置参考
 
-虽然可以在服务声明中在文件上声明[卷](https://docs.docker.com/compose/compose-file/#volumes)，但是本节允许您创建命名卷（不依赖`volumes_from`），这些卷可以在多个服务中重用，并且可以使用 docker 命令行或 API。有关更多信息，请参阅 [docker volume ](https://docs.docker.com/engine/reference/commandline/volume_create/)子命令文档。
+虽然可以在服务声明中在文件上声明[卷](https://docs.docker.com/compose/compose-file/#volumes)，但是本节允许您创建命名卷（不依赖`volumes_from`），这些卷可以在多个服务中重用，并且可以使用 docker 命令行或 API。有关更多信息，请参阅 [docker volume](https://docs.docker.com/engine/reference/commandline/volume_create/)子命令文档。
 
 有关[卷](https://docs.docker.com/engine/admin/volumes/volumes/)的信息，请参见[使用卷](https://docs.docker.com/engine/admin/volumes/volumes/)和[卷插件](https://docs.docker.com/engine/extend/plugins_volume/)。
 
 以下是两种服务设置的示例，其中数据库的数据目录作为卷与另一服务共享，以便可以定期备份它：
 
-```
+```yaml
 version: "3.7"
 
 services:
@@ -1682,7 +1716,7 @@ volumes:
 
 指定该卷应使用哪个卷驱动程序。默认为 Docker Engine 配置使用的驱动程序，大多数情况下是 `local`。如果驱动程序不可用，则引擎在`docker-compose up`尝试创建卷时将返回错误 。
 
-```
+```yaml
 driver: foobar
 ```
 
@@ -1690,7 +1724,7 @@ driver: foobar
 
 指定选项列表，以传递给该卷的驱动程序。这些选项取决于驱动程序-有关更多信息，请参考驱动程序的文档。
 
-```
+```yaml
 volumes:
   example:
     driver_opts:
@@ -1707,7 +1741,7 @@ volumes:
 
 在下面的示例中，Compose 不会尝试创建一个名为`[projectname]_data`的卷，而是查找一个称为`data`的现有卷，并将其装入`db`服务的容器中。
 
-```
+```yaml
 version: "3.7"
 
 services:
@@ -1721,11 +1755,11 @@ volumes:
     external: true
 ```
 
-> [不推荐 external.name ](https://docs.docker.com/compose/compose-file/compose-versioning/#version-34) ，使用`name`来代替。
+> [不推荐 external.name](https://docs.docker.com/compose/compose-file/compose-versioning/#version-34)，使用`name`来代替。
 
 您还可以在 compose 文件中分别指定卷名和引用卷名的名称：
 
-```
+```yaml
 volumes:
   data:
     external:
@@ -1734,7 +1768,7 @@ volumes:
 
 > 外部卷始终使用 docker stack deploy 创建
 >
-> 如果使用[docker stack deploy](https://docs.docker.com/compose/compose-file/#deploy)以[集群模式](https://docs.docker.com/engine/swarm/)启动应用程序 （而不是 [docker compose up](https://docs.docker.com/compose/reference/up/)），则会创建不存在的外部卷。在集群模式下，由服务定义卷后将自动创建该卷。由于服务任务是在新节点上安排的，因此  [swarmkit ](https://github.com/docker/swarmkit/blob/master/README.md)在本地节点上创建卷。要了解更多信息，请参见 [moby / moby＃29976](https://github.com/moby/moby/issues/29976)。
+> 如果使用[docker stack deploy](https://docs.docker.com/compose/compose-file/#deploy)以[集群模式](https://docs.docker.com/engine/swarm/)启动应用程序 （而不是 [docker compose up](https://docs.docker.com/compose/reference/up/)），则会创建不存在的外部卷。在集群模式下，由服务定义卷后将自动创建该卷。由于服务任务是在新节点上安排的，因此  [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)在本地节点上创建卷。要了解更多信息，请参见 [moby / moby＃29976](https://github.com/moby/moby/issues/29976)。
 
 ### labels
 
@@ -1742,7 +1776,7 @@ volumes:
 
 建议您使用反向 DNS 表示法，以防止标签与其他软件使用的标签冲突。
 
-```
+```yaml
 labels:
   com.example.description: "Database volume"
   com.example.department: "IT/Ops"
@@ -1757,9 +1791,9 @@ labels:
 
 > [3.4 版文件格式添加](https://docs.docker.com/compose/compose-file/compose-versioning/#version-34)
 
-为此卷设置自定义名称。name 字段可用于引用包含特殊字符的卷。该名称按原样使用，不会与 stack 名称一起限定作用域。 
+为此卷设置自定义名称。name 字段可用于引用包含特殊字符的卷。该名称按原样使用，不会与 stack 名称一起限定作用域。
 
-```
+```yaml
 version: "3.7"
 volumes:
   data:
@@ -1768,7 +1802,7 @@ volumes:
 
 它也可以与`external`属性一起使用：
 
-```
+```yaml
 version: "3.7"
 volumes:
   data:
@@ -1791,7 +1825,7 @@ volumes:
 
 如果驱动程序不可用，Docker 引擎将返回错误。
 
-```
+```yaml
 driver: overlay
 ```
 
@@ -1814,7 +1848,7 @@ Docker 默认在单个主机上使用`bridge`网络。有关如何与`bridge`网
 
 使用内置网络（例如`host`和`none`）的语法略有不同。使用名称`host`或`none`（Docker 已自动创建的）定义一个外部网络，以及 Compose可 以使用的别名（`hostnet`或`nonet`），然后使用该别名向该网络授予服务访问权限。
 
-```
+```yaml
 version: "3.7"
 services:
   web:
@@ -1849,7 +1883,7 @@ networks:
 
 指定选项列表作为键值对，以传递给该网络的驱动程序。这些选项取决于驱动程序-有关更多信息，请参考驱动程序的文档。
 
-```
+```yaml
 driver_opts:
   foo: "bar"
   baz: 1
@@ -1861,7 +1895,7 @@ driver_opts:
 
 仅在将`driver`设置为`overlay`时使用。如果设置为`true`，则除了服务之外，独立容器还可以连接到该网络。如果独立容器连接到覆盖网络，则它可以与也从其他 Docker 守护程序附加到覆盖网络的服务和独立容器进行通信。
 
-```
+```yaml
 networks:
   mynet1:
     driver: overlay
@@ -1886,7 +1920,7 @@ networks:
 
 一个完整的例子：
 
-```
+```yaml
 ipam:
   driver: default
   config:
@@ -1905,7 +1939,7 @@ ipam:
 
 建议您使用反向 DNS 表示法，以防止标签与其他软件使用的标签冲突。
 
-```
+```yaml
 labels:
   com.example.description: "Financial transaction network"
   com.example.department: "Finance"
@@ -1924,7 +1958,7 @@ labels:
 
 在下面的示例中，`proxy`是通往外界的网关。Compose 不会尝试创建一个名为`[projectname]_outside`的网络，而是寻找一个称为`outside`的现有网络并将`proxy` 服务的容器连接到该网络。
 
-```
+```yaml
 version: "3.7"
 
 services:
@@ -1943,11 +1977,11 @@ networks:
     external: true
 ```
 
-> [不推荐 external.name ](https://docs.docker.com/compose/compose-file/compose-versioning/#version-35) ，使用`name`来代替。
+> [不推荐 external.name](https://docs.docker.com/compose/compose-file/compose-versioning/#version-35) ，使用`name`来代替。
 
 您还可以在文件中单独指定网络名称和用于引用网络的名称：
 
-```
+```yaml
 version: "3.7"
 networks:
   outside:
@@ -1959,9 +1993,9 @@ networks:
 
 > [3.5 版文件格式添加](https://docs.docker.com/compose/compose-file/compose-versioning/#version-35)
 
-为该网络设置自定义名称。名称字段可用于引用包含特殊字符的网络。该名称按原样使用，不会与堆栈名称一起限定作用域。 
+为该网络设置自定义名称。名称字段可用于引用包含特殊字符的网络。该名称按原样使用，不会与堆栈名称一起限定作用域。
 
-```
+```yaml
 version: "3.7"
 networks:
   network1:
@@ -1970,7 +2004,7 @@ networks:
 
 它也可以与`external`属性一起使用：
 
-```
+```yaml
 version: "3.7"
 networks:
   network1:
@@ -1988,7 +2022,7 @@ networks:
 
 在此示例中，`my_first_config`被创建（就像 `_my_first_config)`部署堆栈时一样，并且`my_second_config`已经存在于 Docker 中。）
 
-```
+```yaml
 configs:
   my_first_config:
     file: ./config_data
@@ -1998,7 +2032,7 @@ configs:
 
 外部配置的另一个变体是 Docker 中的配置名称与服务中存在的名称不同时。以下示例修改了前一个示例，以使用名为的外部配置 `redis_config`。
 
-```
+```yaml
 configs:
   my_first_config:
     file: ./config_data
@@ -2019,7 +2053,7 @@ configs:
 
 在此示例中，`my_first_config`被创建（就像 `_my_first_config)`部署堆栈时一样，并且`my_second_config`已经存在于 Docker 中。）
 
-```
+```yaml
 secrets:
   my_first_secret:
     file: ./secret_data
@@ -2031,7 +2065,7 @@ secrets:
 
 ### v3.5 及更高版本
 
-```
+```yaml
 secrets:
   my_first_secret:
     file: ./secret_data
@@ -2042,7 +2076,7 @@ secrets:
 
 ### v3.4 及以下版本
 
-```
+```yaml
   my_second_secret:
     external:
       name: redis_secret
@@ -2054,7 +2088,7 @@ secrets:
 
 您的配置选项可以包含环境变量。Compose 使用`docker-compose`运行时所在的 shell 环境中的变量值。例如，假设 shell 包含`POSTGRES_VERSION=9.3`并提供以下配置：
 
-```
+```yaml
 db:
   image: "postgres:${POSTGRES_VERSION}"
 ```
@@ -2074,14 +2108,14 @@ db:
 
 同样，以下语法允许您指定变量：
 
-- `${VARIABLE:?err}` 如果环境中的变量未设置或为空，则使用包含`err`的错误消息退出。 
-- `${VARIABLE?err}` 如果环境中的变量未设置，则使用包含`err`的错误消息退出。 
+- `${VARIABLE:?err}` 如果环境中的变量未设置或为空，则使用包含`err`的错误消息退出。
+- `${VARIABLE?err}` 如果环境中的变量未设置，则使用包含`err`的错误消息退出。
 
 不支持其他扩展的 shell 格式，例如`${VARIABLE/foo/bar}`。
 
 `$$`当您的配置需要美元符号时，可以使用（双美元符号）。这也可以防止 Compose 插值，因此 `$$` 允许您引用您不想由 Compose 处理的环境变量。
 
-```
+```yaml
 web:
   build: .
   command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
@@ -2095,13 +2129,13 @@ web:
 
 > [3.4 版文件格式添加](https://docs.docker.com/compose/compose-file/compose-versioning/#version-34)。
 
-可以使用扩展字段重用配置片段。这些特殊字段可以是任何格式的，只要它们位于文件的根目录中，并且它们的名称以`x-`字符序列开头。 
+可以使用扩展字段重用配置片段。这些特殊字段可以是任何格式的，只要它们位于文件的根目录中，并且它们的名称以`x-`字符序列开头。
 
 > **注意**
 >
 > 从 3.7 格式（对于 3.x 系列）和 2.4 格式（对于 2.x 系列）开始，扩展字段也允许在服务，卷，网络，配置和密码定义的根目录下使用。
 
-```
+```yaml
 version: '3.4'
 x-custom:
   items:
@@ -2114,7 +2148,7 @@ x-custom:
 
 这些字段的内容被 Compose 忽略，但是可以使用 [YAML 锚点](http://www.yaml.org/spec/1.2/spec.html#id2765878)将其插入资源定义中。例如，如果您希望多个服务使用相同的日志记录配置：
 
-```
+```yaml
 logging:
   options:
     max-size: '12m'
@@ -2124,7 +2158,7 @@ logging:
 
 您可以按如下方式编写 Compose 文件：
 
-```
+```yaml
 version: '3.4'
 x-logging:
   &default-logging
@@ -2144,7 +2178,7 @@ services:
 
 也可以使用 [YAML 合并类型](http://yaml.org/type/merge.html)部分覆盖扩展字段中的值。例如：
 
-```
+```yaml
 version: '3.4'
 x-volumes:
   &default-volume
@@ -2169,7 +2203,7 @@ volumes:
 
 - [用户指南](https://docs.docker.com/compose/)
 - [安装compose](https://docs.docker.com/compose/install/)
-- [ compose 文件版本和升级](https://docs.docker.com/compose/compose-file/compose-versioning/)
+- [compose 文件版本和升级](https://docs.docker.com/compose/compose-file/compose-versioning/)
 - [开始使用Docker](https://docs.docker.com/get-started/)
 - [样品](https://docs.docker.com/samples/)
 - [命令行参考](https://docs.docker.com/compose/reference/)

@@ -10,7 +10,6 @@
 git init
 ```
 
-
 在当前目录创建新的空仓库
 
 ### 克隆仓库
@@ -47,7 +46,6 @@ git config user.email <email>
 git config core.autocrlf true
 ```
 
-
 自动转换 unix 和 Win 在提交（commit）和 检出（checkout）的行未 EOF（CRLF 和 LF）问题
 
 ### 只在保存时转换 EOL
@@ -55,7 +53,6 @@ git config core.autocrlf true
 ```bash
 git config core.autoclrlf input
 ```
-
 
 只在提交时转换 CRLF 到 LF，检出不变
 
@@ -83,7 +80,7 @@ git config --unset <config-name>
 git config [--system | --global] <name> <value>
 ```
 
-- system：系统级别 
+- system：系统级别
 - global：用户级别
 - local：repo 级别
 
@@ -203,7 +200,7 @@ git diff <branch-1> <branch-2>
 git clean -n
 ```
 
- 提示哪些文件会删除，但不会真正的删除文件 
+提示哪些文件会删除，但不会真正的删除文件
 
 ### 交互移除
 
@@ -263,11 +260,11 @@ git merge <branch>
 
 ### 合并使用合并的提交信息
 
-```
+```bash
 git merge --no-ff <branch>
 ```
 
-  不使用 `fast-forward` 方式合并，保留分支的 commit 历史 
+不使用 `fast-forward` 方式合并，保留分支的 commit 历史
 
 ### 交互式变基
 
@@ -404,4 +401,3 @@ git gc
 ```bash
 git fsck
 ```
-
