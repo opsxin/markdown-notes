@@ -52,7 +52,7 @@ $ sed ':a;N;$!ba;s/\n/ /g' test.txt
 $ cat test.txt
 1 2 3
 3 4 5
-5 6 7 
+5 6 7
 7 8 9
 ```
 
@@ -60,7 +60,7 @@ $ cat test.txt
 
 ```bash
 $ sed "/3/d" test.txt
-5 6 7 
+5 6 7
 7 8 9
 ```
 
@@ -70,7 +70,7 @@ $ sed "/3/d" test.txt
 #sed "1,${/3/{/4/d}}" test.txt
 $ sed "{/3/{/4/d}}" test.txt
 1 2 3
-5 6 7 
+5 6 7
 7 8 9
 ```
 
@@ -83,7 +83,7 @@ $ sed "1i 10 11 12" test.txt
 10 11 12
 1 2 3
 3 4 5
-5 6 7 
+5 6 7
 7 8 9
 ```
 
@@ -93,7 +93,7 @@ $ sed "1i 10 11 12" test.txt
 $ sed "$ a 10 11 12" test.txt
 1 2 3
 3 4 5
-5 6 7 
+5 6 7
 7 8 9
 10 11 12
 ```
@@ -162,4 +162,32 @@ $ awk 'END {print NR}' test.txt
 ```bash
 $ wc -l test.txt
 10
+```
+
+## 删除 RC 状态的包（Debian）
+
+> r: the package is marked for removal.
+>
+> c: the configuration files are currently present in the system.
+
+```bash
+dpkg -l | grep ^rc | cut -d' ' -f3| sudo xargs dpkg -P
+```
+
+## 显示根的磁盘信息
+
+```bash
+df -h | awk '/\/$/ {print "disk total:" $2 " free:" $4}'
+```
+
+## CPU 最近 5 次 id 信息
+
+```bash
+vmstat 1 5 | awk 'NR>=3 {id += $15} END {print "cpu id:" id/5}'
+```
+
+## 显示特定 app 内存
+
+```bash
+ps -e -o 'pid,args,user,pmem' | grep "${APP_NAME}" | grep -v 'grep' | awk '{print "app use mem:" 0.15*$4 "G"}'
 ```
