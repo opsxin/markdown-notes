@@ -112,3 +112,42 @@ git log --pretty=oneline
 ```
 
 ![git_log3](1571469175219.png)
+
+## Git 免输用户名和密码
+
+### SSH 协议
+
+通过 SSH 协议和配置 Key，将公钥放置到 github 服务端。
+
+### HTTPS 协议
+
+#### 永久有效
+
+```bash
+git config --global credential.helper store
+```
+
+#### 保存有效期
+
+```bash
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=3600'
+```
+
+## merge 合并
+
+### no  fast forward
+
+所有 commit 信息都会保留
+
+```bash
+git merge master --no-ff
+```
+
+### squash
+
+所有 commit 合并成一个
+
+```bash
+git merge master --squash
+```
