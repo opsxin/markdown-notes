@@ -6,13 +6,13 @@ XShell 字体推荐使用 **Consolas，11号**
 ```bash
 cat > ~/.oh-my-zsh/themes/hsin.zsh-theme << EOF
 # Copy and self modified from xxf.zsh-theme.
-# It is recommended to use with a dark background and the font Consolas.
+# It is recommended to use with a dark background.
 # Colors: black, red, green, yellow, blue, magenta, cyan, and white.
 
 # 08 NOV 2017 - Hsin
 # Change some color configurations.
 # 07 DEC 2019
-# Remove some code.
+# Remove some code and show exit code.
 
 # Machine name.
 local box_name='$([ -f ~/.box-name ] && cat ~/.box-name || echo $HOST)'
@@ -43,6 +43,7 @@ PROMPT="
 %{$terminfo[bold]$fg[yellow]%}[${current_dir}]%{$reset_color%} \
 ${git_info}
 %{$fg_bold[red]%}%* \
+%{$fg_bold[magenta]%}[%?]%{$reset_color%} \
 %{$terminfo[bold]$fg[white]%}$ %{$reset_color%}"
 
 if [[ "$USER" == "root" ]]; then
@@ -53,7 +54,8 @@ PROMPT="
 %{$fg[white]%}in \
 %{$terminfo[bold]$fg[yellow]%}[${current_dir}]%{$reset_color%} \
 ${git_info}
-%{$fg_bold[red]%}%*%{$reset_color%} \
+%{$fg_bold[red]%}%* \
+%{$fg_bold[magenta]%}[%?]%{$reset_color%} \
 %{$terminfo[bold]$fg[blue]%}# %{$reset_color%}"
 fi
 EOF
