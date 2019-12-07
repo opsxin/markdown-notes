@@ -12,7 +12,7 @@ cat > ~/.oh-my-zsh/themes/hsin.zsh-theme << EOF
 # 08 NOV 2017 - Hsin
 # Change some color configurations.
 # 07 DEC 2019
-# Remove some code and show exit code.
+# Remove some code.
 
 # Machine name.
 local box_name='$([ -f ~/.box-name ] && cat ~/.box-name || echo $HOST)'
@@ -21,8 +21,8 @@ local box_name='$([ -f ~/.box-name ] && cat ~/.box-name || echo $HOST)'
 local current_dir='${PWD/#$HOME/~}'
 
 # VCS
-YS_VCS_PROMPT_PREFIX1="%{$fg[white]%}on%{$reset_color%} "
-YS_VCS_PROMPT_PREFIX2=":%{$fg[cyan]%}"
+YS_VCS_PROMPT_PREFIX1="%{$fg[white]%}on %{$reset_color%}%{$fg_bold[white]%}"
+YS_VCS_PROMPT_PREFIX2=":%{$fg_bold[cyan]%}"
 YS_VCS_PROMPT_SUFFIX="%{$reset_color%} "
 YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}✗"
 YS_VCS_PROMPT_CLEAN=" %{$fg[green]%}✔ "
@@ -43,8 +43,7 @@ PROMPT="
 %{$terminfo[bold]$fg[yellow]%}[${current_dir}]%{$reset_color%} \
 ${git_info}
 %{$fg_bold[red]%}%* \
-%{$fg_bold[magenta]%}[%?]%{$reset_color%} \
-%{$terminfo[bold]$fg[white]%}$ %{$reset_color%}"
+%{$terminfo[bold]$fg[blue]%}$ %{$reset_color%}"
 
 if [[ "$USER" == "root" ]]; then
 PROMPT="
@@ -55,7 +54,6 @@ PROMPT="
 %{$terminfo[bold]$fg[yellow]%}[${current_dir}]%{$reset_color%} \
 ${git_info}
 %{$fg_bold[red]%}%* \
-%{$fg_bold[magenta]%}[%?]%{$reset_color%} \
 %{$terminfo[bold]$fg[blue]%}# %{$reset_color%}"
 fi
 EOF
