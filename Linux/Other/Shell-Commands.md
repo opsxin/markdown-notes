@@ -191,3 +191,17 @@ vmstat 1 5 | awk 'NR>=3 {id += $15} END {print "cpu id:" id/5}'
 ```bash
 ps -e -o 'pid,args,user,pmem' | grep "${APP_NAME}" | grep -v 'grep' | awk '{print "app use mem:" 0.15*$4 "G"}'
 ```
+
+## 显示 TCP 各个状态连接数
+
+```bash
+$ ss -ant | awk '{a[$1]++} END{for(i in a) {print i, a[i]}}'
+ESTAB 30
+LISTEN 6
+```
+
+```bash
+$ ss -ant | grep "ESTAB" | wc -l
+30
+```
+
