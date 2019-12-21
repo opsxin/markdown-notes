@@ -19,21 +19,21 @@ PHP 安装 Oracle 12.2 oci 和 pdo_oci 扩展。
 unzip instantclient-sdk-linux.x64-12.2.0.1.0.zip
 unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
 mkdir /usr/lib/oracle
-mv instantclient_12_2 /usr/lib/oracle/12.1
+mv instantclient_12_2 /usr/lib/oracle/12.2
 ```
 
 ### 创建软连接
 
 ```bash
-cd /usr/lib/oracle/12.1
-ln -s libclntsh.so.12.1 libclntsh.so
-ln -s libocci.so.12.1 libocci.so
+cd /usr/lib/oracle/12.2
+ln -s libclntsh.so.12.2 libclntsh.so
+ln -s libocci.so.12.2 libocci.so
 ```
 
 ### 配置 lib
 
 ```bash
-echo "/usr/lib/oracle/12.1" > /etc/ld.so.conf.d/oracle-12.2.conf
+echo "/usr/lib/oracle/12.2" > /etc/ld.so.conf.d/oracle-12.2.conf
 ldconfig
 ```
 
@@ -79,7 +79,7 @@ sed -i "s/10.1/12.2/g" config.m4
 
 ```bash
 phpize
-./configure --with-pdo-oci=instantclient,/usr/lib/oracle/12.1,12.2 --with-php-config=/php/bin/php-config
+./configure --with-pdo-oci=instantclient,/usr/lib/oracle/12.2,12.2 --with-php-config=/php/bin/php-config
 # --with-pdo-oci=instantclient,Oracle 安装位置,Oracle 版本
 ```
 
@@ -100,8 +100,8 @@ EOF
 
 ```bash
 cat >> php-fpm.conf << EOF
-env[LD_LIBRARY_PATH] = /usr/lib/oracle/12.1
-env[ORACLE_HOME] = /usr/lib/oracle/12.1
+env[LD_LIBRARY_PATH] = /usr/lib/oracle/12.2
+env[ORACLE_HOME] = /usr/lib/oracle/12.2
 EOF
 ```
 
