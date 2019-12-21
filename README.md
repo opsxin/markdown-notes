@@ -66,6 +66,8 @@ Markdown-Notes<br/>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/">Other</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/FTP%E5%AE%89%E8%A3%85.md">FTP安装.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/NFS%E5%AE%89%E8%A3%85.md">NFS安装.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/PHP5.6%E5%AE%89%E8%A3%85Oracle12.2%E6%89%A9%E5%B1%95.md">PHP5.6安装Oracle12.2扩展.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/Shell-Commands.md">Shell-Commands.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/exec%E8%AF%B4%E6%98%8E.md">exec说明.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/ps%E5%91%BD%E4%BB%A4.md">ps命令.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Linux/Other/vim%E9%85%8D%E7%BD%AE.md">vim配置.md</a><br>
@@ -108,4 +110,4 @@ Markdown-Notes<br/>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>27 directories, 82 files
+<br/>27 directories, 84 files
