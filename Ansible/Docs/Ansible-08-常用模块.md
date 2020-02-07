@@ -163,9 +163,9 @@ ansible A -m yum_reposity -a 'file=alibaba name=aliEpel state=absent'
 
 ```bash
 # 添加 google-chrome 源
-ansible A -m apt_pository -a 'repo="deb http://dl.google.com/linux/chrome/deb/ stable main" filename="google-chrome"'
+ansible A -m apt_repository -a 'repo="deb http://dl.google.com/linux/chrome/deb/ stable main" filename="google-chrome"'
 # 删除源
-andible A -m apt_pository -a 'repo="deb http://dl.google.com/linux/chrome/deb/ stable main" filename="google-chrome" state=absent'
+andible A -m apt_repository -a 'repo="deb http://dl.google.com/linux/chrome/deb/ stable main" filename="google-chrome" state=absent'
 ```
 
 ### yum 模块
