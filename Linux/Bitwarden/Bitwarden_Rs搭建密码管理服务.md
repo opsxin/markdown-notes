@@ -112,11 +112,11 @@ docker-compose stop && docker-compose start
    location /notifications/hub {
        proxy_pass http://127.0.0.1:3012;
        proxy_set_header Upgrade $http_upgrade;
-      	proxy_set_header Connection "upgrade";
+       proxy_set_header Connection "upgrade";
    }  
-   
+
    location /notifications/hub/negotiate {
-      	proxy_pass http://127.0.0.1:8200;
+       proxy_pass http://127.0.0.1:8200;
    }
    ```
 
@@ -171,15 +171,15 @@ server {
         proxy_set_header    X-Forwarded-Proto $scheme;
     }
 
-	location /notifications/hub {
+    location /notifications/hub {
         proxy_pass http://127.0.0.1:3012;
-    	proxy_set_header Upgrade $http_upgrade;
-    	proxy_set_header Connection "upgrade";
-  	}
-  
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
     location /notifications/hub/negotiate {
-    	proxy_pass http://127.0.0.1:8200;
-  	}
+        proxy_pass http://127.0.0.1:8200;
+    }
 }
 ```
 
