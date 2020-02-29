@@ -95,8 +95,10 @@ docker-compose down
 更新基础镜像或配置
 
 ```bash
-docker-compose stop && docker-compose start
+docker-compose up -d
 ```
+
+*Docker-compose 会读取 Compose 文件，并将其中有变动的服务重构、运行。*
 
 ## 自定义选项
 
