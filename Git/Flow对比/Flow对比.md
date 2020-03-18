@@ -75,6 +75,4 @@ Git Flow，Github Flow 和 Gitlab Flow 的特点及优缺点。
 - 需要进行预发布的项目
 - gitlab 推荐的工作流方式
 
-
-
 > [gitflow & github flow & gitlab flow](https://juejin.im/post/5b83c68751882542c56ca498)

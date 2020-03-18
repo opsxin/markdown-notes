@@ -1,3 +1,5 @@
+# Git Flow 模型
+
 ## 介绍
 
 我们都知道， 在 git 的分支功能相对 svn 确实方便许多，而且也非常推荐使用分支来做开发。我的做法是每个项目都有 2 个分支，master 和 develop。 master 分支是主分支，保证程序有一个稳定版本，develop 则是开发用的分支， 几乎所有的功能开发， bug 修复都在这个分支上， 完成后再合并回 master。
@@ -112,16 +114,16 @@ Version tag prefix? []
    ```bash
    $ git flow release start 0.1
    Switched to a new branch 'release/0.1'
-   
+
    Summary of actions:
    - A new branch 'release/0.1' was created, based on 'develop'
    - You are now on branch 'release/0.1'
-   
+
    Follow-up actions:
    - Bump the version number now!
    - Start committing last-minute fixes in preparing your release
    - When done, run:
-   
+
    git flow release finish '0.1'
    ```
 
@@ -142,7 +144,7 @@ Version tag prefix? []
     1 file changed, 1 insertion(+)
     create mode 100644 version
    Deleted branch release/0.1 (was d77df80).
-   
+
    Summary of actions:
    - Latest objects have been fetched from 'origin'
    - Release branch has been merged into 'master'
@@ -166,16 +168,16 @@ Version tag prefix? []
    ```bash
    $ git flow hotfix start bug1
    Switched to a new branch 'hotfix/bug1'
-   
+
    Summary of actions:
    - A new branch 'hotfix/bug1' was created, based on 'master'
    - You are now on branch 'hotfix/bug1'
-   
+
    Follow-up actions:
    - Bump the version number now!
    - Start committing your hot fixes
    - When done, run:
-   
+
    git flow hotfix finish 'bug1'
    ```
 
@@ -192,7 +194,7 @@ Version tag prefix? []
     f1 |    2 +-
     1 file changed, 1 insertion(+), 1 deletion(-)
    Deleted branch hotfix/bug1 (was aa3ca2e).
-   
+
    Summary of actions:
    - Latest objects have been fetched from 'origin'
    - Hotfix branch has been merged into 'master'
@@ -223,7 +225,5 @@ Version tag prefix? []
 
 > 1. feature 分支开发完成后，暂时不合并至 develop，而是基于 develop 开启 release 分支，将 feature 分支合并到 release 分支，进行测试；
 > 2. release 分支测试通过后，部署到生产环境，将 release 分支代码合并到 develop 分支与 master 分支，并在 master 分支打一个tag；
-
-
-
+>
 > [GIT版本管理：Git Flow模型](https://www.jianshu.com/p/62b4ebe283f3)
