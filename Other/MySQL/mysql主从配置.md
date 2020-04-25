@@ -9,7 +9,7 @@
 ### 获取仓库源包
 
 ```bash
-apt update && apt install -y lsb-core wget && 
+apt update && apt install -y lsb-core wget &&
 wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
 ```
 
@@ -133,7 +133,7 @@ xtrabackup --move-back --target-dir=/backup
 
 #### 设置权限
 
-```bash 
+```bash
 chown -R mysql:mysql /var/lib/mysql
 ```
 
@@ -203,8 +203,6 @@ audit[3329]: AVC apparmor="DENIED" operation="open" profile="/usr/sbin/mysqld" n
  # 增加
  /data/mysql/** rwk,
 ```
-
-
 
 > [Installing Percona XtraBackup on Debian and Ubuntu](https://www.percona.com/doc/percona-xtrabackup/8.0/installation/apt_repo.html)
 >
