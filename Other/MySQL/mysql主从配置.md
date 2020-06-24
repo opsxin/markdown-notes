@@ -98,7 +98,7 @@ read-only=1
 #### 移除旧数据
 
 ```bash
-mv /var/lib/mysql  ~/backup/mysql-old-bak
+mv /var/lib/mysql ~/backup/mysql-old-bak
 ```
 
 ## XtraBackup 导入导出数据
@@ -185,25 +185,57 @@ Slave_IO_Running: Yes
 Slave_SQL_Running: Yes
 ```
 
-## Ubuntu 数据`datadir`自定义的问题
+## XtraBackup 远程备份
 
-如自定义配置`datadir=/data/mysql`，启动时可能会遇到报错：
+### Master
 
-```txt
-audit[3329]: AVC apparmor="DENIED" operation="open" profile="/usr/sbin/mysqld" name="/data/mysql/ibdata1" pid=3329 comm="mysqld" requested_mask="rw" denied_mask="rw" fsuid=107 ouid=107
+#### 生成密钥
+
+```bash
+ssh-keygen -t rsa
 ```
 
-则需要修改`/etc/apparmor.d/usr.sbin.mysqld`的`\# Allow data dir access`部分：
+#### 将公钥添加到远程主机
 
-```ini
- /var/lib/mysql/ r,
- # 增加
- /data/mysql/ r,
- /var/lib/mysql/** rwk,
- # 增加
- /data/mysql/** rwk,
+```bash
+ssh-copy-id root@{Slave-IP}
+```
+
+#### 备份到 Slave
+
+```bash
+innobackupex --user root --password 'YOUR_PASSWORD' --stream=tar ./ | ssh root@{Slave-IP} "gzip - > /data/mydata/mysql.tar.gz"
+```
+
+### Slave
+
+#### 解压文件
+
+```bash
+tar zxvf /data/mydata/mysql.tar.gz
+```
+
+#### 移除旧数据
+
+```bash
+mv /var/lib/mysql ~/backup/mysql-old-bak
+```
+
+#### 还原数据
+
+```bash
+innobackupex  --apply-log   /data/mydata
+innobackupex  --move-back   /data/mydata
+```
+
+#### 修改权限
+
+```bash
+chown mysql:mysql /var/lib/mysql
 ```
 
 > [Installing Percona XtraBackup on Debian and Ubuntu](https://www.percona.com/doc/percona-xtrabackup/8.0/installation/apt_repo.html)
 >
 > [The Backup Cycle - Full Backups Creating a backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/full_backup.html)
+>
+> [MySQL Backup--Xtrabackup远程备份和限速备份](https://www.cnblogs.com/gaogao67/p/10980642.html)
