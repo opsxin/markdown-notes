@@ -105,6 +105,8 @@ Markdown-Notes<br/>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Nginx/root%E5%92%8Calias%E7%9A%84%E5%AE%9E%E9%AA%8C.md">root和alias的实验.md</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Nginx/%E9%99%90%E5%88%B6%E8%AE%BF%E9%97%AE%E4%BB%A3%E7%90%86%E7%9A%84HTTP%E8%B5%84%E6%BA%90(Limiting_Access_to_Proxied_HTTP_Resources).md">限制访问代理的HTTP资源(Limiting_Access_to_Proxied_HTTP_Resources).md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Other/">Other</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Other/MySQL/">MySQL</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Other/MySQL/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE.md">mysql主从配置.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Other/TCP/">TCP</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Other/TCP/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.md">TCP拥塞控制.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Other/TCP/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.md">TCP的三次握手与四次挥手.md</a><br>
@@ -121,4 +123,4 @@ Markdown-Notes<br/>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>34 directories, 88 files
+<br/>35 directories, 89 files
