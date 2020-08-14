@@ -56,10 +56,19 @@ Markdown-Notes<br/>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-10-StatefulSet.md">k8s-10-StatefulSet.md</a><br>
 	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-11-Kubernetes%E5%8E%9F%E7%90%86.md">k8s-11-Kubernetes原理.md</a><br>
 	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubernetes-in-action/k8s-12-RBAC.md">k8s-12-RBAC.md</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubespray/">kubespray</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubespray/K8s%E5%90%AF%E7%94%A8metrics-server.assets/">K8s启用metrics-server.assets</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubespray/K8s%E5%90%AF%E7%94%A8metrics-server.md">K8s启用metrics-server.md</a><br>
+	│   │   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubespray/Kubespray%E5%AE%89%E8%A3%85kubernetes.assets/">Kubespray安装kubernetes.assets</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/kubespray/Kubespray%E5%AE%89%E8%A3%85kubernetes.md">Kubespray安装kubernetes.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E7%AD%94.md">一些问题及解答.md</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/K8S/%E6%91%98%E6%8A%84%E5%8F%8A%E7%90%86%E8%A7%A3.md">摘抄及理解.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/">KVM</a><br>
-	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/KVM%E7%9A%84%E4%BD%BF%E7%94%A8.md">KVM的使用.md</a><br>
+	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/CentOS/">CentOS</a><br>
+	│   │   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/CentOS/KVM%E7%9A%84%E4%BD%BF%E7%94%A8.md">KVM的使用.md</a><br>
+	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/Ubuntu/">Ubuntu</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/Ubuntu/KVM%E4%BD%BF%E7%94%A8.assets/">KVM使用.assets</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── <a href="https://github.com/opsxin/markdown-notes/blob/master/KVM/Ubuntu/KVM%E4%BD%BF%E7%94%A8.md">KVM使用.md</a><br>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/LB/">LB</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/LB/HAproxy.md">HAproxy.md</a><br>
 	│   ├── <a href="https://github.com/opsxin/markdown-notes/blob/master/LB/LVS.md">LVS.md</a><br>
@@ -123,4 +132,4 @@ Markdown-Notes<br/>
 	├── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/">Redis</a><br>
 	│   └── <a href="https://github.com/opsxin/markdown-notes/blob/master/Redis/RDB%E5%92%8CAOF%E5%8C%BA%E5%88%AB.md">RDB和AOF区别.md</a><br>
 	└── <a href="https://github.com/opsxin/markdown-notes/blob/master/update-readme.sh">update-readme.sh</a><br>
-<br/>35 directories, 89 files
+<br/>41 directories, 92 files
